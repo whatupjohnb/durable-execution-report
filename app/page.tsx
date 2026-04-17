@@ -5,11 +5,13 @@ import { Footer } from "@/components/Footer";
 import { reportMeta, sections } from "@/content/report";
 
 import ExecutiveSummary from "@/content/sections/01-executive-summary.mdx";
-import ReliabilityBurden from "@/content/sections/02-reliability-burden.mdx";
-import LLMFailures from "@/content/sections/03-llm-failures.mdx";
-import ObservabilityGap from "@/content/sections/04-observability-gap.mdx";
-import WhatWorks from "@/content/sections/05-what-works.mdx";
-import Methodology from "@/content/sections/06-methodology.mdx";
+import DurableExecution from "@/content/sections/02-durable-execution.mdx";
+import ReliabilityTax from "@/content/sections/03-reliability-tax.mdx";
+import ObservabilityEdge from "@/content/sections/04-observability-edge.mdx";
+import FrameworksEvals from "@/content/sections/05-frameworks-evals.mdx";
+import ConfidenceScaling from "@/content/sections/06-confidence-scaling.mdx";
+import Unsolved from "@/content/sections/07-unsolved.mdx";
+import Conclusion from "@/content/sections/08-conclusion.mdx";
 
 export default function Home() {
   return (
@@ -33,43 +35,59 @@ export default function Home() {
           </Section>
 
           <Section
-            id="the-reliability-burden"
-            eyebrow="Finding 01"
-            title="The reliability burden"
+            id="durable-execution"
+            eyebrow="Section 01"
+            title="Durable execution: mapping use cases and tools"
           >
-            <ReliabilityBurden />
+            <DurableExecution />
           </Section>
 
           <Section
-            id="llm-failures"
-            eyebrow="Finding 02"
-            title="LLM failures"
+            id="reliability-tax"
+            eyebrow="Section 02"
+            title="The reliability tax"
           >
-            <LLMFailures />
+            <ReliabilityTax />
           </Section>
 
           <Section
-            id="observability-gap"
-            eyebrow="Finding 03"
-            title="The observability gap"
+            id="observability-edge"
+            eyebrow="Section 03"
+            title="The observability edge"
           >
-            <ObservabilityGap />
+            <ObservabilityEdge />
           </Section>
 
           <Section
-            id="what-works"
-            eyebrow="Finding 04"
-            title="What works"
+            id="frameworks-evals"
+            eyebrow="Section 04"
+            title="AI frameworks and evals"
           >
-            <WhatWorks />
+            <FrameworksEvals />
           </Section>
 
           <Section
-            id="methodology"
-            eyebrow="Appendix"
-            title="Methodology"
+            id="confidence-scaling"
+            eyebrow="Section 05"
+            title="Confidence in scaling AI"
           >
-            <Methodology />
+            <ConfidenceScaling />
+          </Section>
+
+          <Section
+            id="unsolved"
+            eyebrow="Section 06"
+            title="What engineers say is still unsolved"
+          >
+            <Unsolved />
+          </Section>
+
+          <Section
+            id="conclusion"
+            eyebrow="Closing"
+            title="Conclusion"
+          >
+            <Conclusion />
           </Section>
         </main>
       </div>

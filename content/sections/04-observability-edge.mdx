@@ -1,0 +1,139 @@
+import { ChartFrame } from "@/components/charts/ChartFrame";
+import { BarChart } from "@/components/charts/BarChart";
+import { AreaChart } from "@/components/charts/AreaChart";
+import { GroupedBarChart } from "@/components/charts/GroupedBarChart";
+import { PullQuote } from "@/components/PullQuote";
+import { StatCallout } from "@/components/StatCallout";
+import {
+  diagnosticSpeed,
+  diagnosticSpeedByTool,
+  incidentsBy90Days,
+  topFailureCauses,
+} from "@/content/report";
+
+In this survey we asked one free-text question: *"What is the biggest
+unsolved problem in building reliable workflows, agents, and endpoints?"*
+One theme dominated the responses: observability.
+
+While not exclusively an AI problem, observability was cited more frequently
+by teams building AI in production… which makes sense; most observability
+tools were built on the premise that the same inputs produce the same
+outputs. AI systems break that assumption. When a workflow fails because an
+LLM returned a malformed response at step three of five, the error surfaces
+as a downstream consequence in a system that had no reason to expect it.
+
+<PullQuote attribution="Engineer, 2–10 engineer team">
+  Observability gaps — when something breaks, it's hard to trace why an
+  agent made a decision or reproduce it. Debugging feels more like
+  forensics than engineering. LLMs don't crash cleanly; they degrade,
+  hallucinate, or partially succeed. That makes it hard to define clear
+  failure modes and retries.
+</PullQuote>
+
+### What we asked
+
+1. How do you observe workflow runs?
+2. When a workflow fails in production, how long does it typically take to
+   understand what went wrong?
+3. In the past 90 days, has a workflow or background job failure caused a
+   customer-visible incident?
+4. What are the most common causes of failures? (pick up to 3)
+
+### Observability platforms and diagnostic speed
+
+38% of teams can diagnose a production failure in minutes. Another 54% get
+there in under an hour but require active investigation. 9% take hours or
+can't fully explain what happened at all.
+
+<ChartFrame
+  label="Figure 8"
+  caption="How long to understand what went wrong?"
+  source="Time to diagnose a production failure. All respondents."
+  aspect="aspect-[16/7]"
+>
+  <BarChart data={diagnosticSpeed} valueSuffix="%" horizontal accentIndex={0} />
+</ChartFrame>
+
+The gap between these cohorts is almost entirely explained by observability
+tooling. Platform-native dashboards — where observability is built into the
+orchestration layer — deliver the best outcomes: 40% diagnose in minutes,
+with only 1% in the slow-or-blind band.
+
+Teams using only APM tools without an orchestration dashboard: 29% fast,
+11% slow or blind. That's an 11× difference in worst-case outcomes.
+
+<ChartFrame
+  label="Figure 9"
+  caption="Diagnostic speed, by observability approach"
+  source="Distribution of diagnostic speed, normalized per row."
+  aspect="aspect-[16/9]"
+>
+  <AreaChart
+    rows={diagnosticSpeedByTool}
+    keys={["Minutes", "Under an hour", "Hours / blind"]}
+  />
+</ChartFrame>
+
+<StatCallout
+  value="11×"
+  label="Teams using only APM tools are 11× more likely to spend hours understanding a failure vs teams using orchestration-native insights."
+  source="Inngest 2026 Durable Execution Benchmark (n=130)"
+/>
+
+<PullQuote attribution="VP of Engineering, 501–1,000 engineer team">
+  Apart from unconstrained cost management in our workflows, our biggest
+  challenge is observability. We seem to get more and more logic in our
+  workflows getting pushed to LLMs, which not only makes them
+  non-deterministic but just hard to evaluate for anything other than raw
+  response time.
+</PullQuote>
+
+> **Key takeaway:** Orchestration tools that provide granular observability
+> are the best shot teams have to find what went wrong, quickly, when
+> workflows fail.
+
+### Rate and cause of incidents in AI vs non-AI use cases
+
+74% of teams building AI in production experienced at least one
+customer-visible incident in the past 90 days — vs 62% of non-AI teams. One
+in five AI teams had three or more, while teams larger than 500 engineers
+rarely accumulate 3+.
+
+<ChartFrame
+  label="Figure 10"
+  caption="Customer-visible incidents in the past 90 days, AI vs non-AI teams"
+  source="Distribution of incident counts, normalized per row."
+  aspect="aspect-[16/9]"
+>
+  <AreaChart
+    rows={incidentsBy90Days}
+    keys={["0 incidents", "1–2 incidents", "3+ incidents"]}
+  />
+</ChartFrame>
+
+Infrastructure crashes are a top cause of workflow failure for both AI and
+non-AI use cases, though LLM / external API failures invert the top slot for
+those building with AI.
+
+<ChartFrame
+  label="Figure 11"
+  caption="Top cited causes of workflow failure, AI vs non-AI teams"
+  source="Share citing each cause as a top-three source of failure."
+  aspect="aspect-[16/10]"
+>
+  <GroupedBarChart
+    rows={topFailureCauses.map((d) => ({
+      label: d.cause,
+      AI: d.ai,
+      "Non-AI": d.nonAI,
+    }))}
+    series={[
+      { key: "AI", label: "AI teams" },
+      { key: "Non-AI", label: "Non-AI teams" },
+    ]}
+  />
+</ChartFrame>
+
+These trends mostly hold by team size, though the largest teams report a
+much higher occurrence of infra and scaling-related failures — maybe
+unsurprisingly.

@@ -1,0 +1,186 @@
+import { ChartFrame } from "@/components/charts/ChartFrame";
+import { BarChart } from "@/components/charts/BarChart";
+import { AreaChart } from "@/components/charts/AreaChart";
+import { PullQuote } from "@/components/PullQuote";
+import { StatCallout } from "@/components/StatCallout";
+import {
+  evalTools,
+  confidenceByEvals,
+  evalGaps,
+  frameworkTools,
+  confidenceByFramework,
+  frameworkGaps,
+} from "@/content/report";
+
+AI frameworks and evals exist in the layer of building AI where
+non-determinism becomes harder to manage through better infrastructure alone.
+
+**Evals** aim to measure whether AI outputs are correct, safe, and within
+acceptable variance.
+
+**Agent frameworks** are the libraries that sit between application code and
+the model — structuring calls, managing context, handling tool use.
+
+Both categories barely existed two years ago and have grown fast. And both
+may share a common achilles heel: they were built as standalone layers,
+without a native connection to the orchestration layer that knows what
+actually ran.
+
+### What we asked
+
+1. What are you using to evaluate AI outputs in production?
+2. What do you believe are the biggest limitations, if any, of modern AI
+   eval solutions?
+3. What, if anything, are you using for an agent framework?
+4. What do you believe are the biggest limitations, if any, of modern agent
+   frameworks?
+
+### Using evals to improve AI quality in production
+
+Maybe the most surprising finding in this survey is that 35% of respondents
+building AI in production are not doing AI evals at all. Of the 65% who are,
+most have built their own pipeline.
+
+<StatCallout
+  value="35%"
+  label="of teams building AI in production are not running evals at all. Those teams are 3.6× more likely to lack confidence in their ability to scale."
+  source="Inngest 2026 Durable Execution Benchmark (n=130)"
+/>
+
+Tool selection spread seems to hold across all team sizes, though as with
+orchestration solutions, teams begin to default to building their own
+solution when they're small enough that complexity is low, or big enough
+that bespoke solutions seem like the only answer.
+
+<ChartFrame
+  label="Figure 13"
+  caption="Eval tooling among teams building AI in production"
+  source="Primary eval approach, respondents running AI workflows in production."
+>
+  <BarChart data={evalTools} valueSuffix="%" horizontal accentIndex={0} />
+</ChartFrame>
+
+<PullQuote>
+  The biggest unsolved problem is being able to evaluate complex multi-agent
+  workflows quickly and effectively. Evaluating all of these non-deterministic
+  intermediary steps is very difficult to do at scale.
+</PullQuote>
+
+Growth-phase teams (11–50 engineers) exhibit the highest rate of "not doing
+evals" at 44%. This may simply be because these teams are moving fast,
+shipping fast, and deferring infrastructure investments until something
+breaks.
+
+### Confidence in AI stack correlated with eval solutions
+
+However, when looking at confidence in AI stack against the presence of eval
+solutions, we see some indicators that this tooling choice may correlate
+with overall confidence in scale. Considering flaky LLMs are the #1 driver
+of workflow failure for those building with AI, this particular correlation
+(confidence and use of evals) may be unsurprising.
+
+<ChartFrame
+  label="Figure 14"
+  caption="Confidence in scaling, by eval adoption"
+  source="Distribution of confidence levels, normalized per row."
+  aspect="aspect-[16/7]"
+>
+  <AreaChart
+    rows={confidenceByEvals}
+    keys={["Very confident", "Somewhat confident", "Not confident"]}
+  />
+</ChartFrame>
+
+### Perceived opportunities for improvement in eval solutions
+
+Regardless of whether teams invested in, built, or deferred eval solutions,
+they also answered what gaps they perceived to exist in the category.
+
+While the top two reasons cited pertain exclusively to the ergonomics of
+eval solutions, three are failures of context: results in a separate system
+(20%), no way to act on a failed eval (13%), we don't have enough coverage
+to trust our output (12%), evals offline and disconnected from production
+behavior (10%). Nearly half of all AI teams (47%) cite at least one of these
+three. Each describes the same structural absence: eval state and
+orchestration state that can't see each other.
+
+<PullQuote>
+  Deeply integrated infrastructure, data sources, evaluations, and data
+  migrations based on evaluation results — that's what's still missing.
+</PullQuote>
+
+<ChartFrame
+  label="Figure 15"
+  caption="Perceived gaps in AI eval solutions"
+  source="Share citing each gap as a top limitation of modern eval tooling."
+>
+  <BarChart data={evalGaps} valueSuffix="%" horizontal accentIndex={2} />
+</ChartFrame>
+
+### Using agent frameworks to guide AI agent production
+
+Agent frameworks provide the foundational components to simplify the process
+of building, deploying, and managing autonomous AI agents, though the
+category is still quite new.
+
+Given the popularity of frameworks like LangChain, it might be surprising
+that 69% of respondents building AI just call LLM APIs directly, or have
+built their own abstractions.
+
+The remaining 31% are split between Vercel AI SDK (30% of framework users),
+LangChain/LangGraph (20%), and smaller tools. This trend holds across team
+size cohorts, though we do see adoption of LangChain/LangGraph skewing
+towards larger teams.
+
+<StatCallout
+  value="69%"
+  label="of teams building AI in production aren't using an off-the-shelf framework. They call LLM APIs directly or have built their own abstractions."
+  source="Inngest 2026 Durable Execution Benchmark (n=130)"
+/>
+
+<ChartFrame
+  label="Figure 18"
+  caption="Agent framework usage among teams building AI in production"
+  source="Primary framework approach. Direct LLM calls and custom abstractions grouped."
+>
+  <BarChart data={frameworkTools} valueSuffix="%" horizontal accentIndex={0} />
+</ChartFrame>
+
+### Confidence in AI stack correlated with framework solutions
+
+When looking at how overall confidence in AI stack correlates with presence
+of framework solutions, we see growth-stage tools like Mastra correlating
+with higher confidence levels.
+
+<ChartFrame
+  label="Figure 19"
+  caption="Confidence in scaling, by agent framework choice"
+  source="Distribution of confidence levels, normalized per row."
+  aspect="aspect-[16/9]"
+>
+  <AreaChart
+    rows={confidenceByFramework}
+    keys={["Very confident", "Somewhat confident", "Not confident"]}
+  />
+</ChartFrame>
+
+### Perceived opportunities for improvement in framework solutions
+
+Regardless of whether teams invested in, built, or deferred framework
+solutions, they answered what gaps they perceived to exist in the category,
+generally. The predominant gaps cited are that agent framework abstractions
+make failures harder to trace (26%), and there's poor support for
+long-running or stateful workflows (19%).
+
+<ChartFrame
+  label="Figure 20"
+  caption="Perceived gaps in agent frameworks"
+  source="Share citing each gap as a top limitation of modern agent frameworks."
+>
+  <BarChart data={frameworkGaps} valueSuffix="%" horizontal accentIndex={1} />
+</ChartFrame>
+
+However, it should be noted that fear of making failures harder to trace
+while using an agent framework did not shake out in the data. Time to
+diagnose workflow failures is nearly identical between those using
+frameworks, and those calling LLMs directly without a framework.

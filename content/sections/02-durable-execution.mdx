@@ -1,0 +1,83 @@
+import { ChartFrame } from "@/components/charts/ChartFrame";
+import { BarChart } from "@/components/charts/BarChart";
+import {
+  workflowUseCases,
+  orchestrationPlatforms,
+  inngestSoloVsPaired,
+  workflowCoverageByTool,
+} from "@/content/report";
+
+Durable execution is a fault-tolerant approach to running code that ensures
+functions complete — no matter what. These platforms persist state, handle
+failures, pause and retry when needed, and provide deep observability for
+quick troubleshooting and recovery. They are the full-context infrastructure
+layer that modern production systems are being built on top of.
+
+While the survey showed that types of workflows and jobs run in production
+are fairly uniform across companies of all sizes, we saw quite a range in
+what folks were using to ensure durable execution at scale.
+
+### What we asked
+
+1. What types of workflows or jobs are you running in production?
+2. What are you using to ensure reliable execution of those workflows and jobs?
+
+### Top use cases for durable execution
+
+Background jobs and event-driven workflows are near-universal use cases for
+anyone building asynchronous workflows in production. These run at companies
+of every size, regardless of what teams are building. Long-running workflows
+and AI/LLM workflows are tied at 68% — AI is now as common a production use
+case as long-running workflows.
+
+<ChartFrame
+  label="Figure 1"
+  caption="Workflow types running in production"
+  source="Share of respondents running each workflow type in production (multi-select)."
+>
+  <BarChart data={workflowUseCases} valueSuffix="%" horizontal accentIndex={3} />
+</ChartFrame>
+
+### Orchestration platforms by team, and use case
+
+What teams are building correlates strongly with which orchestration solution
+they use (or build themselves). 56% of respondents use more than one tool,
+often pairing a custom-built solution with a third-party platform.
+
+<ChartFrame
+  label="Figure 2"
+  caption="Orchestration platforms in use"
+  source="Share of respondents using each platform (multi-select)."
+>
+  <BarChart data={orchestrationPlatforms} valueSuffix="%" horizontal accentIndex={2} />
+</ChartFrame>
+
+For example, 100% of Temporal users surveyed have another durable execution
+or orchestration solution running alongside to handle edge cases. Inngest is
+the platform most often run alone (56%), with 22% of those teams also running
+something custom-built.
+
+This loyalty may be a function of scale: Inngest is popular among growing
+teams who want low-friction adoption that scales with them.
+
+<ChartFrame
+  label="Figure 2b"
+  caption="Among Inngest users, what else is running alongside?"
+  source="Share of Inngest users pairing Inngest with additional orchestration tooling."
+  aspect="aspect-[16/7]"
+>
+  <BarChart data={inngestSoloVsPaired} valueSuffix="%" horizontal accentIndex={0} />
+</ChartFrame>
+
+But it's also a reflection of capability breadth. Among statistically
+meaningful solo-tool cohorts, Inngest serves the widest variety of use cases
+at an average of 75% across all five workflow types. Custom-built tools take
+second place but drop sharply on AI coverage (53%).
+
+<ChartFrame
+  label="Figure 3"
+  caption="Average workflow-type coverage, by solo-tool cohort"
+  source="Mean share of the five workflow types covered by teams using one tool alone."
+>
+  <BarChart data={workflowCoverageByTool} valueSuffix="%" horizontal accentIndex={0} />
+</ChartFrame>

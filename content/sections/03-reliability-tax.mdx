@@ -1,0 +1,125 @@
+import { ChartFrame } from "@/components/charts/ChartFrame";
+import { BarChart } from "@/components/charts/BarChart";
+import { AreaChart } from "@/components/charts/AreaChart";
+import { GroupedBarChart } from "@/components/charts/GroupedBarChart";
+import { PullQuote } from "@/components/PullQuote";
+import { StatCallout } from "@/components/StatCallout";
+import {
+  reliabilityTimeAIvsNonAI,
+  reliabilityBurdenDelta,
+  reliabilityDrivers,
+} from "@/content/report";
+
+Building AI in production carries different challenges from building
+traditional software — higher throughput, non-deterministic models, opaque
+evaluations. The question this section tries to answer is: is it the use
+case, the team size, or the tooling that makes the biggest difference in how
+much time engineers spend on reliability? And critically — can anything
+reduce that time?
+
+### What we asked
+
+1. Roughly what share of your team's engineering time goes to reliability work?
+2. Has that percentage gone up or down in the last 12 months? If up, what
+   do you think is driving that increase?
+
+### Time spent on reliability: AI vs non-AI use cases
+
+Teams building AI in production spend more time on reliability work. 20% of
+AI teams are in the 26–50% band — spending up to half their engineering
+capacity just keeping things running. That's twice the rate of non-AI teams
+(10%).
+
+<ChartFrame
+  label="Figure 4"
+  caption="Share of engineering time spent on reliability, AI vs non-AI teams"
+  source="Distribution of reported reliability-work share, normalized to 100% per row."
+  aspect="aspect-[16/9]"
+>
+  <AreaChart
+    rows={reliabilityTimeAIvsNonAI}
+    keys={["<10%", "10–25%", "26–50%", "51%+"]}
+  />
+</ChartFrame>
+
+Nearly half of AI teams (48%) are in the 10–25% band. That's a significant
+but not catastrophic spend — the kind of number that likely prevents the team
+from shipping as fast as it wants to.
+
+<StatCallout
+  value="20%"
+  label="of AI teams spend up to half of their engineering capacity on reliability work — twice the rate of non-AI teams."
+  source="Inngest 2026 Durable Execution Benchmark (n=130)"
+/>
+
+### How has time spent on reliability changed over time?
+
+While the survey showed that larger teams generally spend more of their time
+on reliability toil, the net change in time spent on reliability over the
+last year is relatively uniform across teams of all sizes. Change over time
+also appears to be relatively similar between AI and non-AI use cases.
+
+The more revealing split is by orchestration tool.
+
+<ChartFrame
+  label="Figure 6"
+  caption="Net change in reliability burden over 12 months, by orchestration tool"
+  source="Percentage-point change in share of teams reporting increased reliability work, by primary tool."
+>
+  <BarChart
+    data={reliabilityBurdenDelta.map((d) => ({
+      label: d.label,
+      value: d.value,
+    }))}
+    valueSuffix="pp"
+    horizontal
+    accentIndex={4}
+  />
+</ChartFrame>
+
+Teams building AI workflows with Inngest (−10pp) and custom-built orchestration
+tools (−9pp) correlate with lower reliability burden over the last year.
+Temporal (+22pp) and AWS/Vercel/CF (+9pp) users correlate with higher burden.
+BullMQ/Celery/Sidekiq sits in the middle (−5pp).
+
+### What causes reliability toil to increase?
+
+For the 31% who reported their burden increasing, the top two drivers were
+equal in citation: higher traffic and scale (61%) and technical debt (61%).
+However, when splitting results by AI and non-AI use cases, we see higher
+traffic & scale take a slight lead for AI teams at 62%, and technical debt
+take the lead for non-AI teams at a significantly higher margin of 86%.
+
+Multi-service architectures, faster shipping pressure, and AI workloads with
+new failure modes follow closely. Non-deterministic outputs requiring more
+validation logic is last.
+
+<PullQuote>
+  I think the shifting landscape to unproven technologies and repackaging of
+  workflows into AI frameworks are causing us a lot of problems. We run 75+
+  internal and external integrations with recurring intervals — the
+  fragmentation and rapid change means we're constantly re-evaluating.
+</PullQuote>
+
+<ChartFrame
+  label="Figure 7"
+  caption="Drivers of rising reliability burden, AI vs non-AI teams"
+  source="Share citing each driver. Base: respondents reporting increased burden (31%)."
+  aspect="aspect-[16/10]"
+>
+  <GroupedBarChart
+    rows={reliabilityDrivers.map((d) => ({
+      label: d.cause,
+      AI: d.ai,
+      "Non-AI": d.nonAI,
+    }))}
+    series={[
+      { key: "AI", label: "AI teams" },
+      { key: "Non-AI", label: "Non-AI teams" },
+    ]}
+  />
+</ChartFrame>
+
+> **Key insight:** Orchestration tooling should help teams handle rapid or
+> lumpy scale, as well as fit into their existing stack in order to reduce
+> the friction cited here.

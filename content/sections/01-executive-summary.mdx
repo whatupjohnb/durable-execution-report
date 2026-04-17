@@ -1,7 +1,4 @@
 import { StatCallout } from "@/components/StatCallout";
-import { ChartFrame } from "@/components/charts/ChartFrame";
-import { BarChart } from "@/components/charts/BarChart";
-import { confidenceByOrgSize } from "@/content/report";
 
 We surveyed 130 engineers across companies of all sizes — from solopreneurs to
 organizations with 1,000+ engineering staff — about what they're building, and
@@ -10,10 +7,11 @@ and AI engineers and directors, in order to really focus on those closest to
 infrastructure decisions.
 
 Some findings were unsurprising: 68% of respondents are building AI workflows
-in production. Other findings were unexpected: Only 19% of those teams are
-"very confident" their infrastructure can handle 2–3× their current scale. At
-organizations with 500+ engineers and significantly more resource, that number
-is 0%.
+in production.
+
+Other findings were unexpected: Only 19% of those teams are "very confident"
+their infrastructure can handle 2–3× their current scale. At organizations
+with 500+ engineers and significantly more resource, that number is 0%.
 
 That confidence gap is the story of this report; what teams are asking to have
 solved vs what tooling choices, outcomes, and confidence levels tell us about
@@ -41,14 +39,6 @@ reliably, for every user. Here are the highlights:
 
 <StatCallout
   value="19%"
-  label="of AI teams are very confident their infrastructure can handle 2–3× their current scale."
+  label="of AI teams are very confident their infrastructure can handle 2–3× their current scale. At 500+ engineer orgs, it's 0%."
   source="Inngest 2026 Durable Execution Benchmark (n=130)"
 />
-
-<ChartFrame
-  label="Figure 1.1"
-  caption="Confidence in scaling by organization size"
-  source="Share reporting “very confident” in 2–3× scaling, by engineering headcount."
->
-  <BarChart data={confidenceByOrgSize} valueSuffix="%" accentIndex={0} />
-</ChartFrame>

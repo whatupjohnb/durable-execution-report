@@ -1,0 +1,105 @@
+import { ChartFrame } from "@/components/charts/ChartFrame";
+import { BarChart } from "@/components/charts/BarChart";
+import { PullQuote } from "@/components/PullQuote";
+import { unsolvedThemes } from "@/content/report";
+
+Our final question in the survey was open-ended: *"What do you think is the
+biggest unsolved problem in building reliable workflows, agents, and
+endpoints?"* The responses tell us a lot about universal problems, and
+problems of scale.
+
+<ChartFrame
+  label="Figure 24"
+  caption="Top themes in open-ended responses about unsolved problems"
+  source="Share of free-text responses mentioning each theme. Multiple codes per response."
+>
+  <BarChart data={unsolvedThemes} valueSuffix="%" horizontal accentIndex={0} />
+</ChartFrame>
+
+### Observability: the named gap
+
+19% of responses name observability as the core unsolved problem — the
+highest of any theme, and the only one that appears equally among AI (18%)
+and non-AI (21%) teams.
+
+<PullQuote attribution="Head of ML & Data Science, 11–50 engineer team">
+  Observability is, I would say, still very unsolved. A lot of the
+  workflows that we run, we are able to monitor, but it is not at the same
+  level and requires a lot more instrumentation than we would like. Often
+  the issues that are found are outside of the observability metrics that
+  we have built, so they get missed.
+</PullQuote>
+
+<PullQuote attribution="VP of Engineering, 11–50 engineer team">
+  The end-to-end observability in case of errors — digging takes time and
+  recovering from failed steps requires deep architectural knowledge and
+  failures embrace within an engineering and data department.
+</PullQuote>
+
+<PullQuote attribution="Engineer, 11–50 engineer team">
+  People are forgetting that the hardest part about software engineering is
+  accounting for edge cases. This was always a problem, but how much more
+  software is being built, thanks to AI, has made it orders of magnitude
+  more difficult to solve. The surface area has exploded. People are very
+  interested in building increasingly complex software, they are way less
+  interested in building observability.
+</PullQuote>
+
+It's also the primary concern of folks from companies large and small.
+
+<PullQuote attribution="VP of Engineering, 501–1,000 engineer team">
+  Our biggest challenge is observability. We seem to get more and more logic
+  in our workflows getting pushed to LLMs, which not only makes them
+  non-deterministic but just hard to evaluate for anything other than raw
+  response time.
+</PullQuote>
+
+<PullQuote attribution="Engineer, 2–10 engineer team">
+  Observability gaps — when something breaks, it's hard to trace why an
+  agent made a decision or reproduce it. Debugging feels more like
+  forensics than engineering.
+</PullQuote>
+
+### Composability: the unnamed gap
+
+Survey responses point to observability as a felt gap, but the survey data
+reveals another: the importance of shared context, in a layer that makes
+every other component in the stack actually effective. There are three
+signals that support this finding.
+
+### Signal one: platform-native observability outperforms bolted-on
+
+Teams relying only on APM tools like Sentry or Datadog are 11× more likely
+to end up slow or blind when a failure hits — 11% take hours or can't
+explain what happened at all, vs. 1% for teams using insights native to
+their orchestration platform. The latter teams are also 38% more likely to
+pinpoint failures in minutes (40% vs. 29%).
+
+### Signal two: three of five major eval complaints are integration problems
+
+The five most-cited eval limitations split into two types: two are intrinsic
+to evaluation (31% cite hard-to-write evals, 25% cite LLM-as-judge cost),
+while three are integration failures — results in a separate system (20%),
+no way to act on a failed eval (13%), evals offline and disconnected from
+production (10%). Each describes the same structural absence: eval state and
+orchestration state that can't see each other.
+
+### Signal three: framework composability is the missing link
+
+69% of AI teams call LLM APIs directly or built their own abstractions
+rather than using a framework — and 20% of them still cite poor composability
+with job orchestration as a top limitation, comparable to the rate among
+LangChain and Vercel AI SDK users. Teams that rejected frameworks are
+already building orchestration primitives from scratch. The features aren't
+missing from the stack; the connection between AI logic and the
+orchestration layer is.
+
+<PullQuote attribution="Director of Enterprise Architecture, 51–500 engineer team">
+  From my experience, the biggest unsolved problem is ensuring deterministic
+  reliability in non-deterministic systems — especially when LLM-driven
+  agents interact across multi-step workflows and external APIs. I often
+  see failures in state management, error propagation, and tool
+  orchestration, where edge cases break silently and are hard to trace or
+  reproduce. Until observability, guardrails, and self-healing mechanisms
+  mature, achieving production-grade reliability remains a core challenge.
+</PullQuote>
