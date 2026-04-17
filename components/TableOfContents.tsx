@@ -32,7 +32,7 @@ export function TableOfContents({ items }: { items: TOCItem[] }) {
   return (
     <nav
       aria-label="Table of contents"
-      className="sticky top-8 hidden w-56 shrink-0 lg:block print-hide"
+      className="sticky top-8 hidden w-56 shrink-0 self-start lg:block print-hide"
     >
       <div className="mb-4 font-mono text-xs uppercase tracking-widest text-carbon-500">
         Contents
