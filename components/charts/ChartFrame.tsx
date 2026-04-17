@@ -1,5 +1,23 @@
 import { clsx } from "@/lib/clsx";
 
+export type ChartVariant =
+  | "matcha"
+  | "honey"
+  | "breeze"
+  | "purplehaze"
+  | "ruby"
+  | "blush";
+
+// Static class mapping so Tailwind's JIT picks up every variant at build time.
+const VARIANT_BG: Record<ChartVariant, string> = {
+  matcha: "bg-gradient-matcha",
+  honey: "bg-gradient-honey",
+  breeze: "bg-gradient-breeze",
+  purplehaze: "bg-gradient-purplehaze",
+  ruby: "bg-gradient-ruby",
+  blush: "bg-gradient-blush",
+};
+
 type Props = {
   label?: string;
   caption?: string;
@@ -7,6 +25,7 @@ type Props = {
   children: React.ReactNode;
   className?: string;
   aspect?: string;
+  variant?: ChartVariant;
 };
 
 export function ChartFrame({
@@ -16,11 +35,13 @@ export function ChartFrame({
   children,
   className,
   aspect = "aspect-[16/9]",
+  variant = "matcha",
 }: Props) {
   return (
     <figure
       className={clsx(
-        "my-10 overflow-hidden rounded-2xl bg-hero-gradient p-6 text-carbon-1000 ring-1 ring-inset ring-carbon-1000/10 sm:p-8",
+        "my-10 overflow-hidden rounded-2xl p-6 text-carbon-1000 ring-1 ring-inset ring-carbon-1000/10 sm:p-8",
+        VARIANT_BG[variant],
         className,
       )}
     >

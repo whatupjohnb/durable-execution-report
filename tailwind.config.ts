@@ -116,9 +116,25 @@ const config: Config = {
         "container-desktop": "1600px",
       },
       backgroundImage: {
-        // Exact Figma stops from the user's hero gradient.
+        // Hero — exact Figma stops (matcha + signature lime)
         "hero-gradient":
           "linear-gradient(135deg, #FFFFFF 0%, #9ADAB3 33%, #79D617 49%, #2C9B63 64%, #FFFFFF 82%)",
+        // Section-specific chart backgrounds, all following the same
+        // light → mid-bright → deep → light structure as the hero, varying
+        // only the hue. Numbers are sourced from Inngest's carbon/matcha/
+        // breeze/ruby/honey/purplehaze/blush scales.
+        "gradient-matcha":
+          "linear-gradient(135deg, #FFFFFF 0%, #9ADAB3 33%, #79D617 49%, #2C9B63 64%, #FFFFFF 82%)",
+        "gradient-honey":
+          "linear-gradient(135deg, #FFFFFF 0%, #FFE39B 33%, #FCC43F 49%, #D56B13 64%, #FFFFFF 82%)",
+        "gradient-breeze":
+          "linear-gradient(135deg, #FFFFFF 0%, #CEE9FF 33%, #52B2FD 49%, #1365D6 64%, #FFFFFF 82%)",
+        "gradient-purplehaze":
+          "linear-gradient(135deg, #FFFFFF 0%, #E6E2FE 33%, #AD9FFC 49%, #6222DF 64%, #FFFFFF 82%)",
+        "gradient-ruby":
+          "linear-gradient(135deg, #FFFFFF 0%, #FEDEDC 33%, #FA8D86 49%, #CB2A1D 64%, #FFFFFF 82%)",
+        "gradient-blush":
+          "linear-gradient(135deg, #FFFFFF 0%, #FFDDE2 33%, #FD88A0 49%, #CF164B 64%, #FFFFFF 82%)",
       },
       keyframes: {
         fadeUp: {

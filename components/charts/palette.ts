@@ -26,15 +26,17 @@ export const palette = {
   carbon1000: "#020202",
 } as const;
 
-// Ordered series colors for charts that sit on the hero gradient background.
-// Deep, saturated, always readable against lime/white stops.
+// Ordered series colors for charts that sit on ANY colored gradient
+// background. Pure carbon (monochrome) so bars read consistently whether the
+// background is matcha, honey, breeze, purplehaze, ruby, or blush — the
+// gradient carries the hue, the bars carry the data.
 export const categoricalOnGradient = [
   palette.carbon1000,
-  palette.matcha800,
   palette.carbon700,
-  palette.matcha900,
   palette.carbon900,
-  palette.matcha700,
+  palette.carbon600,
+  palette.carbon800,
+  palette.carbon400,
 ];
 
 // Ordered series colors for charts on the dark canvas (used by SmallMultiples
