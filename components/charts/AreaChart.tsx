@@ -5,7 +5,7 @@ import { Group } from "@visx/group";
 import { scaleLinear, scaleBand, scaleOrdinal } from "@visx/scale";
 import { AxisBottom, AxisLeft } from "@visx/axis";
 import { BarStackHorizontal } from "@visx/shape";
-import { palette, categoricalColors } from "./palette";
+import { palette, categoricalOnGradient, inkOnGradient } from "./palette";
 
 export type StackedRow = {
   label: string;
@@ -17,10 +17,6 @@ type Props = {
   keys: string[];
 };
 
-/**
- * Horizontal 100%-stacked bar — effective for survey distributions
- * ("How confident are you…?"). Uses lime as the most-positive color.
- */
 export function AreaChart({ rows, keys }: Props) {
   return (
     <ParentSize>
@@ -44,7 +40,7 @@ function AreaChartInner({
   rows,
   keys,
 }: Props & { width: number; height: number }) {
-  const margin = { top: 36, right: 16, bottom: 24, left: 140 };
+  const margin = { top: 44, right: 16, bottom: 28, left: 160 };
   const innerW = Math.max(0, width - margin.left - margin.right);
   const innerH = Math.max(0, height - margin.top - margin.bottom);
 
@@ -70,8 +66,21 @@ function AreaChartInner({
   });
   const colorScale = scaleOrdinal<string, string>({
     domain: keys,
-    range: keys.map((_, i) => categoricalColors[i % categoricalColors.length]),
+    range: keys.map(
+      (_, i) => categoricalOnGradient[i % categoricalOnGradient.length],
+    ),
   });
+
+  const axisLabelProps = {
+    fill: inkOnGradient.base,
+    fontSize: 11,
+    fontFamily: "var(--font-inter), sans-serif",
+  } as const;
+  const tickLabelProps = {
+    fill: inkOnGradient.muted,
+    fontSize: 10,
+    fontFamily: "var(--font-jetbrains-mono), monospace",
+  } as const;
 
   return (
     <svg width={width} height={height}>
@@ -84,19 +93,34 @@ function AreaChartInner({
           y={(d) => d.label}
           xScale={xScale}
           yScale={yScale}
-          color={(k) => colorScale(k) ?? palette.matcha500}
+          color={(k) => colorScale(k) ?? palette.carbon1000}
         >
           {(barStacks) =>
             barStacks.flatMap((bs) =>
               bs.bars.map((bar) => (
-                <rect
-                  key={`${bs.index}-${bar.index}`}
-                  x={bar.x}
-                  y={bar.y}
-                  width={bar.width}
-                  height={bar.height}
-                  fill={bar.color}
-                />
+                <g key={`${bs.index}-${bar.index}`}>
+                  <rect
+                    x={bar.x}
+                    y={bar.y}
+                    width={bar.width}
+                    height={bar.height}
+                    fill={bar.color}
+                  />
+                  {bar.width > 30 ? (
+                    <text
+                      x={bar.x + bar.width / 2}
+                      y={bar.y + bar.height / 2}
+                      textAnchor="middle"
+                      dy="0.32em"
+                      fontSize={10}
+                      fontFamily="var(--font-jetbrains-mono), monospace"
+                      fill={palette.carbon50}
+                      fontWeight={600}
+                    >
+                      {Math.round(Number(bar.bar.data[bar.key]))}%
+                    </text>
+                  ) : null}
+                </g>
               )),
             )
           }
@@ -104,49 +128,45 @@ function AreaChartInner({
 
         <AxisLeft
           scale={yScale}
-          stroke={palette.carbon800}
-          tickStroke={palette.carbon800}
           hideAxisLine
+          hideTicks
           tickLabelProps={() => ({
-            fill: palette.carbon200,
-            fontSize: 11,
-            fontFamily: "var(--font-inter), sans-serif",
+            ...axisLabelProps,
             textAnchor: "end",
-            dx: -8,
+            dx: -10,
             dy: "0.32em",
+            fontWeight: 500,
           })}
         />
         <AxisBottom
           top={innerH}
           scale={xScale}
           numTicks={5}
-          stroke={palette.carbon800}
-          tickStroke={palette.carbon800}
+          stroke="rgba(2, 2, 2, 0.3)"
+          tickStroke="rgba(2, 2, 2, 0.3)"
           tickLabelProps={() => ({
-            fill: palette.carbon400,
-            fontSize: 10,
-            fontFamily: "var(--font-jetbrains-mono), monospace",
+            ...tickLabelProps,
             textAnchor: "middle",
           })}
           tickFormat={(v) => `${v}%`}
         />
       </Group>
 
-      {/* Legend */}
-      <g transform={`translate(${margin.left}, 12)`}>
+      <g transform={`translate(${margin.left}, 14)`}>
         {keys.map((k, i) => (
-          <g key={k} transform={`translate(${i * 140}, 0)`}>
+          <g key={k} transform={`translate(${i * 160}, 0)`}>
             <rect
-              width={10}
-              height={10}
-              fill={colorScale(k) ?? palette.matcha500}
+              width={12}
+              height={12}
+              fill={colorScale(k) ?? palette.carbon1000}
             />
             <text
-              x={16}
-              y={9}
-              fontSize={10}
-              fontFamily="var(--font-jetbrains-mono), monospace"
-              fill={palette.carbon400}
+              x={18}
+              y={10}
+              fontSize={11}
+              fontFamily="var(--font-inter), sans-serif"
+              fill={inkOnGradient.base}
+              fontWeight={500}
             >
               {k}
             </text>

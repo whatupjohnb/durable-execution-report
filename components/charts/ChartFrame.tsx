@@ -20,23 +20,23 @@ export function ChartFrame({
   return (
     <figure
       className={clsx(
-        "my-10 rounded-xl border border-carbon-800 bg-carbon-950 p-5",
+        "my-10 overflow-hidden rounded-2xl bg-hero-gradient p-6 text-carbon-1000 ring-1 ring-inset ring-carbon-1000/10 sm:p-8",
         className,
       )}
     >
       {label ? (
-        <div className="mb-3 font-mono text-[0.6875rem] uppercase tracking-widest text-matcha-400">
+        <div className="mb-3 font-mono text-[0.6875rem] uppercase tracking-widest text-carbon-1000/70">
           {label}
         </div>
       ) : null}
       {caption ? (
-        <figcaption className="mb-4 font-heading text-lg font-medium leading-snug text-carbon-50">
+        <figcaption className="mb-5 max-w-2xl font-heading text-lg font-semibold leading-snug text-carbon-1000 sm:text-xl">
           {caption}
         </figcaption>
       ) : null}
       <div className={clsx("w-full", aspect)}>{children}</div>
       {source ? (
-        <div className="mt-3 font-mono text-[0.6875rem] text-carbon-500">
+        <div className="mt-4 font-mono text-[0.6875rem] text-carbon-1000/60">
           {source}
         </div>
       ) : null}

@@ -5,7 +5,7 @@ import { Group } from "@visx/group";
 import { scaleBand, scaleLinear } from "@visx/scale";
 import { AxisBottom, AxisLeft } from "@visx/axis";
 import { Bar } from "@visx/shape";
-import { palette, categoricalColors } from "./palette";
+import { palette, categoricalOnGradient, inkOnGradient } from "./palette";
 
 export type BarDatum = { label: string; value: number };
 
@@ -36,9 +36,20 @@ function BarChartInner({
   horizontal = false,
   accentIndex,
 }: Props & { width: number; height: number }) {
-  const margin = { top: 12, right: 16, bottom: 36, left: 56 };
+  const margin = { top: 12, right: 32, bottom: 36, left: horizontal ? 200 : 56 };
   const innerW = Math.max(0, width - margin.left - margin.right);
   const innerH = Math.max(0, height - margin.top - margin.bottom);
+
+  const axisLabelProps = {
+    fill: inkOnGradient.base,
+    fontSize: 11,
+    fontFamily: "var(--font-inter), sans-serif",
+  } as const;
+  const tickLabelProps = {
+    fill: inkOnGradient.muted,
+    fontSize: 10,
+    fontFamily: "var(--font-jetbrains-mono), monospace",
+  } as const;
 
   if (horizontal) {
     const yScale = scaleBand<string>({
@@ -59,6 +70,8 @@ function BarChartInner({
             const y = yScale(d.label) ?? 0;
             const w = xScale(d.value);
             const isAccent = accentIndex === i;
+            const baseColor =
+              categoricalOnGradient[i % categoricalOnGradient.length];
             return (
               <g key={d.label}>
                 <Bar
@@ -66,11 +79,7 @@ function BarChartInner({
                   y={y}
                   width={w}
                   height={yScale.bandwidth()}
-                  fill={
-                    isAccent
-                      ? palette.limeSignature
-                      : categoricalColors[i % categoricalColors.length]
-                  }
+                  fill={isAccent ? palette.carbon1000 : baseColor}
                   rx={2}
                 />
                 <text
@@ -79,7 +88,8 @@ function BarChartInner({
                   dy="0.32em"
                   fontSize={11}
                   fontFamily="var(--font-jetbrains-mono), monospace"
-                  fill={palette.carbon200}
+                  fill={inkOnGradient.base}
+                  fontWeight={600}
                 >
                   {d.value}
                   {valueSuffix}
@@ -89,14 +99,12 @@ function BarChartInner({
           })}
           <AxisLeft
             scale={yScale}
-            stroke={palette.carbon800}
-            tickStroke={palette.carbon800}
+            hideAxisLine
+            hideTicks
             tickLabelProps={() => ({
-              fill: palette.carbon400,
-              fontSize: 11,
-              fontFamily: "var(--font-inter), sans-serif",
+              ...axisLabelProps,
               textAnchor: "end",
-              dx: -6,
+              dx: -10,
               dy: "0.32em",
             })}
           />
@@ -119,36 +127,58 @@ function BarChartInner({
   return (
     <svg width={width} height={height}>
       <Group left={margin.left} top={margin.top}>
+        {/* Gridlines */}
+        {yScale.ticks(4).map((t) => (
+          <line
+            key={t}
+            x1={0}
+            x2={innerW}
+            y1={yScale(t)}
+            y2={yScale(t)}
+            stroke={inkOnGradient.grid}
+            strokeOpacity={0.18}
+            strokeDasharray="2 4"
+          />
+        ))}
         {data.map((d, i) => {
           const x = xScale(d.label) ?? 0;
           const y = yScale(d.value);
           const h = innerH - y;
           const isAccent = accentIndex === i;
+          const baseColor =
+            categoricalOnGradient[i % categoricalOnGradient.length];
           return (
-            <Bar
-              key={d.label}
-              x={x}
-              y={y}
-              width={xScale.bandwidth()}
-              height={h}
-              fill={
-                isAccent
-                  ? palette.limeSignature
-                  : categoricalColors[i % categoricalColors.length]
-              }
-              rx={2}
-            />
+            <g key={d.label}>
+              <Bar
+                x={x}
+                y={y}
+                width={xScale.bandwidth()}
+                height={h}
+                fill={isAccent ? palette.carbon1000 : baseColor}
+                rx={2}
+              />
+              <text
+                x={x + xScale.bandwidth() / 2}
+                y={y - 8}
+                textAnchor="middle"
+                fontSize={11}
+                fontFamily="var(--font-jetbrains-mono), monospace"
+                fill={inkOnGradient.base}
+                fontWeight={600}
+              >
+                {d.value}
+                {valueSuffix}
+              </text>
+            </g>
           );
         })}
         <AxisLeft
           scale={yScale}
           numTicks={4}
-          stroke={palette.carbon800}
-          tickStroke={palette.carbon800}
+          hideAxisLine
+          hideTicks
           tickLabelProps={() => ({
-            fill: palette.carbon400,
-            fontSize: 11,
-            fontFamily: "var(--font-jetbrains-mono), monospace",
+            ...tickLabelProps,
             textAnchor: "end",
             dx: -6,
             dy: "0.32em",
@@ -158,12 +188,10 @@ function BarChartInner({
         <AxisBottom
           top={innerH}
           scale={xScale}
-          stroke={palette.carbon800}
-          tickStroke={palette.carbon800}
+          stroke="rgba(2, 2, 2, 0.3)"
+          tickStroke="rgba(2, 2, 2, 0.3)"
           tickLabelProps={() => ({
-            fill: palette.carbon400,
-            fontSize: 11,
-            fontFamily: "var(--font-inter), sans-serif",
+            ...axisLabelProps,
             textAnchor: "middle",
           })}
         />

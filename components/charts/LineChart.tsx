@@ -7,7 +7,7 @@ import { AxisBottom, AxisLeft } from "@visx/axis";
 import { LinePath, AreaClosed } from "@visx/shape";
 import { curveMonotoneX } from "@visx/curve";
 import { LinearGradient } from "@visx/gradient";
-import { palette, categoricalColors } from "./palette";
+import { palette, categoricalOnGradient, inkOnGradient } from "./palette";
 
 export type LineSeries = {
   label: string;
@@ -39,7 +39,7 @@ function LineChartInner({
   yLabel,
   yMax,
 }: Props & { width: number; height: number }) {
-  const margin = { top: 16, right: 24, bottom: 36, left: 52 };
+  const margin = { top: 40, right: 24, bottom: 36, left: 52 };
   const innerW = Math.max(0, width - margin.left - margin.right);
   const innerH = Math.max(0, height - margin.top - margin.bottom);
 
@@ -58,17 +58,27 @@ function LineChartInner({
     nice: true,
   });
 
+  const axisLabelProps = {
+    fill: inkOnGradient.base,
+    fontSize: 11,
+    fontFamily: "var(--font-inter), sans-serif",
+  } as const;
+  const tickLabelProps = {
+    fill: inkOnGradient.muted,
+    fontSize: 10,
+    fontFamily: "var(--font-jetbrains-mono), monospace",
+  } as const;
+
   return (
     <svg width={width} height={height}>
       <LinearGradient
         id="line-accent-fill"
-        from={palette.limeSignature}
-        to={palette.limeSignature}
-        fromOpacity={0.35}
+        from={palette.carbon1000}
+        to={palette.carbon1000}
+        fromOpacity={0.2}
         toOpacity={0}
       />
       <Group left={margin.left} top={margin.top}>
-        {/* Horizontal gridlines */}
         {yScale.ticks(4).map((t) => (
           <line
             key={t}
@@ -76,16 +86,15 @@ function LineChartInner({
             x2={innerW}
             y1={yScale(t)}
             y2={yScale(t)}
-            stroke={palette.carbon800}
+            stroke={inkOnGradient.grid}
+            strokeOpacity={0.18}
             strokeDasharray="2 4"
           />
         ))}
 
         {series.map((s, i) => {
           const color =
-            i === 0
-              ? palette.limeSignature
-              : categoricalColors[i % categoricalColors.length];
+            categoricalOnGradient[i % categoricalOnGradient.length];
           return (
             <g key={s.label}>
               {i === 0 ? (
@@ -103,7 +112,7 @@ function LineChartInner({
                 x={(d) => xScale(d.x) ?? 0}
                 y={(d) => yScale(d.y)}
                 stroke={color}
-                strokeWidth={2}
+                strokeWidth={2.5}
                 curve={curveMonotoneX}
               />
               {s.points.map((p) => (
@@ -111,9 +120,9 @@ function LineChartInner({
                   key={`${s.label}-${p.x}`}
                   cx={xScale(p.x) ?? 0}
                   cy={yScale(p.y)}
-                  r={3}
-                  fill="#020202"
-                  stroke={color}
+                  r={3.5}
+                  fill={color}
+                  stroke={palette.carbon50}
                   strokeWidth={1.5}
                 />
               ))}
@@ -126,17 +135,15 @@ function LineChartInner({
           numTicks={4}
           label={yLabel}
           labelProps={{
-            fill: palette.carbon600,
+            fill: inkOnGradient.muted,
             fontSize: 10,
             fontFamily: "var(--font-jetbrains-mono), monospace",
             textAnchor: "middle",
           }}
-          stroke={palette.carbon800}
-          tickStroke={palette.carbon800}
+          hideAxisLine
+          hideTicks
           tickLabelProps={() => ({
-            fill: palette.carbon400,
-            fontSize: 11,
-            fontFamily: "var(--font-jetbrains-mono), monospace",
+            ...tickLabelProps,
             textAnchor: "end",
             dx: -6,
             dy: "0.32em",
@@ -145,34 +152,30 @@ function LineChartInner({
         <AxisBottom
           top={innerH}
           scale={xScale}
-          stroke={palette.carbon800}
-          tickStroke={palette.carbon800}
+          stroke="rgba(2, 2, 2, 0.3)"
+          tickStroke="rgba(2, 2, 2, 0.3)"
           tickLabelProps={() => ({
-            fill: palette.carbon400,
-            fontSize: 11,
-            fontFamily: "var(--font-inter), sans-serif",
+            ...axisLabelProps,
             textAnchor: "middle",
           })}
         />
       </Group>
 
-      {/* Legend */}
       {series.length > 1 ? (
-        <g transform={`translate(${margin.left}, 2)`}>
+        <g transform={`translate(${margin.left}, 10)`}>
           {series.map((s, i) => {
             const color =
-              i === 0
-                ? palette.limeSignature
-                : categoricalColors[i % categoricalColors.length];
+              categoricalOnGradient[i % categoricalOnGradient.length];
             return (
-              <g key={s.label} transform={`translate(${i * 120}, 0)`}>
-                <rect width={10} height={2} y={5} fill={color} />
+              <g key={s.label} transform={`translate(${i * 140}, 0)`}>
+                <rect width={12} height={3} y={6} fill={color} />
                 <text
-                  x={14}
-                  y={8}
-                  fontSize={10}
-                  fontFamily="var(--font-jetbrains-mono), monospace"
-                  fill={palette.carbon400}
+                  x={18}
+                  y={9}
+                  fontSize={11}
+                  fontFamily="var(--font-inter), sans-serif"
+                  fill={inkOnGradient.base}
+                  fontWeight={500}
                 >
                   {s.label}
                 </text>

@@ -5,7 +5,7 @@ import { Group } from "@visx/group";
 import { scaleBand, scaleLinear } from "@visx/scale";
 import { AxisLeft } from "@visx/axis";
 import { Bar } from "@visx/shape";
-import { palette } from "./palette";
+import { palette, inkOnGradient } from "./palette";
 
 export type GroupedRow = {
   label: string;
@@ -19,8 +19,8 @@ type Props = {
 };
 
 /**
- * Horizontal grouped bar chart. One row per category, one bar per series.
- * Ideal for AI-vs-non-AI style comparisons across several causes or options.
+ * Horizontal grouped bar chart for AI vs non-AI style comparisons,
+ * styled for the hero-gradient ChartFrame (dark ink).
  */
 export function GroupedBarChart(props: Props) {
   return (
@@ -41,7 +41,7 @@ function GroupedInner({
   series,
   valueSuffix = "%",
 }: Props & { width: number; height: number }) {
-  const margin = { top: 32, right: 32, bottom: 12, left: 200 };
+  const margin = { top: 36, right: 40, bottom: 12, left: 220 };
   const innerW = Math.max(0, width - margin.left - margin.right);
   const innerH = Math.max(0, height - margin.top - margin.bottom);
 
@@ -60,25 +60,26 @@ function GroupedInner({
     nice: true,
   });
 
-  const defaultColors = [palette.limeSignature, palette.carbon400];
+  // Default: black for first series (AI/Confident), deep matcha for second.
+  const defaultColors = [palette.carbon1000, palette.matcha700];
 
   return (
     <svg width={width} height={height}>
-      {/* Legend */}
-      <g transform={`translate(${margin.left}, 8)`}>
+      <g transform={`translate(${margin.left}, 10)`}>
         {series.map((s, i) => (
-          <g key={s.key} transform={`translate(${i * 140}, 0)`}>
+          <g key={s.key} transform={`translate(${i * 160}, 0)`}>
             <rect
-              width={10}
-              height={10}
-              fill={s.color ?? defaultColors[i] ?? palette.matcha500}
+              width={12}
+              height={12}
+              fill={s.color ?? defaultColors[i] ?? palette.carbon1000}
             />
             <text
-              x={16}
-              y={9}
-              fontSize={10}
-              fontFamily="var(--font-jetbrains-mono), monospace"
-              fill={palette.carbon400}
+              x={18}
+              y={10}
+              fontSize={11}
+              fontFamily="var(--font-inter), sans-serif"
+              fill={inkOnGradient.base}
+              fontWeight={500}
             >
               {s.label}
             </text>
@@ -97,17 +98,25 @@ function GroupedInner({
                 const w = xScale(v);
                 const y = rowY + i * barH;
                 const color =
-                  s.color ?? defaultColors[i] ?? palette.matcha500;
+                  s.color ?? defaultColors[i] ?? palette.carbon1000;
                 return (
                   <g key={s.key}>
-                    <Bar x={0} y={y + 1} width={w} height={barH - 2} fill={color} rx={1} />
+                    <Bar
+                      x={0}
+                      y={y + 1}
+                      width={w}
+                      height={barH - 2}
+                      fill={color}
+                      rx={1.5}
+                    />
                     <text
                       x={w + 6}
                       y={y + barH / 2}
                       dy="0.32em"
                       fontSize={10}
                       fontFamily="var(--font-jetbrains-mono), monospace"
-                      fill={palette.carbon200}
+                      fill={inkOnGradient.base}
+                      fontWeight={600}
                     >
                       {v}
                       {valueSuffix}
@@ -123,12 +132,13 @@ function GroupedInner({
           hideAxisLine
           hideTicks
           tickLabelProps={() => ({
-            fill: palette.carbon200,
+            fill: inkOnGradient.base,
             fontSize: 11,
             fontFamily: "var(--font-inter), sans-serif",
             textAnchor: "end",
             dx: -10,
             dy: "0.32em",
+            fontWeight: 500,
           })}
         />
       </Group>

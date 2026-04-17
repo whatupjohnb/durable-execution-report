@@ -16,18 +16,22 @@ type Props = {
   columns?: number;
 };
 
+/**
+ * Small multiples grid, styled for the hero-gradient ChartFrame.
+ * Each tile is a dark card floating over the gradient.
+ */
 export function SmallMultiples({ series, columns = 2 }: Props) {
   return (
     <div
-      className="grid gap-4"
-      style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}
+      className="grid gap-3"
+      style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` }}
     >
       {series.map((s) => (
         <div
           key={s.label}
-          className="rounded-lg border border-carbon-800 bg-carbon-950 p-3"
+          className="rounded-lg bg-carbon-1000/85 p-3 backdrop-blur-sm"
         >
-          <div className="mb-2 font-mono text-[0.625rem] uppercase tracking-wider text-carbon-400">
+          <div className="mb-2 font-mono text-[0.625rem] uppercase tracking-wider text-carbon-200">
             {s.label}
           </div>
           <div className="aspect-[3/2]">

@@ -1,8 +1,12 @@
 /**
- * Categorical chart palette, anchored on the signature lime + Inngest matcha.
- * Values are raw CSS RGB triplets so charts can resolve them against the
- * current theme via `rgb(var(--X))` in styles, or convert to hex at build
- * time. In practice we expose them as hex strings for Visx consumption.
+ * Chart palette for two contexts:
+ *  - `onDark`: for anything rendered on the black canvas (StatCallouts,
+ *    PullQuotes, etc.) — bright lime + matcha tones
+ *  - `onGradient`: for chart bodies that sit on top of the hero gradient —
+ *    deep greens and near-black, which pop against lime/white stops
+ *
+ * The gradient background is vibrant enough that light colors disappear;
+ * dark-on-green is the move.
  */
 export const palette = {
   limeSignature: "#79D617",
@@ -10,19 +14,32 @@ export const palette = {
   matcha500: "#2C9B63",
   matcha700: "#016239",
   matcha800: "#015430",
+  matcha900: "#004D2B",
   carbon50: "#F6F6F6",
   carbon200: "#CCCCCC",
   carbon400: "#9B9B9B",
   carbon600: "#636363",
+  carbon700: "#4B4B4B",
   carbon800: "#353535",
   carbon900: "#242424",
   carbon950: "#121212",
+  carbon1000: "#020202",
 } as const;
 
-// Ordered list for categorical series. Lime first (for "hero" series),
-// then matcha tones, then neutrals. Designed to degrade sensibly when there
-// are more series than colors — cycles through.
-export const categoricalColors = [
+// Ordered series colors for charts that sit on the hero gradient background.
+// Deep, saturated, always readable against lime/white stops.
+export const categoricalOnGradient = [
+  palette.carbon1000,
+  palette.matcha800,
+  palette.carbon700,
+  palette.matcha900,
+  palette.carbon900,
+  palette.matcha700,
+];
+
+// Ordered series colors for charts on the dark canvas (used by SmallMultiples
+// if we ever put one outside a ChartFrame).
+export const categoricalOnDark = [
   palette.limeSignature,
   palette.matcha500,
   palette.matcha700,
@@ -30,3 +47,15 @@ export const categoricalColors = [
   palette.matcha800,
   palette.carbon400,
 ];
+
+// Alias kept for any existing imports.
+export const categoricalColors = categoricalOnGradient;
+
+// Shared on-gradient ink colors (text, axes, gridlines)
+export const inkOnGradient = {
+  base: palette.carbon1000,
+  muted: palette.carbon800,
+  subtle: palette.carbon700,
+  axis: palette.carbon900,
+  grid: palette.carbon1000, // with low opacity, specified inline
+} as const;
