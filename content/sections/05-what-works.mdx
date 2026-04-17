@@ -1,0 +1,35 @@
+import { StatCallout } from "@/components/StatCallout";
+import { ChartFrame } from "@/components/charts/ChartFrame";
+import { SmallMultiples } from "@/components/charts/SmallMultiples";
+import { burdenTrend } from "@/content/report";
+
+When we segmented the 19% of teams who reported high confidence in scaling
+their AI workflows, a consistent pattern emerged. These teams were
+disproportionately likely to be running three things in combination — not
+any one of them alone.
+
+1. **Structured durable execution** at every model-call boundary.
+2. **Orchestration-native observability** — traces that follow the workflow,
+   not the HTTP request.
+3. **Continuous production evals** — offline evaluation was correlated with
+   confidence, but production evals were correlated with _scaling_ confidence
+   specifically.
+
+<StatCallout
+  value="3×"
+  label="Teams running all three solutions were 3× more likely to report high confidence in scaling AI workflows than teams running one or none."
+  source="Inngest 2026 Durable Execution Benchmark (n=130)"
+/>
+
+The inverse was also true: teams running only ad-hoc queueing (no durable
+execution), logging-only observability, and no production evals were
+disproportionately represented in the "not at all confident" segment.
+
+<ChartFrame
+  label="Figure 5.1"
+  caption="Reliability-work share over time, by team profile"
+  source="Small multiples — identical y-axes, percent of time spent on reliability."
+  aspect="aspect-[5/2]"
+>
+  <SmallMultiples series={burdenTrend} columns={2} />
+</ChartFrame>

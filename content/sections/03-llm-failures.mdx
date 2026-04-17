@@ -1,0 +1,28 @@
+import { ChartFrame } from "@/components/charts/ChartFrame";
+import { BarChart } from "@/components/charts/BarChart";
+import { topFailureCauses } from "@/content/report";
+
+For the first time in the survey's history, a dependency on an external model
+provider — rather than an internal infrastructure failure — is the most cited
+cause of production workflow failure. 56% of teams building AI in production
+name LLM or external API failures as a top cause of incidents, displacing
+infrastructure crashes, which remain in the top slot for non-AI teams.
+
+The shift matters because the standard playbook for infrastructure crashes
+(retries, circuit breakers, autoscaling) does not cleanly translate to model
+failures: a retried hallucination is still a hallucination, and rate-limit
+backoff against a provider is fundamentally different from backoff against
+your own services.
+
+<ChartFrame
+  label="Figure 3.1"
+  caption="Top cited causes of production workflow failure"
+  source="Share of respondents citing each cause as a top-three source of failures."
+>
+  <BarChart data={topFailureCauses} valueSuffix="%" horizontal accentIndex={0} />
+</ChartFrame>
+
+Teams that reported high confidence in scale were three times more likely to
+be running structured **durable execution** around each model call — meaning
+the call was checkpointed, idempotent, and retriable at the step level — and
+correspondingly less exposed to this new failure mode.
