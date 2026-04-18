@@ -91,7 +91,7 @@
 
 html,
 body {
-  background-color: rgb(var(--color-background-canvas-base));
+  background-color: rgb(var(--color-background-canvas-subtle));
   color: rgb(var(--color-foreground-base));
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

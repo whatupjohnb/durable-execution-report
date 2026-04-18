@@ -119,22 +119,22 @@ const config: Config = {
         // Hero — exact Figma stops (matcha + signature lime)
         "hero-gradient":
           "linear-gradient(135deg, #FFFFFF 0%, #9ADAB3 33%, #79D617 49%, #2C9B63 64%, #FFFFFF 82%)",
-        // Section-specific chart backgrounds, all following the same
-        // light → mid-bright → deep → light structure as the hero, varying
-        // only the hue. Numbers are sourced from Inngest's carbon/matcha/
-        // breeze/ruby/honey/purplehaze/blush scales.
+        // Section-specific chart backgrounds — tinted-light → mid → deep →
+        // tinted-light. Uses each palette's own 100-level tint instead of
+        // pure white so the gradient reads colored end-to-end, with a wider
+        // saturated middle band.
         "gradient-matcha":
-          "linear-gradient(135deg, #FFFFFF 0%, #9ADAB3 33%, #79D617 49%, #2C9B63 64%, #FFFFFF 82%)",
+          "linear-gradient(135deg, #DFF5E6 0%, #9ADAB3 20%, #79D617 50%, #2C9B63 80%, #DFF5E6 100%)",
         "gradient-honey":
-          "linear-gradient(135deg, #FFFFFF 0%, #FFE39B 33%, #FCC43F 49%, #D56B13 64%, #FFFFFF 82%)",
+          "linear-gradient(135deg, #FFEEC4 0%, #FFE39B 20%, #FCC43F 50%, #D56B13 80%, #FFEEC4 100%)",
         "gradient-breeze":
-          "linear-gradient(135deg, #FFFFFF 0%, #CEE9FF 33%, #52B2FD 49%, #1365D6 64%, #FFFFFF 82%)",
+          "linear-gradient(135deg, #E0F2FF 0%, #CEE9FF 20%, #52B2FD 50%, #1365D6 80%, #E0F2FF 100%)",
         "gradient-purplehaze":
-          "linear-gradient(135deg, #FFFFFF 0%, #E6E2FE 33%, #AD9FFC 49%, #6222DF 64%, #FFFFFF 82%)",
+          "linear-gradient(135deg, #F0EDFF 0%, #E6E2FE 20%, #AD9FFC 50%, #6222DF 80%, #F0EDFF 100%)",
         "gradient-ruby":
-          "linear-gradient(135deg, #FFFFFF 0%, #FEDEDC 33%, #FA8D86 49%, #CB2A1D 64%, #FFFFFF 82%)",
+          "linear-gradient(135deg, #FEEBE9 0%, #FEDEDC 20%, #FA8D86 50%, #CB2A1D 80%, #FEEBE9 100%)",
         "gradient-blush":
-          "linear-gradient(135deg, #FFFFFF 0%, #FFDDE2 33%, #FD88A0 49%, #CF164B 64%, #FFFFFF 82%)",
+          "linear-gradient(135deg, #FFEAED 0%, #FFDDE2 20%, #FD88A0 50%, #CF164B 80%, #FFEAED 100%)",
       },
       keyframes: {
         fadeUp: {
