@@ -1,5 +1,4 @@
 import { Eyebrow } from "./Eyebrow";
-import { GlitchTexture } from "./GlitchTexture";
 import { DownloadButton } from "./DownloadButton";
 
 type Props = {
@@ -15,24 +14,26 @@ export function ReportHero({
 }: Props) {
   return (
     <header className="px-4 pt-8 sm:px-8 sm:pt-12">
-      <div className="relative overflow-hidden rounded-2xl">
-        {/* Base gradient — exact stops from Figma */}
+      <div className="relative overflow-hidden rounded-tr-[48px] rounded-bl-[48px]">
+        {/* Layer 1 — base gradient (exact Figma stops) */}
         <div
           className="absolute inset-0 bg-hero-gradient"
           aria-hidden="true"
         />
 
-        {/* Glitch texture — anchored to right edge, tints to darker green */}
+        {/* Layer 2 — textured noise, soft-light blend at 35% opacity.
+            Drop file at /public/textures/noise.png (see textures/README.md). */}
         <div
-          className="pointer-events-none absolute inset-y-0 right-0 w-[40%] text-matcha-800/60"
+          className="absolute inset-0 mix-blend-soft-light opacity-[0.35] bg-cover bg-center"
+          style={{ backgroundImage: "url('/textures/noise.png')" }}
           aria-hidden="true"
-        >
-          <GlitchTexture className="h-full w-full" />
-        </div>
+        />
 
-        {/* Subtle inner vignette to deepen edges */}
+        {/* Layer 3 — Shape.png at 5% opacity, scaled up to bleed past the
+            frame. Drop file at /public/textures/shape.png. */}
         <div
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_40%,_rgba(0,0,0,0.18)_100%)]"
+          className="pointer-events-none absolute -inset-[15%] opacity-[0.05] bg-contain bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/textures/shape.png')" }}
           aria-hidden="true"
         />
 
