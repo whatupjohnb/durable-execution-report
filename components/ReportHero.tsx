@@ -32,7 +32,7 @@ export function ReportHero({
         {/* Layer 3 — Shape.png at 5% opacity, scaled up to bleed past the
             frame. Drop file at /public/textures/shape.png. */}
         <div
-          className="pointer-events-none absolute -inset-[15%] opacity-[0.05] bg-contain bg-center bg-no-repeat"
+          className="pointer-events-none absolute -inset-[15%] opacity-[0.12] bg-contain bg-center bg-no-repeat"
           style={{ backgroundImage: "url('/textures/shape.png')" }}
           aria-hidden="true"
         />
