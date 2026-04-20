@@ -80,7 +80,7 @@ export function ChartFrame({
       </div>
 
       {/* Gradient footer — source + Inngest wordmark */}
-      <div className="flex flex-col items-center gap-4 rounded-none bg-black/20 px-3 py-3 text-center sm:px-5">
+      <div className="flex flex-col items-center gap-4 px-3 py-3 text-center sm:px-5">
         {source ? (
           <p className="max-w-2xl font-mono text-[0.75rem] leading-relaxed text-white/80">
             {source}
