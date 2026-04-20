@@ -1,14 +1,12 @@
-import { Eyebrow } from "./Eyebrow";
 import { DownloadButton } from "./DownloadButton";
+import { InngestWordmark } from "./InngestWordmark";
 
 type Props = {
-  eyebrow?: string;
   title: string;
   subtitle?: string;
 };
 
 export function ReportHero({
-  eyebrow = "AI in Production",
   title,
   subtitle,
 }: Props) {
@@ -39,7 +37,7 @@ export function ReportHero({
         {/* Content — each child enters sequentially */}
         <div className="relative mx-auto flex min-h-[min(88vh,832px)] max-w-3xl flex-col items-center justify-center gap-6 px-6 py-32 text-center sm:py-40">
           <div className="hero-enter hero-enter-1">
-            <Eyebrow tone="dark">{eyebrow}</Eyebrow>
+            <InngestWordmark className="h-8 w-auto text-carbon-1000" />
           </div>
           <h1 className="hero-enter hero-enter-2 font-heading-inktrap text-4xl font-medium tracking-tight text-carbon-1000 sm:text-5xl md:text-6xl">
             {title}

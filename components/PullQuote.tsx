@@ -8,8 +8,8 @@ type Props = {
 export function PullQuote({ children, attribution }: Props) {
   return (
     <Reveal as="figure" className="my-10 rounded-tr-[24px] rounded-bl-[24px] border border-carbon-700 bg-[#242424] px-7 py-7 sm:px-10 sm:py-8">
+      <div className="mb-2 select-none font-heading text-7xl leading-none text-carbon-500">&ldquo;</div>
       <div className="font-heading text-xl font-normal leading-snug tracking-tight text-carbon-50 sm:text-2xl">
-        <span className="mr-1 font-heading text-2xl leading-none text-matcha-600 select-none align-top">&ldquo;</span>
         {children}
       </div>
       {attribution ? (

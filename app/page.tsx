@@ -17,7 +17,6 @@ export default function Home() {
   return (
     <>
       <ReportHero
-        eyebrow={reportMeta.eyebrow}
         title={reportMeta.title}
         subtitle={reportMeta.subtitle}
       />
@@ -28,7 +27,6 @@ export default function Home() {
         <main className="min-w-0 flex-1 divide-y divide-carbon-800/50">
           <Section
             id="executive-summary"
-            eyebrow="AI in Production"
             title="Executive summary"
           >
             <ExecutiveSummary />
@@ -36,7 +34,6 @@ export default function Home() {
 
           <Section
             id="confidence-scaling"
-            eyebrow="Section 01"
             title="Confidence in scaling AI"
           >
             <ConfidenceScaling />
@@ -44,7 +41,7 @@ export default function Home() {
 
           <Section
             id="durable-execution"
-            eyebrow="Section 02"
+
             title="Durable execution: mapping use cases and tools"
           >
             <DurableExecution />
@@ -52,7 +49,6 @@ export default function Home() {
 
           <Section
             id="reliability-tax"
-            eyebrow="Section 03"
             title="The reliability tax"
           >
             <ReliabilityTax />
@@ -60,7 +56,6 @@ export default function Home() {
 
           <Section
             id="observability-edge"
-            eyebrow="Section 04"
             title="The observability edge"
           >
             <ObservabilityEdge />
@@ -68,7 +63,6 @@ export default function Home() {
 
           <Section
             id="frameworks-evals"
-            eyebrow="Section 05"
             title="AI frameworks and evals"
           >
             <FrameworksEvals />
@@ -76,7 +70,6 @@ export default function Home() {
 
           <Section
             id="unsolved"
-            eyebrow="Section 06"
             title="What engineers say is still unsolved"
           >
             <Unsolved />
@@ -84,7 +77,6 @@ export default function Home() {
 
           <Section
             id="conclusion"
-            eyebrow="Closing"
             title="Conclusion"
           >
             <Conclusion />
