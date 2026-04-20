@@ -55,13 +55,13 @@ export function ChartFrame({
     <Reveal as="figure"
       id={anchorId}
       className={clsx(
-        "my-10 flex flex-col gap-5 rounded-tr-[24px] rounded-bl-[24px] p-4 pb-6 scroll-mt-24 sm:p-5 sm:pb-7",
+        "my-10 flex flex-col gap-5 rounded-none p-4 pb-6 scroll-mt-24 sm:p-5 sm:pb-7",
         VARIANT_BG[variant],
         className,
       )}
     >
       {/* White card — title + share buttons + chart body */}
-      <div className="rounded-tl-none rounded-tr-[24px] rounded-br-none rounded-bl-[24px] bg-white p-5 shadow-[0_16px_48px_-18px_rgba(0,0,0,0.35)] sm:p-7">
+      <div className="rounded-none bg-white p-5 shadow-[0_16px_48px_-18px_rgba(0,0,0,0.35)] sm:p-7">
         {(caption || anchorId) ? (
           <div className="mb-5 flex items-start justify-between gap-4">
             {caption ? (
@@ -80,7 +80,7 @@ export function ChartFrame({
       </div>
 
       {/* Gradient footer — source + Inngest wordmark */}
-      <div className="flex flex-col items-center gap-4 rounded-bl-[20px] bg-black/20 px-3 py-3 text-center sm:px-5">
+      <div className="flex flex-col items-center gap-4 rounded-none bg-black/20 px-3 py-3 text-center sm:px-5">
         {source ? (
           <p className="max-w-2xl font-mono text-[0.75rem] leading-relaxed text-white/80">
             {source}
