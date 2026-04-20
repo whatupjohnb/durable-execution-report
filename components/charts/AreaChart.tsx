@@ -21,6 +21,8 @@ type Props = {
   colors?: Record<string, string>;
   /** Directional hint under the chart. */
   direction?: DirectionHint;
+  /** Width of the label column. Default "14rem". */
+  labelWidth?: string;
 };
 
 /**
@@ -28,7 +30,7 @@ type Props = {
  * heights. Each row has: label + optional n=, a full-width stacked bar,
  * and an optional right-edge summary label.
  */
-export function AreaChart({ rows, keys, colors, direction }: Props) {
+export function AreaChart({ rows, keys, colors, direction, labelWidth = "14rem" }: Props) {
   const colorFor = (k: string, i: number): string =>
     colors?.[k] ?? categoricalOnGradient[i % categoricalOnGradient.length];
 
@@ -55,7 +57,8 @@ export function AreaChart({ rows, keys, colors, direction }: Props) {
           return (
             <li
               key={r.label}
-              className="grid items-center gap-x-4 text-[13px] sm:grid-cols-[14rem_minmax(0,1fr)_5.5rem]"
+              className="grid items-center gap-x-4 text-[13px]"
+              style={{ gridTemplateColumns: `${labelWidth} minmax(0,1fr) 5.5rem` }}
             >
               <div className="flex flex-col gap-0.5 text-left">
                 <span className="font-semibold text-carbon-1000">
