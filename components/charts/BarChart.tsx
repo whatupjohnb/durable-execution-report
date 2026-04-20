@@ -77,7 +77,7 @@ function HorizontalBars({
         return (
           <li
             key={d.label}
-            className="grid items-center gap-x-4 gap-y-1 text-[13px] sm:grid-cols-[14rem_minmax(0,1fr)_auto]"
+            className="grid items-center gap-x-4 gap-y-1 text-[13px] sm:grid-cols-[14rem_minmax(0,1fr)_3.5rem]"
           >
             <div className="flex flex-col gap-0.5 text-left">
               <span className="font-medium leading-snug text-carbon-900">

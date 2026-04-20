@@ -55,7 +55,7 @@ export function AreaChart({ rows, keys, colors, direction }: Props) {
           return (
             <li
               key={r.label}
-              className="grid items-center gap-x-4 text-[13px] sm:grid-cols-[14rem_minmax(0,1fr)_auto]"
+              className="grid items-center gap-x-4 text-[13px] sm:grid-cols-[14rem_minmax(0,1fr)_5.5rem]"
             >
               <div className="flex flex-col gap-0.5 text-left">
                 <span className="font-semibold text-carbon-1000">

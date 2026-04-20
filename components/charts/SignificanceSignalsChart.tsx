@@ -5,19 +5,10 @@ type Group = { name: string; rows: SignalRow[] };
 
 type Props = {
   groups: Group[];
-  /** Subtitle printed above the chart, e.g. "Net = % confident − % unconfident". */
   subtitle?: string;
 };
 
-/**
- * Horizontal diverging-magnitude bar chart for Figure 23. Each row shows a
- * statistical signal's +/− effect size (pp). Bars share a common left origin
- * and their widths represent absolute magnitude; colors encode sign
- * (green = more common among confident, red = among unconfident) and
- * significance (saturated = sig, dim gray = ns).
- */
 export function SignificanceSignalsChart({ groups, subtitle }: Props) {
-  // Compute a shared scale across all rows so every bar is comparable.
   const allPp = groups.flatMap((g) => g.rows.map((r) => Math.abs(r.pp)));
   const max = Math.max(40, Math.ceil(Math.max(...allPp) / 5) * 5);
 
@@ -34,41 +25,43 @@ export function SignificanceSignalsChart({ groups, subtitle }: Props) {
         <span className="text-[#016239]">more common among confident →</span>
       </div>
 
-      {groups.map((g) => (
-        <div key={g.name} className="flex flex-col gap-2">
-          <h4 className="font-mono text-[0.7rem] uppercase tracking-widest text-carbon-500">
-            {g.name}
-          </h4>
-          <ul className="flex flex-col gap-1.5">
+      {/* Single grid so all columns align across groups */}
+      <div className="grid grid-cols-[14rem_minmax(0,1fr)_5rem_5rem_2rem] items-center gap-x-4 gap-y-1.5 text-[13px]">
+        {groups.map((g) => (
+          <>
+            {/* Group header — spans all 5 columns */}
+            <div
+              key={g.name}
+              className="col-span-5 mt-3 first:mt-0 font-mono text-[0.7rem] uppercase tracking-widest text-carbon-500"
+            >
+              {g.name}
+            </div>
             {g.rows.map((r) => (
-              <SignalBar key={r.label} row={r} max={max} />
+              <SignalRow key={r.label} row={r} max={max} />
             ))}
-          </ul>
-        </div>
-      ))}
+          </>
+        ))}
+      </div>
     </div>
   );
 }
 
-function SignalBar({ row, max }: { row: SignalRow; max: number }) {
+function SignalRow({ row, max }: { row: SignalRow; max: number }) {
   const abs = Math.abs(row.pp);
   const positive = row.pp >= 0;
   const significant = row.sig !== "ns";
 
   const barColor = significant
     ? positive
-      ? "#016239" // matcha-700 — significant positive
-      : "#A52015" // ruby-700 — significant negative
-    : "#7C7C7C"; // carbon-500 — not significant
-
-  const barOpacity = significant ? 1 : 0.55;
-  const valueColor = significant ? "#FFFFFF" : "#1A161C";
+      ? "#016239"
+      : "#A52015"
+    : "#7C7C7C";
 
   return (
-    <li className="grid items-center gap-x-4 gap-y-0 text-[13px] sm:grid-cols-[14rem_minmax(0,1fr)_auto_auto_2rem]">
+    <>
       <span
         className={clsx(
-          "text-left leading-tight",
+          "leading-tight",
           significant ? "font-semibold text-carbon-1000" : "text-carbon-700",
         )}
       >
@@ -76,12 +69,12 @@ function SignalBar({ row, max }: { row: SignalRow; max: number }) {
       </span>
       <div className="relative h-6 min-w-0 overflow-hidden bg-carbon-100">
         <div
-          className="flex h-full items-center justify-center whitespace-nowrap font-mono text-xs tabular-nums"
+          className="flex h-full items-center justify-center whitespace-nowrap font-mono text-xs tabular-nums text-white"
           style={{
             width: `${(abs / max) * 100}%`,
             backgroundColor: barColor,
-            opacity: barOpacity,
-            color: valueColor,
+            opacity: significant ? 1 : 0.55,
+            color: significant ? "#FFFFFF" : "#1A161C",
           }}
         >
           {row.pp > 0 ? "+" : ""}
@@ -90,7 +83,7 @@ function SignalBar({ row, max }: { row: SignalRow; max: number }) {
       </div>
       <span
         className={clsx(
-          "whitespace-nowrap text-right font-mono text-xs tabular-nums",
+          "text-right font-mono text-xs tabular-nums",
           positive ? "text-[#016239]" : "text-carbon-700",
         )}
       >
@@ -98,7 +91,7 @@ function SignalBar({ row, max }: { row: SignalRow; max: number }) {
       </span>
       <span
         className={clsx(
-          "whitespace-nowrap text-right font-mono text-xs tabular-nums",
+          "text-right font-mono text-xs tabular-nums",
           positive ? "text-carbon-700" : "text-[#A52015]",
         )}
       >
@@ -112,6 +105,6 @@ function SignalBar({ row, max }: { row: SignalRow; max: number }) {
       >
         {row.sig}
       </span>
-    </li>
+    </>
   );
 }
