@@ -37,10 +37,12 @@ export function BubbleMatrix({ themes, cohorts }: Props) {
         ))}
       </div>
 
+      <div className="overflow-x-auto">
       <div
         role="table"
         className="grid gap-x-1 gap-y-1"
         style={{
+          minWidth: `${themes.length * 5}rem`,
           gridTemplateColumns: `minmax(2.75rem,3rem) repeat(${themes.length}, minmax(0, 1fr))`,
         }}
       >
@@ -71,6 +73,7 @@ export function BubbleMatrix({ themes, cohorts }: Props) {
             ))}
           </div>
         ))}
+      </div>
       </div>
     </div>
   );

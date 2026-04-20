@@ -58,7 +58,7 @@ export function AreaChart({ rows, keys, colors, direction, labelWidth = "14rem" 
             <li
               key={r.label}
               className="grid items-center gap-x-4 text-[13px]"
-              style={{ gridTemplateColumns: `${labelWidth} minmax(0,1fr) 5.5rem` }}
+              style={{ gridTemplateColumns: `min(${labelWidth}, 40vw) minmax(0,1fr) min(5.5rem, 22vw)` }}
             >
               <div className="flex flex-col gap-0.5 text-left">
                 <span className="font-normal text-carbon-1000">
