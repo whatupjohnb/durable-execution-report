@@ -164,9 +164,7 @@ body {
 .report-prose ul + p,
 .report-prose ol + p,
 .report-prose p + h2,
-.report-prose p + h3,
 .report-prose h2 + p,
-.report-prose h3 + p,
 .report-prose p + blockquote,
 .report-prose blockquote + p,
 .report-prose p + figure,
@@ -189,7 +187,7 @@ body {
   font-size: 1.25rem;
   line-height: 1.25;
   letter-spacing: -0.01em;
-  margin: 3rem 0 0.75rem;
+  margin: 3.5rem 0 0.4rem;
 }
 .report-prose a {
   color: rgb(var(--color-lime-signature));
