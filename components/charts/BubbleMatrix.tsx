@@ -9,40 +9,15 @@ type Cohort = {
 type Props = {
   themes: string[];
   cohorts: Cohort[];
-  /** Minimum bubble diameter in px (for values of 1). Default 22. */
-  minPx?: number;
-  /** Multiplier applied to sqrt(value). Default 11. */
-  scale?: number;
 };
 
 /**
  * Bubble-grid matrix: rows = cohorts, columns = themes, bubble area ∝ count.
- * Pure HTML/CSS so long theme labels and row headers flow naturally.
+ * Fluid CSS grid that fits the available width without horizontal scroll —
+ * bubble sizes scale to the column width.
  */
-export function BubbleMatrix({
-  themes,
-  cohorts,
-  minPx = 22,
-  scale = 11,
-}: Props) {
-  const maxValue = Math.max(
-    ...cohorts.flatMap((c) => c.values),
-  );
-
-  const diameter = (v: number) => {
-    if (v <= 0) return 0;
-    // Area ∝ v, so diameter ∝ sqrt(v)
-    const px = minPx + Math.sqrt(v) * scale;
-    return px;
-  };
-
-  // Row height is driven by the largest bubble in that row so circles don't
-  // get cropped. Compute per-row max so small-value rows don't waste space.
-  const rowHeights = cohorts.map(
-    (c) => Math.max(40, diameter(Math.max(...c.values)) + 16),
-  );
-
-  const colWidth = Math.max(80, diameter(maxValue) + 24);
+export function BubbleMatrix({ themes, cohorts }: Props) {
+  const maxValue = Math.max(...cohorts.flatMap((c) => c.values));
 
   return (
     <div className="flex flex-col gap-4">
@@ -62,57 +37,72 @@ export function BubbleMatrix({
         ))}
       </div>
 
-      <div className="overflow-x-auto">
-        <div
-          role="table"
-          className="grid gap-2"
-          style={{
-            gridTemplateColumns: `60px repeat(${themes.length}, minmax(${colWidth}px, 1fr))`,
-          }}
-        >
-          {/* Header row: blank corner, then theme labels */}
-          <div />
-          {themes.map((t) => (
-            <div
-              key={t}
-              className="px-1 text-center text-[0.72rem] font-semibold leading-tight text-carbon-700"
-            >
-              {t}
-            </div>
-          ))}
+      <div
+        role="table"
+        className="grid gap-x-1 gap-y-1"
+        style={{
+          gridTemplateColumns: `minmax(2.75rem,3rem) repeat(${themes.length}, minmax(0, 1fr))`,
+        }}
+      >
+        {/* Header row */}
+        <div />
+        {themes.map((t) => (
+          <div
+            key={t}
+            className="px-0.5 text-center text-[0.68rem] font-semibold leading-tight text-carbon-700"
+          >
+            {t}
+          </div>
+        ))}
 
-          {/* Body rows */}
-          {cohorts.map((c, ri) => (
-            <div key={c.label} className="contents">
-              <div
-                className="flex items-center justify-end pr-2 text-right font-mono text-xs text-carbon-500"
-                style={{ minHeight: rowHeights[ri] }}
-              >
-                n={c.n}
-              </div>
-              {c.values.map((v, ci) => (
-                <div
-                  key={`${ri}-${ci}`}
-                  className="relative flex items-center justify-center"
-                  style={{ minHeight: rowHeights[ri] }}
-                >
-                  {v > 0 ? (
-                    <div
-                      className="flex items-center justify-center rounded-full text-sm font-semibold tabular-nums text-white"
-                      style={{
-                        width: diameter(v),
-                        height: diameter(v),
-                        backgroundColor: c.color,
-                      }}
-                    >
-                      {v}
-                    </div>
-                  ) : null}
-                </div>
-              ))}
+        {/* Body rows */}
+        {cohorts.map((c, ri) => (
+          <div key={c.label} className="contents">
+            <div className="flex items-center justify-end pr-1 text-right font-mono text-[11px] text-carbon-500">
+              n={c.n}
             </div>
-          ))}
-        </div>
+            {c.values.map((v, ci) => (
+              <BubbleCell
+                key={`${ri}-${ci}`}
+                value={v}
+                maxValue={maxValue}
+                color={c.color}
+              />
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function BubbleCell({
+  value,
+  maxValue,
+  color,
+}: {
+  value: number;
+  maxValue: number;
+  color: string;
+}) {
+  if (value <= 0) {
+    // Reserve vertical rhythm with an invisible spacer so row heights align.
+    return <div className="aspect-square w-full max-w-[4.5rem]" />;
+  }
+  const ratio = Math.sqrt(value / maxValue);
+  // Diameter as a % of cell width; capped to leave a little padding.
+  const pct = Math.max(30, Math.min(92, ratio * 92));
+  return (
+    <div className="flex aspect-square w-full max-w-[4.5rem] items-center justify-center mx-auto">
+      <div
+        className="flex items-center justify-center rounded-full text-sm font-semibold tabular-nums text-white"
+        style={{
+          width: `${pct}%`,
+          height: `${pct}%`,
+          backgroundColor: color,
+        }}
+      >
+        {value}
       </div>
     </div>
   );
