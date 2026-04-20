@@ -14,10 +14,8 @@ type Props = {
 
 export function QuoteCarousel({ quotes }: Props) {
   const [index, setIndex] = useState(0);
-  const [dir, setDir] = useState<"left" | "right">("right");
 
   function go(next: number) {
-    setDir(next > index ? "right" : "left");
     setIndex(next);
   }
 
@@ -28,43 +26,28 @@ export function QuoteCarousel({ quotes }: Props) {
 
   return (
     <div className="my-10 select-none">
-      {/* Card */}
-      <div className="relative overflow-hidden rounded-tr-[24px] rounded-bl-[24px] bg-[#353535] px-8 py-10 sm:px-12 sm:py-12">
-        {/* Opening mark */}
-        <span className="mb-4 block font-heading text-3xl leading-none text-matcha-600 select-none">
-          &ldquo;
-        </span>
-
-        {/* Quote text */}
-        <p
+      {/* Card — identical structure and padding to PullQuote */}
+      <div className="rounded-tr-[24px] rounded-bl-[24px] bg-[#353535] px-7 py-7 sm:px-10 sm:py-8">
+        <div
           key={index}
-          className={clsx(
-            "font-heading text-xl font-normal leading-snug tracking-tight text-carbon-50 sm:text-2xl",
-            "animate-quote-in",
-          )}
+          className="font-heading text-xl font-normal leading-snug tracking-tight text-carbon-50 sm:text-2xl animate-quote-in"
         >
+          <span className="mr-1 font-heading text-2xl leading-none text-matcha-600 select-none align-top">&ldquo;</span>
           {q.quote}
-        </p>
-
-        {/* Attribution */}
+          <span className="ml-1 font-heading text-2xl leading-none text-matcha-600 select-none align-top">&rdquo;</span>
+        </div>
         {q.attribution ? (
           <p
             key={`attr-${index}`}
-            className="mt-6 font-mono text-xs uppercase tracking-widest text-carbon-500 animate-quote-in"
+            className="mt-5 font-mono text-xs uppercase tracking-widest text-carbon-500 animate-quote-in"
           >
             — {q.attribution}
           </p>
         ) : null}
-
-        {/* Closing mark */}
-        <span className="mt-4 block text-right font-heading text-3xl leading-none text-matcha-600 select-none">
-          &rdquo;
-        </span>
       </div>
 
       {/* Controls */}
       <div className="mt-4 flex items-center justify-between px-1">
-        {/* Dots */}
         <div className="flex gap-2">
           {quotes.map((_, i) => (
             <button
@@ -73,15 +56,11 @@ export function QuoteCarousel({ quotes }: Props) {
               aria-label={`Go to quote ${i + 1}`}
               className={clsx(
                 "h-1.5 rounded-full transition-all duration-300",
-                i === index
-                  ? "w-6 bg-matcha-500"
-                  : "w-1.5 bg-carbon-700 hover:bg-carbon-500",
+                i === index ? "w-6 bg-matcha-500" : "w-1.5 bg-carbon-700 hover:bg-carbon-500",
               )}
             />
           ))}
         </div>
-
-        {/* Arrows */}
         <div className="flex gap-2">
           <button
             onClick={prev}
