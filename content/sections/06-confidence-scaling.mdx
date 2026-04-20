@@ -1,9 +1,9 @@
 import { ChartFrame } from "@/components/charts/ChartFrame";
-import { BarChart } from "@/components/charts/BarChart";
-import { GroupedBarChart } from "@/components/charts/GroupedBarChart";
+import { AreaChart } from "@/components/charts/AreaChart";
+import { SignificanceSignalsChart } from "@/components/charts/SignificanceSignalsChart";
 import { SectionLead } from "@/components/SectionLead";
 import { StatCallout } from "@/components/StatCallout";
-import { confidenceByTeamSize, stackPredictors } from "@/content/report";
+import { confidenceByTeamSize, significanceSignals } from "@/content/report";
 
 <SectionLead>
   68% of total respondents are running AI workflows in production, but only
@@ -30,11 +30,26 @@ feel paradoxical.
 <ChartFrame
   variant="ruby"
   label="Figure 22"
-  caption="Share 'very confident' in handling 2–3× scale, by team size"
-  source="Share of respondents reporting high confidence, by engineering headcount."
+  caption="Confidence in scaling AI workloads — by team size"
+  source="Q13: How confident are you in your setup's ability to handle AI workloads reliably at 2–3× current scale? AI teams only."
+  aspect="aspect-[16/9]"
 >
-  <BarChart data={confidenceByTeamSize} valueSuffix="%" accentIndex={0} />
+  <AreaChart
+    rows={confidenceByTeamSize}
+    keys={["Very confident", "Somewhat confident", "Not very confident", "Not at all confident"]}
+    colors={{
+      "Very confident": "#2C9B63",
+      "Somewhat confident": "#9ADAB3",
+      "Not very confident": "#FA8D86",
+      "Not at all confident": "#A52015",
+    }}
+  />
 </ChartFrame>
+
+_Very confident drops at every step of growth — from 26% at Solo/2–10 to
+0% at 500+. The 500+ band is entirely "somewhat" or "not very" confident,
+with 27% not very confident. More resources, more complexity, less
+certainty._
 
 It could be that these teams rate their use cases to be relatively simple —
 already designed for 2–3× scale by nature of the stage they're at.
@@ -49,19 +64,12 @@ statistically significant trends worth noting.
   variant="ruby"
   label="Figure 23"
   caption="The most statistically significant signals for confidence in scaling AI"
-  source="Share of confident and unconfident teams reporting each stack factor."
-  aspect="aspect-[16/10]"
+  source="AI teams only. Opacity indicates statistical significance (Fisher's exact test)."
+  aspect="aspect-auto"
 >
-  <GroupedBarChart
-    rows={stackPredictors.map((d) => ({
-      label: d.factor,
-      Confident: d.confident,
-      Unconfident: d.unconfident,
-    }))}
-    series={[
-      { key: "Confident", label: "Confident teams" },
-      { key: "Unconfident", label: "Unconfident teams" },
-    ]}
+  <SignificanceSignalsChart
+    groups={significanceSignals}
+    subtitle="Net = % confident (n=73) minus % unconfident (n=15). *** p<0.01, ** p<0.05, * p<0.10, ns not significant. Greyed rows shown for context only."
   />
 </ChartFrame>
 

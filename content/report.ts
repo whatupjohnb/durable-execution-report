@@ -392,7 +392,38 @@ export const frameworkTools = [
   { label: "Other", value: 11 },
 ];
 
+// Figure 19 — scaling confidence by agent framework. AI teams only.
+// Sorted by % very confident.
 export const confidenceByFramework = [
+  {
+    label: "Mastra", n: 6, directional: true,
+    rightLabel: "50% / 0%",
+    segments: { "Very confident": 50, "Somewhat confident": 50, "Not very confident":  0 },
+  },
+  {
+    label: "Vercel AI SDK", n: 26,
+    rightLabel: "35% / 8%",
+    segments: { "Very confident": 35, "Somewhat confident": 57, "Not very confident":  8 },
+  },
+  {
+    label: "Direct API / DIY", n: 61,
+    rightLabel: "16% / 20%",
+    segments: { "Very confident": 16, "Somewhat confident": 64, "Not very confident": 20 },
+  },
+  {
+    label: "LlamaIndex", n: 7, directional: true,
+    rightLabel: "14% / 14%",
+    segments: { "Very confident": 14, "Somewhat confident": 72, "Not very confident": 14 },
+  },
+  {
+    label: "LangChain/LangGraph", n: 18,
+    rightLabel: "0% / 22%",
+    segments: { "Very confident":  0, "Somewhat confident": 78, "Not very confident": 22 },
+  },
+];
+
+// Legacy shape retained for any still-wired imports.
+export const _legacyConfidenceByFramework = [
   {
     label: "Mastra",
     segments: {
@@ -427,54 +458,139 @@ export const confidenceByFramework = [
   },
 ];
 
+// Figure 20 — perceived limitations of agent frameworks (all respondents n=143).
+// "Not using frameworks" row tinted gray to read as a non-response.
 export const frameworkGaps = [
-  { label: "Abstractions make failures harder to trace", value: 26 },
-  { label: "Poor composability with job orchestration", value: 20 },
-  { label: "Poor support for long-running / stateful workflows", value: 19 },
-  { label: "Lock-in to specific providers", value: 14 },
-  { label: "Immature / unstable APIs", value: 12 },
+  { label: "Abstractions make failures harder to trace",                      value: 26, count: 37, color: "#1A161C" },
+  { label: "Poor support for long-running or stateful workflows",             value: 19, count: 27, color: "#1A161C" },
+  { label: "Only handles orchestration at the application layer (not infra)", value: 15, count: 22, color: "#1A161C" },
+  { label: "We're not using frameworks / don't know enough to comment",       value: 15, count: 22, color: "#9B9B9B" },
+  { label: "Abstractions are too rigid",                                      value: 15, count: 22, color: "#1A161C" },
+  { label: "Lock-in makes it hard to switch models or providers",             value: 13, count: 18, color: "#1A161C" },
+  { label: "Doesn't compose well with job orchestration",                     value: 12, count: 17, color: "#1A161C" },
 ];
+
+// Figure 21 — framework gaps by tool (matrix). Values are % of each tool's
+// users citing each limitation. Tools with n<3 excluded.
+export const frameworkGapsByTool = {
+  columns: [
+    "Harder to trace",
+    "Poor stateful",
+    "App layer only",
+    "Too rigid",
+    "Lock-in",
+  ],
+  rows: [
+    { label: "Direct/DIY",     n: 61, values: [38, 26, 21, 25, 18] },
+    { label: "Vercel AI SDK",  n: 26, values: [54, 35, 38, 23, 35] },
+    { label: "LangChain",      n: 18, values: [50, 50, 28, 39, 28] },
+    { label: "LlamaIndex",     n:  7, values: [43, 14, 29, 71, 14] },
+    { label: "Mastra",         n:  6, values: [67, 17, 33, 17,  0] },
+  ],
+};
 
 // ---------------------------------------------------------------------------
 // Confidence in scaling — Section 6
 // ---------------------------------------------------------------------------
 
+// Figure 22 — confidence in scaling AI workloads, by team size. AI teams only.
+// 100%-stacked with 4 confidence levels, sorted by team size ascending.
+// rightLabel renders "very% / (not very + not at all)%".
 export const confidenceByTeamSize = [
-  { label: "1–10", value: 28 },
-  { label: "11–50", value: 22 },
-  { label: "51–200", value: 18 },
-  { label: "201–500", value: 12 },
-  { label: "500+", value: 0 },
+  {
+    label: "Solo / 2–10", n: 35,
+    rightLabel: "26% / 17%",
+    segments: {
+      "Very confident": 26,
+      "Somewhat confident": 57,
+      "Not very confident": 14,
+      "Not at all confident": 3,
+    },
+  },
+  {
+    label: "11–50", n: 27,
+    rightLabel: "22% / 19%",
+    segments: {
+      "Very confident": 22,
+      "Somewhat confident": 59,
+      "Not very confident": 15,
+      "Not at all confident": 4,
+    },
+  },
+  {
+    label: "51–500", n: 15,
+    rightLabel: "13% / 7%",
+    segments: {
+      "Very confident": 13,
+      "Somewhat confident": 80,
+      "Not very confident": 7,
+      "Not at all confident": 0,
+    },
+  },
+  {
+    label: "500+", n: 11,
+    rightLabel: "0% / 27%",
+    segments: {
+      "Very confident": 0,
+      "Somewhat confident": 73,
+      "Not very confident": 27,
+      "Not at all confident": 0,
+    },
+  },
 ];
 
-// Stack-choice predictors of confidence: share of confident vs unconfident
-// teams that report each combination.
+// Figure 23 — the most statistically significant signals for confidence.
+// Net = % confident (n=73) minus % unconfident (n=15). AI teams only.
+// sig = "***" (p<0.01), "**" (p<0.05), "*" (p<0.10), or "ns" (not significant).
+export type SignalRow = {
+  label: string;
+  pp: number;
+  conf: number;
+  unconf: number;
+  sig: "***" | "**" | "*" | "ns";
+};
+
+export const significanceSignals: Array<{ name: string; rows: SignalRow[] }> = [
+  {
+    name: "Strongest positive combinations",
+    rows: [
+      { label: "Durable execution + evals + low burden",          pp: 36, conf: 49, unconf: 13, sig: "**" },
+      { label: "Durable execution + evals",                       pp: 33, conf: 60, unconf: 27, sig: "**" },
+      { label: "Evals + fast debug",                              pp: 32, conf: 32, unconf:  0, sig: "***" },
+      { label: "Durable execution + orch-native insights + low burden", pp: 34, conf: 47, unconf: 13, sig: "ns" },
+      { label: "Durable execution + fast debug",                  pp: 30, conf: 37, unconf:  7, sig: "ns" },
+      { label: "Orch-native insights + fast debug",               pp: 27, conf: 27, unconf:  0, sig: "ns" },
+    ],
+  },
+  {
+    name: "Single factors",
+    rows: [
+      { label: "Has production evals",             pp: 30, conf: 70, unconf: 40, sig: "**" },
+      { label: "Diagnoses failures in minutes",    pp: 29, conf: 42, unconf: 13, sig: "**" },
+      { label: "Orchestration-native insights",    pp: 22, conf: 62, unconf: 40, sig: "ns" },
+      { label: "Any structured orchestration",     pp: 15, conf: 88, unconf: 73, sig: "ns" },
+      { label: "Low reliability burden",           pp: 15, conf: 82, unconf: 67, sig: "ns" },
+    ],
+  },
+  {
+    name: "Anti-patterns",
+    rows: [
+      { label: "No evals + no orch-native insights", pp: -33, conf: 14, unconf: 47, sig: "***" },
+      { label: "No production evals",                pp: -30, conf: 30, unconf: 60, sig: "**" },
+      { label: "Logs only",                          pp: -10, conf:  3, unconf: 13, sig: "ns" },
+      { label: "Ad-hoc or no orchestration",         pp: -25, conf: 15, unconf: 40, sig: "ns" },
+      { label: "No structured orchestration",        pp: -15, conf: 12, unconf: 27, sig: "ns" },
+    ],
+  },
+];
+
+// Legacy shape retained in case anything still imports it.
 export const stackPredictors = [
-  {
-    factor: "All three: durable execution + evals + fast diagnosis",
-    confident: 49,
-    unconfident: 13,
-  },
-  {
-    factor: "Production evals in place",
-    confident: 68,
-    unconfident: 32,
-  },
-  {
-    factor: "Durable execution platform",
-    confident: 75,
-    unconfident: 45,
-  },
-  {
-    factor: "Diagnose failures in minutes",
-    confident: 62,
-    unconfident: 27,
-  },
-  {
-    factor: "No evals in place",
-    confident: 12,
-    unconfident: 58,
-  },
+  { factor: "All three: durable execution + evals + fast diagnosis", confident: 49, unconfident: 13 },
+  { factor: "Production evals in place",                             confident: 68, unconfident: 32 },
+  { factor: "Durable execution platform",                            confident: 75, unconfident: 45 },
+  { factor: "Diagnose failures in minutes",                          confident: 62, unconfident: 27 },
+  { factor: "No evals in place",                                     confident: 12, unconfident: 58 },
 ];
 
 // ---------------------------------------------------------------------------

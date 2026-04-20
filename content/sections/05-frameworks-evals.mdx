@@ -12,6 +12,9 @@ import {
   evalGaps,
   evalGapsByTool,
   frameworkAdoptionByTeamSize,
+  confidenceByFramework,
+  frameworkGaps,
+  frameworkGapsByTool,
 } from "@/content/report";
 
 <SectionLead>
@@ -208,7 +211,73 @@ large-team default (45% at 500+). Vercel AI SDK peaks at smaller teams and
 fades with scale. Direct API/DIY is consistently dominant — teams at every
 size are doing some form of it._
 
+### Confidence in AI stack correlated with framework solutions
+
+When looking at how overall confidence in AI stack correlates with presence
+of framework solutions, we see growth-stage tools like Mastra correlating
+with higher confidence levels.
+
+<ChartFrame
+  variant="purplehaze"
+  label="Figure 19"
+  caption="Scaling confidence by agent framework"
+  source="AI teams only. Very / somewhat / not very confident. * = n<10, directional. Values on the right: very confident % / not confident %."
+  aspect="aspect-[16/9]"
+>
+  <AreaChart
+    rows={confidenceByFramework}
+    keys={["Very confident", "Somewhat confident", "Not very confident"]}
+    colors={{
+      "Very confident": "#2C9B63",
+      "Somewhat confident": "#9ADAB3",
+      "Not very confident": "#FA8D86",
+    }}
+  />
+</ChartFrame>
+
+_LangChain/LangGraph: 0% very confident, 22% not confident. Vercel AI SDK:
+35% very confident, 8% not confident. That 27pp gap in "very confident" is
+the sharpest framework differential. Mastra (n=6) at 50% is directional
+only._
+
+### Perceived opportunities for improvement in framework solutions
+
+Regardless of whether teams invested in, built, or deferred framework
+solutions, they answered what gaps they perceived to exist in the category,
+generally. The predominant gaps cited are that agent framework abstractions
+make failures harder to trace (26%), and there's poor support for
+long-running or stateful workflows (19%).
+
+<ChartFrame
+  variant="purplehaze"
+  label="Figure 20"
+  caption="What's broken about agent frameworks"
+  source="Q17: What do you believe are the biggest limitations of modern agent frameworks? % of all respondents citing each limitation (n=143)."
+  aspect="aspect-[16/10]"
+>
+  <BarChart data={frameworkGaps} valueSuffix="%" horizontal showTrack insideLabels />
+</ChartFrame>
+
 However, it should be noted that fear of making failures harder to trace
 while using an agent framework did not shake out in the data. Time to
 diagnose workflow failures is nearly identical between those using
 frameworks, and those calling LLMs directly without a framework.
+
+To add a little more color to these perceived gaps, however, we can compare
+against tools in use, only to extrapolate potential opportunities for
+improvement in each. It's important to note that respondents were not asked
+about gaps in their solutions — just in the category overall.
+
+<ChartFrame
+  variant="purplehaze"
+  label="Figure 21"
+  caption="What's broken about agent frameworks — by tool"
+  source="Q17: % of framework users citing each limitation. Red = 50%+, amber = 30–49%."
+  aspect="aspect-auto"
+>
+  <HeatmapTable
+    columns={frameworkGapsByTool.columns}
+    rows={frameworkGapsByTool.rows}
+    footnote="LangChain/LangGraph users: 0% very confident at scale, 89% had a customer-visible incident in 90 days. Direct API users: 18% very confident, 72% any incident."
+  />
+</ChartFrame>
