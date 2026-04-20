@@ -65,18 +65,18 @@ function SignalBar({ row, max }: { row: SignalRow; max: number }) {
   const valueColor = significant ? "#FFFFFF" : "#1A161C";
 
   return (
-    <li className="grid grid-cols-[14rem_1fr_5rem_5rem_2.5rem] items-center gap-3 text-sm sm:grid-cols-[18rem_1fr_5rem_5rem_2.5rem]">
+    <li className="grid grid-cols-[minmax(0,18rem)_minmax(0,1fr)_auto_auto_2rem] items-center gap-x-4 gap-y-0 text-sm">
       <span
         className={clsx(
-          "truncate text-right",
+          "text-right leading-tight",
           significant ? "font-semibold text-carbon-1000" : "text-carbon-700",
         )}
       >
         {row.label}
       </span>
-      <div className="relative h-6 overflow-hidden bg-carbon-100">
+      <div className="relative h-6 min-w-0 overflow-hidden bg-carbon-100">
         <div
-          className="flex h-full items-center justify-center font-mono text-xs tabular-nums"
+          className="flex h-full items-center justify-center whitespace-nowrap font-mono text-xs tabular-nums"
           style={{
             width: `${(abs / max) * 100}%`,
             backgroundColor: barColor,
@@ -88,10 +88,20 @@ function SignalBar({ row, max }: { row: SignalRow; max: number }) {
           {row.pp}pp
         </div>
       </div>
-      <span className={clsx("text-right font-mono text-xs", positive ? "text-[#016239]" : "text-carbon-700")}>
+      <span
+        className={clsx(
+          "whitespace-nowrap text-right font-mono text-xs tabular-nums",
+          positive ? "text-[#016239]" : "text-carbon-700",
+        )}
+      >
         {row.conf}% conf
       </span>
-      <span className={clsx("text-right font-mono text-xs", positive ? "text-carbon-700" : "text-[#A52015]")}>
+      <span
+        className={clsx(
+          "whitespace-nowrap text-right font-mono text-xs tabular-nums",
+          positive ? "text-carbon-700" : "text-[#A52015]",
+        )}
+      >
         {row.unconf}% unconf
       </span>
       <span

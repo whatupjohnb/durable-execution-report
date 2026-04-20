@@ -58,12 +58,12 @@ export function GroupedBarChart({ rows, series, valueSuffix = "%" }: Props) {
                 return (
                   <li
                     key={s.key}
-                    className="grid grid-cols-[2.5rem_1fr_3rem] items-center gap-3 text-sm"
+                    className="grid grid-cols-[2.5rem_minmax(0,1fr)_3rem] items-center gap-3 text-sm"
                   >
                     <span className="text-right font-mono text-[0.7rem] uppercase tracking-wider text-carbon-500">
                       {seriesShortLabel(s.label)}
                     </span>
-                    <div className="relative h-5 bg-carbon-100">
+                    <div className="relative h-5 min-w-0 bg-carbon-100">
                       <div
                         className="absolute inset-y-0 left-0 flex items-center justify-end pr-2"
                         style={{ width: `${pct}%`, backgroundColor: color }}

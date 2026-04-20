@@ -73,13 +73,12 @@ function HorizontalBars({
         return (
           <li
             key={d.label}
-            className="grid items-center gap-x-4 gap-y-1 text-sm sm:grid-cols-[minmax(11rem,18rem)_1fr_auto] sm:gap-x-5"
-            style={{ gridTemplateColumns: undefined }}
+            className="grid items-center gap-x-4 gap-y-1 text-sm sm:grid-cols-[minmax(0,auto)_minmax(0,1fr)_auto] sm:gap-x-5"
           >
-            <div className="font-medium leading-snug text-carbon-900 sm:text-right">
+            <div className="max-w-[18rem] font-medium leading-snug text-carbon-900 sm:text-right">
               {d.label}
             </div>
-            <div className="relative h-8">
+            <div className="relative h-8 min-w-0">
               {showTrack ? (
                 <div className="absolute inset-0 bg-carbon-100" />
               ) : null}
@@ -95,7 +94,7 @@ function HorizontalBars({
                 ) : null}
               </div>
             </div>
-            <div className="flex items-center gap-3 sm:justify-end">
+            <div className="flex items-center gap-3 whitespace-nowrap sm:justify-end">
               {d.count !== undefined ? (
                 <span className="font-mono text-xs tabular-nums text-carbon-500">
                   n={d.count}

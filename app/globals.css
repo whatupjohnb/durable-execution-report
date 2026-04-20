@@ -192,6 +192,32 @@ body {
   font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
   font-size: 0.875em;
 }
+
+/* Charts contain their own lists (legends, rows, etc.); kill the prose
+   bullet/marker styling inside any <figure> in a .report-prose block. */
+.report-prose figure ul,
+.report-prose figure ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.report-prose figure ul > li,
+.report-prose figure ol > li {
+  padding: 0;
+  margin: 0;
+  position: static;
+}
+.report-prose figure ul > li::before {
+  content: none;
+  display: none;
+  background: transparent;
+  width: 0;
+  height: 0;
+}
+.report-prose figure ol > li::marker {
+  color: inherit;
+  font: inherit;
+}
 .report-prose blockquote {
   border-left: 2px solid rgb(var(--color-matcha-400));
   margin: 1.5rem 0;

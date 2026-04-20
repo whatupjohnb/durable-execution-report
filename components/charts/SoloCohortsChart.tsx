@@ -95,7 +95,7 @@ function CohortBlock({
           return (
             <li
               key={r.label}
-              className="grid grid-cols-[8rem_1fr_3rem] items-center gap-3 sm:grid-cols-[10rem_1fr_3rem]"
+              className="grid grid-cols-[8rem_minmax(0,1fr)_3rem] items-center gap-3 sm:grid-cols-[10rem_minmax(0,1fr)_3rem]"
             >
               <span className="truncate text-sm text-carbon-800">
                 {r.label}
