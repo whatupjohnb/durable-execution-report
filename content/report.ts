@@ -180,13 +180,15 @@ export const reliabilityTimeAIvsNonAI = [
   },
 ];
 
-// Change in reliability burden over the last 12 months, by orchestration tool.
+// Figure 6 — change in reliability burden over the last 12 months, by
+// orchestration tool. Positive values (burden increasing) are tinted ruby;
+// negative (burden decreasing) are tinted matcha.
 export const reliabilityBurdenDelta = [
-  { label: "Temporal", value: 22 },
-  { label: "AWS / Vercel / CF", value: 9 },
-  { label: "BullMQ / Celery / Sidekiq", value: -5 },
-  { label: "Custom-built", value: -9 },
-  { label: "Inngest", value: -10 },
+  { label: "Temporal",                  value:  22, color: "#F54A3F" }, // ruby-500
+  { label: "AWS / Vercel / CF",         value:   9, color: "#FA8D86" }, // ruby-400
+  { label: "BullMQ / Celery / Sidekiq", value:  -5, color: "#9ADAB3" }, // matcha-300
+  { label: "Custom-built",              value:  -9, color: "#66BD8B" }, // matcha-400
+  { label: "Inngest",                   value: -10, color: "#2C9B63" }, // matcha-500
 ];
 
 // Figure 7 — drivers of rising reliability burden, AI vs non-AI.
@@ -333,15 +335,16 @@ export const confidenceByEvals = [
 
 // Figure 15 — perceived limitations of eval solutions (all respondents n=143).
 // The "not running evals" row is a non-response — tinted gray so it reads
-// distinctly from the other limitations.
+// distinctly from the other limitations. Other rows get brand-color accents
+// drawn from the Inngest categorical palette.
 export const evalGaps = [
-  { label: "Hard to write evals that catch the failures that actually matter", value: 28, count: 40, color: "#1A161C" },
-  { label: "LLM-as-judge is too slow or expensive to run at scale",            value: 22, count: 32, color: "#1A161C" },
-  { label: "Results live in a separate system from where we debug failures",   value: 18, count: 26, color: "#1A161C" },
-  { label: "We're not running evals / don't know enough to comment",           value: 16, count: 23, color: "#9B9B9B" },
-  { label: "No way to act on a failed eval — it's observability only",         value: 12, count: 17, color: "#1A161C" },
-  { label: "We don't have enough coverage to trust our outputs",               value: 11, count: 16, color: "#1A161C" },
-  { label: "Evals are offline only — don't reflect production behavior",       value:  9, count: 13, color: "#1A161C" },
+  { label: "Hard to write evals that catch the failures that actually matter", value: 28, count: 40, color: "#FF7300" }, // citrus
+  { label: "LLM-as-judge is too slow or expensive to run at scale",            value: 22, count: 32, color: "#2389F1" }, // breeze
+  { label: "Results live in a separate system from where we debug failures",   value: 18, count: 26, color: "#8F75B7" }, // quantum
+  { label: "We're not running evals / don't know enough to comment",           value: 16, count: 23, color: "#9B9B9B" }, // gray — non-response
+  { label: "No way to act on a failed eval — it's observability only",         value: 12, count: 17, color: "#2C9B63" }, // matcha
+  { label: "We don't have enough coverage to trust our outputs",               value: 11, count: 16, color: "#FCC43F" }, // honey
+  { label: "Evals are offline only — don't reflect production behavior",       value:  9, count: 13, color: "#F54A3F" }, // ruby
 ];
 
 // Figure 16 — eval gaps by tool in use (matrix). Values are % of each tool's
@@ -461,13 +464,13 @@ export const _legacyConfidenceByFramework = [
 // Figure 20 — perceived limitations of agent frameworks (all respondents n=143).
 // "Not using frameworks" row tinted gray to read as a non-response.
 export const frameworkGaps = [
-  { label: "Abstractions make failures harder to trace",                      value: 26, count: 37, color: "#1A161C" },
-  { label: "Poor support for long-running or stateful workflows",             value: 19, count: 27, color: "#1A161C" },
-  { label: "Only handles orchestration at the application layer (not infra)", value: 15, count: 22, color: "#1A161C" },
-  { label: "We're not using frameworks / don't know enough to comment",       value: 15, count: 22, color: "#9B9B9B" },
-  { label: "Abstractions are too rigid",                                      value: 15, count: 22, color: "#1A161C" },
-  { label: "Lock-in makes it hard to switch models or providers",             value: 13, count: 18, color: "#1A161C" },
-  { label: "Doesn't compose well with job orchestration",                     value: 12, count: 17, color: "#1A161C" },
+  { label: "Abstractions make failures harder to trace",                      value: 26, count: 37, color: "#FF7300" }, // citrus
+  { label: "Poor support for long-running or stateful workflows",             value: 19, count: 27, color: "#2389F1" }, // breeze
+  { label: "Only handles orchestration at the application layer (not infra)", value: 15, count: 22, color: "#8F75B7" }, // quantum
+  { label: "We're not using frameworks / don't know enough to comment",       value: 15, count: 22, color: "#9B9B9B" }, // gray — non-response
+  { label: "Abstractions are too rigid",                                      value: 15, count: 22, color: "#2C9B63" }, // matcha
+  { label: "Lock-in makes it hard to switch models or providers",             value: 13, count: 18, color: "#FCC43F" }, // honey
+  { label: "Doesn't compose well with job orchestration",                     value: 12, count: 17, color: "#F54A3F" }, // ruby
 ];
 
 // Figure 21 — framework gaps by tool (matrix). Values are % of each tool's

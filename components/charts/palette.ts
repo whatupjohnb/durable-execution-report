@@ -27,17 +27,17 @@ export const palette = {
   carbon1000: "#020202",
 } as const;
 
-// Ordered series colors for charts that sit on ANY colored gradient
-// background. Pure carbon (monochrome) so bars read consistently whether the
-// background is matcha, honey, breeze, purplehaze, ruby, or blush — the
-// gradient carries the hue, the bars carry the data.
+// Ordered categorical palette drawn from the official Inngest brand colors.
+// Used as the default for any BarChart / AreaChart / etc. that doesn't
+// specify per-datum colors. Maximizes visual distinction across up to 6
+// series while staying within the Inngest palette.
 export const categoricalOnGradient = [
-  palette.carbon1000,
-  palette.carbon700,
-  palette.carbon900,
-  palette.carbon600,
-  palette.carbon800,
-  palette.carbon400,
+  "#FF7300", // citrus-500 — orange
+  "#2389F1", // breeze-500 — blue
+  "#2C9B63", // matcha-500 — green
+  "#8F75B7", // quantum-500 — purple
+  "#FCC43F", // honey-300 — gold
+  "#F54A3F", // ruby-500 — red
 ];
 
 // Ordered series colors for charts on the dark canvas (used by SmallMultiples

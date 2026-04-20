@@ -1,5 +1,5 @@
 import { clsx } from "@/lib/clsx";
-import { palette, categoricalOnGradient } from "./palette";
+import { categoricalOnGradient } from "./palette";
 
 export type StackedRow = {
   label: string;
@@ -29,14 +29,8 @@ type Props = {
  * and an optional right-edge summary label.
  */
 export function AreaChart({ rows, keys, colors, direction }: Props) {
-  const fallback = [
-    palette.carbon1000,
-    palette.carbon700,
-    palette.carbon500,
-    palette.carbon400,
-  ];
   const colorFor = (k: string, i: number): string =>
-    colors?.[k] ?? fallback[i % fallback.length];
+    colors?.[k] ?? categoricalOnGradient[i % categoricalOnGradient.length];
 
   return (
     <div className="flex flex-col gap-5">

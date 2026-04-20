@@ -46,7 +46,7 @@ export function GroupedBarChart({ rows, series, valueSuffix = "%" }: Props) {
       <ul className="flex flex-col gap-5">
         {rows.map((row) => (
           <li key={row.label as string} className="flex flex-col gap-1.5">
-            <div className="text-sm font-semibold text-carbon-1000">
+            <div className="text-[13px] font-semibold text-carbon-1000">
               {row.label as string}
             </div>
             <ul className="flex flex-col gap-1">
@@ -58,7 +58,7 @@ export function GroupedBarChart({ rows, series, valueSuffix = "%" }: Props) {
                 return (
                   <li
                     key={s.key}
-                    className="grid grid-cols-[2.5rem_minmax(0,1fr)_3rem] items-center gap-3 text-sm"
+                    className="grid grid-cols-[2.5rem_minmax(0,1fr)_3rem] items-center gap-3 text-[13px]"
                   >
                     <span className="text-right font-mono text-[0.7rem] uppercase tracking-wider text-carbon-500">
                       {seriesShortLabel(s.label)}
@@ -77,7 +77,7 @@ export function GroupedBarChart({ rows, series, valueSuffix = "%" }: Props) {
                       </div>
                     </div>
                     <span
-                      className="text-right font-mono text-sm font-semibold tabular-nums"
+                      className="text-right font-mono text-[13px] font-semibold tabular-nums"
                       style={{ color }}
                     >
                       {pct > 18 ? "" : `${v}${valueSuffix}`}

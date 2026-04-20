@@ -31,7 +31,7 @@ export function HeatmapTable({
   return (
     <div className="flex flex-col gap-3">
       <div className="overflow-x-auto">
-        <table className="w-full border-collapse text-sm">
+        <table className="w-full border-collapse text-[13px]">
           <thead>
             <tr className="align-bottom">
               <th className="w-40 border-b border-carbon-300 py-3 pr-4 text-left font-mono text-xs font-medium uppercase tracking-widest text-carbon-500">
@@ -66,7 +66,7 @@ export function HeatmapTable({
                   <td
                     key={ci}
                     className={clsx(
-                      "px-2 py-3 text-center align-middle text-sm tabular-nums",
+                      "px-2 py-3 text-center align-middle text-[13px] tabular-nums",
                       v >= redAt
                         ? "bg-[#F54A3F]/15 font-semibold text-[#A52015]"
                         : v >= amberAt
