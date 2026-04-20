@@ -37,7 +37,7 @@ export function GroupedBarChart({ rows, series, valueSuffix = "%" }: Props) {
                 backgroundColor: s.color ?? defaultColors[i] ?? palette.carbon1000,
               }}
             />
-            <span className="font-medium">{s.label}</span>
+            <span className="font-normal">{s.label}</span>
           </div>
         ))}
       </div>
@@ -46,7 +46,7 @@ export function GroupedBarChart({ rows, series, valueSuffix = "%" }: Props) {
       <ul className="flex flex-col gap-5">
         {rows.map((row) => (
           <li key={row.label as string} className="flex flex-col gap-1.5">
-            <div className="text-[13px] font-semibold text-carbon-1000">
+            <div className="text-[13px] font-normal text-carbon-1000">
               {row.label as string}
             </div>
             <ul className="flex flex-col gap-1">
@@ -69,7 +69,7 @@ export function GroupedBarChart({ rows, series, valueSuffix = "%" }: Props) {
                         style={{ width: `${pct}%`, backgroundColor: color }}
                       >
                         {pct > 18 ? (
-                          <span className="font-mono text-[0.7rem] font-semibold tabular-nums text-white">
+                          <span className="font-mono text-[0.7rem] font-normal tabular-nums text-white">
                             {v}
                             {valueSuffix}
                           </span>
@@ -77,7 +77,7 @@ export function GroupedBarChart({ rows, series, valueSuffix = "%" }: Props) {
                       </div>
                     </div>
                     <span
-                      className="text-right font-mono text-[13px] font-semibold tabular-nums"
+                      className="text-right font-mono text-[13px] font-normal tabular-nums"
                       style={{ color }}
                     >
                       {pct > 18 ? "" : `${v}${valueSuffix}`}

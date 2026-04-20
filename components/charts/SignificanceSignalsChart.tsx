@@ -62,7 +62,7 @@ function SignalRow({ row, max }: { row: SignalRow; max: number }) {
       <span
         className={clsx(
           "leading-tight",
-          significant ? "font-semibold text-carbon-1000" : "text-carbon-700",
+          significant ? "font-normal text-carbon-1000" : "font-normal text-carbon-500",
         )}
       >
         {row.label}
@@ -100,7 +100,7 @@ function SignalRow({ row, max }: { row: SignalRow; max: number }) {
       <span
         className={clsx(
           "text-center font-mono text-[0.7rem]",
-          significant ? "font-semibold text-carbon-1000" : "text-carbon-500",
+          significant ? "font-normal text-carbon-1000" : "font-normal text-carbon-500",
         )}
       >
         {row.sig}

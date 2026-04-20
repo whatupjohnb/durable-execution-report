@@ -80,7 +80,7 @@ function HorizontalBars({
             className="grid items-center gap-x-4 gap-y-1 text-[13px] sm:grid-cols-[14rem_minmax(0,1fr)_3.5rem]"
           >
             <div className="flex flex-col gap-0.5 text-left">
-              <span className="font-medium leading-snug text-carbon-900">
+              <span className="font-normal leading-snug text-carbon-900">
                 {d.label}
               </span>
               {d.count !== undefined ? (
@@ -98,7 +98,7 @@ function HorizontalBars({
                 style={{ width: `${pct}%`, backgroundColor: color }}
               >
                 {insideLabels && pct > 12 ? (
-                  <span className="font-mono text-[11px] font-semibold tabular-nums text-white">
+                  <span className="font-mono text-[11px] font-normal tabular-nums text-white">
                     {d.value}
                     {valueSuffix}
                   </span>
@@ -107,7 +107,7 @@ function HorizontalBars({
             </div>
             {!insideLabels ? (
               <span
-                className="min-w-[2.5rem] text-right font-mono text-[13px] font-bold tabular-nums"
+                className="min-w-[2.5rem] text-right font-mono text-[13px] font-normal tabular-nums"
                 style={{ color }}
               >
                 {d.value}
@@ -140,12 +140,12 @@ function ColumnInner({
   const axisLabelProps = {
     fill: inkOnGradient.base,
     fontSize: 12,
-    fontFamily: "var(--font-inter), sans-serif",
+    fontFamily: "var(--font-circular), sans-serif",
   } as const;
   const tickLabelProps = {
     fill: inkOnGradient.muted,
     fontSize: 10,
-    fontFamily: "var(--font-jetbrains-mono), monospace",
+    fontFamily: "var(--font-whyte-mono), monospace",
   } as const;
 
   const colorFor = (d: BarDatum, i: number): string => {
@@ -193,7 +193,7 @@ function ColumnInner({
                 y={y - 8}
                 textAnchor="middle"
                 fontSize={13}
-                fontFamily="var(--font-inter), sans-serif"
+                fontFamily="var(--font-circular), sans-serif"
                 fontWeight={700}
                 fill={fill}
               >
