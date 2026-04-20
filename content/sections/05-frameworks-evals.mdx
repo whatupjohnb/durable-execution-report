@@ -100,7 +100,6 @@ of workflow failure for those building with AI, this particular correlation
   label="Figure 14"
   caption="Scaling confidence by eval approach"
   source="AI teams only. Very / somewhat / not very confident. * = n<10, directional. Values on the right: very confident % / not confident %."
-  aspect="aspect-[16/9]"
 >
   <AreaChart
     rows={confidenceByEvals}
@@ -140,7 +139,6 @@ that can't see each other.
   label="Figure 15"
   caption="What's wrong with current eval solutions"
   source="Q15: What do you believe are the biggest limitations of modern AI eval solutions? % of all respondents citing each limitation (n=143)."
-  aspect="aspect-[16/10]"
 >
   <BarChart data={evalGaps} valueSuffix="%" horizontal showTrack insideLabels />
 </ChartFrame>
@@ -155,7 +153,6 @@ solutions — just in the category overall.
   label="Figure 16"
   caption="What's wrong with current eval solutions — by tool"
   source="Q15: % of each tool's users citing each limitation. Red = 50%+, amber = 30–49%."
-  aspect="aspect-auto"
 >
   <HeatmapTable
     columns={evalGapsByTool.columns}
@@ -222,7 +219,6 @@ with higher confidence levels.
   label="Figure 19"
   caption="Scaling confidence by agent framework"
   source="AI teams only. Very / somewhat / not very confident. * = n<10, directional. Values on the right: very confident % / not confident %."
-  aspect="aspect-[16/9]"
 >
   <AreaChart
     rows={confidenceByFramework}
@@ -253,7 +249,6 @@ long-running or stateful workflows (19%).
   label="Figure 20"
   caption="What's broken about agent frameworks"
   source="Q17: What do you believe are the biggest limitations of modern agent frameworks? % of all respondents citing each limitation (n=143)."
-  aspect="aspect-[16/10]"
 >
   <BarChart data={frameworkGaps} valueSuffix="%" horizontal showTrack insideLabels />
 </ChartFrame>
@@ -273,7 +268,6 @@ about gaps in their solutions — just in the category overall.
   label="Figure 21"
   caption="What's broken about agent frameworks — by tool"
   source="Q17: % of framework users citing each limitation. Red = 50%+, amber = 30–49%."
-  aspect="aspect-auto"
 >
   <HeatmapTable
     columns={frameworkGapsByTool.columns}

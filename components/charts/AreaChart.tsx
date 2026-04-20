@@ -1,18 +1,12 @@
-"use client";
-
-import { ParentSize } from "@visx/responsive";
-import { Group } from "@visx/group";
-import { scaleLinear, scaleBand, scaleOrdinal } from "@visx/scale";
-import { AxisLeft } from "@visx/axis";
-import { BarStackHorizontal } from "@visx/shape";
-import { palette, inkOnGradient } from "./palette";
+import { clsx } from "@/lib/clsx";
+import { palette, categoricalOnGradient } from "./palette";
 
 export type StackedRow = {
   label: string;
   segments: Record<string, number>;
-  /** Optional raw count for the row, rendered next to the label. */
+  /** Optional raw count for the row. */
   n?: number;
-  /** When true, appends a superscript * to the label (directional cohort). */
+  /** When true, appends a * to the label (directional cohort). */
   directional?: boolean;
   /** Optional right-edge label (e.g. "50% / 12%"). */
   rightLabel?: string;
@@ -25,214 +19,102 @@ type Props = {
   keys: string[];
   /** Explicit per-key fill color; falls back to categorical palette. */
   colors?: Record<string, string>;
-  /**
-   * Optional directional hint below the chart, e.g. { left: "← fast",
-   * right: "slow →" }. Used on Figures 9 and 10.
-   */
+  /** Directional hint under the chart. */
   direction?: DirectionHint;
-  /** Minimum bar-height feel: tall distribution rows. */
-  rowHeight?: number;
 };
 
-export function AreaChart(props: Props) {
-  return (
-    <div className="flex h-full flex-col">
-      <div className="flex-1 min-h-0">
-        <ParentSize>
-          {({ width, height }) =>
-            width > 0 && height > 0 ? (
-              <Inner width={width} height={height} {...props} />
-            ) : null
-          }
-        </ParentSize>
-      </div>
-      {props.direction ? (
-        <div className="mt-3 flex justify-between font-mono text-xs text-carbon-500">
-          <span className="italic">{props.direction.left}</span>
-          <span className="italic">{props.direction.right}</span>
-        </div>
-      ) : null}
-    </div>
-  );
-}
-
-function Inner({
-  width,
-  height,
-  rows,
-  keys,
-  colors,
-}: Props & { width: number; height: number }) {
-  const hasRightLabel = rows.some((r) => r.rightLabel);
-  const margin = {
-    top: 44,
-    right: hasRightLabel ? 96 : 16,
-    bottom: 16,
-    left: 220,
-  };
-  const innerW = Math.max(0, width - margin.left - margin.right);
-  const innerH = Math.max(0, height - margin.top - margin.bottom);
-
-  const data = rows.map((r) => {
-    const total = keys.reduce((acc, k) => acc + (r.segments[k] ?? 0), 0) || 1;
-    const out: Record<string, number> & { label: string } = {
-      label: r.label,
-    } as never;
-    for (const k of keys) {
-      out[k] = ((r.segments[k] ?? 0) / total) * 100;
-    }
-    return out;
-  });
-
-  const yScale = scaleBand<string>({
-    domain: data.map((d) => d.label),
-    range: [0, innerH],
-    padding: 0.25,
-  });
-  const xScale = scaleLinear<number>({
-    domain: [0, 100],
-    range: [0, innerW],
-  });
+/**
+ * 100%-stacked horizontal bar chart. Pure HTML/CSS for deterministic row
+ * heights. Each row has: label + optional n=, a full-width stacked bar,
+ * and an optional right-edge summary label.
+ */
+export function AreaChart({ rows, keys, colors, direction }: Props) {
   const fallback = [
     palette.carbon1000,
     palette.carbon700,
     palette.carbon500,
     palette.carbon400,
   ];
-  const colorScale = scaleOrdinal<string, string>({
-    domain: keys,
-    range: keys.map((k, i) => colors?.[k] ?? fallback[i % fallback.length]),
-  });
+  const colorFor = (k: string, i: number): string =>
+    colors?.[k] ?? fallback[i % fallback.length];
 
   return (
-    <svg width={width} height={height}>
-      <Group left={margin.left} top={margin.top}>
-        <BarStackHorizontal<(typeof data)[number], string>
-          data={data}
-          keys={keys}
-          height={innerH}
-          width={innerW}
-          y={(d) => d.label}
-          xScale={xScale}
-          yScale={yScale}
-          color={(k) => colorScale(k) ?? palette.carbon1000}
-        >
-          {(barStacks) =>
-            barStacks.flatMap((bs) =>
-              bs.bars.map((bar) => (
-                <g key={`${bs.index}-${bar.index}`}>
-                  <rect
-                    x={bar.x}
-                    y={bar.y}
-                    width={bar.width}
-                    height={bar.height}
-                    fill={bar.color}
-                  />
-                  {bar.width > 36 ? (
-                    <text
-                      x={bar.x + bar.width / 2}
-                      y={bar.y + bar.height / 2}
-                      textAnchor="middle"
-                      dy="0.32em"
-                      fontSize={12}
-                      fontFamily="var(--font-inter), sans-serif"
-                      fontWeight={700}
-                      fill={palette.carbon50}
-                    >
-                      {Math.round(Number(bar.bar.data[bar.key]))}%
-                    </text>
-                  ) : null}
-                </g>
-              )),
-            )
-          }
-        </BarStackHorizontal>
+    <div className="flex flex-col gap-5">
+      {/* Legend */}
+      <div className="flex flex-wrap gap-x-5 gap-y-2 text-xs text-carbon-700">
+        {keys.map((k, i) => (
+          <div key={k} className="flex items-center gap-2">
+            <span
+              className="inline-block h-3 w-3"
+              style={{ backgroundColor: colorFor(k, i) }}
+            />
+            <span className="font-medium">{k}</span>
+          </div>
+        ))}
+      </div>
 
-        {/* Right-edge labels (e.g. "50% / 12%") */}
-        {hasRightLabel
-          ? rows.map((r) => {
-              if (!r.rightLabel) return null;
-              const y = (yScale(r.label) ?? 0) + yScale.bandwidth() / 2;
-              return (
-                <text
-                  key={`rl-${r.label}`}
-                  x={innerW + 12}
-                  y={y}
-                  dy="0.32em"
-                  fontSize={13}
-                  fontFamily="var(--font-inter), sans-serif"
-                  fontWeight={600}
-                  fill={inkOnGradient.base}
-                >
-                  {r.rightLabel}
-                </text>
-              );
-            })
-          : null}
-
-        <AxisLeft
-          scale={yScale}
-          hideAxisLine
-          hideTicks
-          tickComponent={(props) => {
-            const idx = data.findIndex((d) => d.label === props.formattedValue);
-            const row = rows[idx];
-            const n = row?.n;
-            const star = row?.directional ? " *" : "";
-            return (
-              <g transform={`translate(${props.x}, ${props.y})`}>
-                <text
-                  textAnchor="end"
-                  dx={-10}
-                  dy="0.32em"
-                  fontSize={13}
-                  fontFamily="var(--font-inter), sans-serif"
-                  fontWeight={600}
-                  fill={inkOnGradient.base}
-                >
-                  {props.formattedValue}
-                  {star}
-                </text>
-                {n !== undefined ? (
-                  <text
-                    textAnchor="end"
-                    dx={-10}
-                    dy="1.45em"
-                    fontSize={10}
-                    fontFamily="var(--font-jetbrains-mono), monospace"
-                    fill={palette.carbon500}
-                  >
-                    n={n}
-                  </text>
+      {/* Rows */}
+      <ul className="flex flex-col gap-2">
+        {rows.map((r) => {
+          const total =
+            keys.reduce((acc, k) => acc + (r.segments[k] ?? 0), 0) || 1;
+          return (
+            <li
+              key={r.label}
+              className="grid items-center gap-x-4 text-sm sm:grid-cols-[minmax(9rem,14rem)_minmax(2.5rem,3rem)_1fr_auto]"
+            >
+              <div className="flex items-baseline gap-1 sm:justify-end">
+                <span className="font-semibold text-carbon-1000">
+                  {r.label}
+                </span>
+                {r.directional ? (
+                  <span className="text-carbon-500">*</span>
                 ) : null}
-              </g>
-            );
-          }}
-        />
+              </div>
+              <div className="font-mono text-xs tabular-nums text-carbon-500 sm:text-left">
+                {r.n !== undefined ? `n=${r.n}` : ""}
+              </div>
+              <div className="flex h-9 overflow-hidden">
+                {keys.map((k, i) => {
+                  const v = r.segments[k] ?? 0;
+                  const pct = (v / total) * 100;
+                  if (pct <= 0) return null;
+                  const color = colorFor(k, i);
+                  return (
+                    <div
+                      key={k}
+                      className="flex items-center justify-center overflow-hidden text-xs font-semibold tabular-nums text-white"
+                      style={{ width: `${pct}%`, backgroundColor: color }}
+                    >
+                      {pct >= 8 ? `${Math.round(pct)}%` : ""}
+                    </div>
+                  );
+                })}
+              </div>
+              {r.rightLabel ? (
+                <div className="font-mono text-sm font-semibold tabular-nums text-carbon-1000">
+                  {r.rightLabel}
+                </div>
+              ) : (
+                <div />
+              )}
+            </li>
+          );
+        })}
+      </ul>
 
-        {/* Legend */}
-        <g transform={`translate(0, ${-margin.top + 14})`}>
-          {keys.map((k, i) => (
-            <g key={k} transform={`translate(${i * 160}, 0)`}>
-              <rect
-                width={12}
-                height={12}
-                fill={colorScale(k) ?? palette.carbon1000}
-              />
-              <text
-                x={18}
-                y={10}
-                fontSize={11}
-                fontFamily="var(--font-inter), sans-serif"
-                fill={inkOnGradient.base}
-                fontWeight={500}
-              >
-                {k}
-              </text>
-            </g>
-          ))}
-        </g>
-      </Group>
-    </svg>
+      {/* Direction arrows */}
+      {direction ? (
+        <div
+          className={clsx(
+            "flex justify-between font-mono text-xs italic text-carbon-500",
+            "-mt-1",
+          )}
+        >
+          <span>{direction.left}</span>
+          <span>{direction.right}</span>
+        </div>
+      ) : null}
+    </div>
   );
 }

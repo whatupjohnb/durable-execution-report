@@ -45,7 +45,6 @@ case as long-running workflows.
   label="Figure 1"
   caption="What are teams running in production?"
   source="Q2: What types of workflows or jobs are you running in production? Q11: Are you currently running AI workflows in production? All respondents n=130. Multi-select — totals exceed 100%."
-  aspect="aspect-[16/9]"
 >
   <BarChart data={workflowUseCases} valueSuffix="%" horizontal />
 </ChartFrame>
@@ -61,7 +60,6 @@ often pairing a custom-built solution with a third-party platform.
   label="Figure 2"
   caption="How many orchestration tools are teams using?"
   source="All respondents n=130. 56% use more than one tool."
-  aspect="aspect-[16/7]"
 >
   <BarChart data={toolCountDistribution} valueSuffix="%" horizontal showTrack />
 </ChartFrame>
@@ -97,7 +95,6 @@ second place but drop sharply on AI coverage (53%).
   label="Figure 3"
   caption="Use case breadth — teams using only one orchestration tool"
   source="Q2 × Q3 × Q11. Solo users of each tool only. % running each workflow type. Sorted by average across all five use cases."
-  aspect="aspect-auto"
 >
   <SoloCohortsChart
     cohorts={soloToolCohorts}

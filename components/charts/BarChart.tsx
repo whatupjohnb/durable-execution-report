@@ -32,35 +32,103 @@ type Props = {
 };
 
 export function BarChart(props: Props) {
+  if (props.horizontal) return <HorizontalBars {...props} />;
   return (
     <ParentSize>
       {({ width, height }) =>
         width > 0 && height > 0 ? (
-          <BarChartInner width={width} height={height} {...props} />
+          <ColumnInner width={width} height={height} {...props} />
         ) : null
       }
     </ParentSize>
   );
 }
 
-function BarChartInner({
+// ---------------------------------------------------------------------------
+// Horizontal mode — HTML/CSS for deterministic bar heights and typography.
+// ---------------------------------------------------------------------------
+function HorizontalBars({
+  data,
+  valueSuffix = "",
+  accentIndex,
+  showTrack = false,
+  insideLabels = false,
+}: Props) {
+  const hasAnyCount = data.some((d) => d.count !== undefined);
+  const domainMax = showTrack
+    ? 100
+    : Math.max(...data.map((d) => d.value));
+
+  const colorFor = (d: BarDatum, i: number): string => {
+    if (d.color) return d.color;
+    if (accentIndex === i) return palette.carbon1000;
+    return categoricalOnGradient[i % categoricalOnGradient.length];
+  };
+
+  return (
+    <ul className="flex flex-col gap-2.5">
+      {data.map((d, i) => {
+        const pct = Math.max(0, (d.value / domainMax) * 100);
+        const color = colorFor(d, i);
+        return (
+          <li
+            key={d.label}
+            className="grid items-center gap-x-4 gap-y-1 text-sm sm:grid-cols-[minmax(11rem,18rem)_1fr_auto] sm:gap-x-5"
+            style={{ gridTemplateColumns: undefined }}
+          >
+            <div className="font-medium leading-snug text-carbon-900 sm:text-right">
+              {d.label}
+            </div>
+            <div className="relative h-8">
+              {showTrack ? (
+                <div className="absolute inset-0 bg-carbon-100" />
+              ) : null}
+              <div
+                className="absolute inset-y-0 left-0 flex items-center justify-end pr-2"
+                style={{ width: `${pct}%`, backgroundColor: color }}
+              >
+                {insideLabels && pct > 12 ? (
+                  <span className="font-mono text-xs font-semibold tabular-nums text-white">
+                    {d.value}
+                    {valueSuffix}
+                  </span>
+                ) : null}
+              </div>
+            </div>
+            <div className="flex items-center gap-3 sm:justify-end">
+              {d.count !== undefined ? (
+                <span className="font-mono text-xs tabular-nums text-carbon-500">
+                  n={d.count}
+                </span>
+              ) : null}
+              {!insideLabels ? (
+                <span
+                  className="min-w-[3rem] text-right font-mono text-sm font-bold tabular-nums"
+                  style={{ color }}
+                >
+                  {d.value}
+                  {valueSuffix}
+                </span>
+              ) : null}
+            </div>
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Column mode — Visx for axis + gridline rendering.
+// ---------------------------------------------------------------------------
+function ColumnInner({
   width,
   height,
   data,
   valueSuffix = "",
-  horizontal = false,
   accentIndex,
-  showTrack = false,
-  insideLabels = false,
 }: Props & { width: number; height: number }) {
-  const hasAnyCount = data.some((d) => d.count !== undefined);
-  const rightPad = insideLabels ? 16 : hasAnyCount ? 96 : 48;
-  const margin = {
-    top: 12,
-    right: horizontal ? rightPad : 32,
-    bottom: 36,
-    left: horizontal ? 260 : 56,
-  };
+  const margin = { top: 24, right: 24, bottom: 40, left: 48 };
   const innerW = Math.max(0, width - margin.left - margin.right);
   const innerH = Math.max(0, height - margin.top - margin.bottom);
 
@@ -75,112 +143,11 @@ function BarChartInner({
     fontFamily: "var(--font-jetbrains-mono), monospace",
   } as const;
 
-  const colorFor = (d: BarDatum, i: number, isAccent: boolean): string => {
+  const colorFor = (d: BarDatum, i: number): string => {
     if (d.color) return d.color;
-    if (isAccent) return palette.carbon1000;
+    if (accentIndex === i) return palette.carbon1000;
     return categoricalOnGradient[i % categoricalOnGradient.length];
   };
-
-  if (horizontal) {
-    const max = Math.max(...data.map((d) => d.value));
-    const domainMax = showTrack ? 100 : max;
-    const yScale = scaleBand<string>({
-      domain: data.map((d) => d.label),
-      range: [0, innerH],
-      padding: 0.3,
-    });
-    const xScale = scaleLinear<number>({
-      domain: [0, domainMax],
-      range: [0, innerW],
-      nice: !showTrack,
-    });
-
-    return (
-      <svg width={width} height={height}>
-        <Group left={margin.left} top={margin.top}>
-          {data.map((d, i) => {
-            const y = yScale(d.label) ?? 0;
-            const w = xScale(d.value);
-            const fill = colorFor(d, i, accentIndex === i);
-            return (
-              <g key={d.label}>
-                {showTrack ? (
-                  <Bar
-                    x={0}
-                    y={y}
-                    width={innerW}
-                    height={yScale.bandwidth()}
-                    fill={fill}
-                    fillOpacity={0.15}
-                  />
-                ) : null}
-                <Bar
-                  x={0}
-                  y={y}
-                  width={w}
-                  height={yScale.bandwidth()}
-                  fill={fill}
-                />
-                {insideLabels ? (
-                  <text
-                    x={w - 8}
-                    y={y + yScale.bandwidth() / 2}
-                    dy="0.32em"
-                    textAnchor="end"
-                    fontSize={14}
-                    fontFamily="var(--font-inter), sans-serif"
-                    fontWeight={700}
-                    fill={palette.carbon50}
-                  >
-                    {d.value}
-                    {valueSuffix}
-                  </text>
-                ) : (
-                  <>
-                    {d.count !== undefined ? (
-                      <text
-                        x={w + 10}
-                        y={y + yScale.bandwidth() / 2}
-                        dy="0.32em"
-                        fontSize={11}
-                        fontFamily="var(--font-jetbrains-mono), monospace"
-                        fill={palette.carbon500}
-                      >
-                        n={d.count}
-                      </text>
-                    ) : null}
-                    <text
-                      x={innerW + (hasAnyCount ? 52 : 10)}
-                      y={y + yScale.bandwidth() / 2}
-                      dy="0.32em"
-                      fontSize={13}
-                      fontFamily="var(--font-inter), sans-serif"
-                      fontWeight={700}
-                      fill={fill}
-                    >
-                      {d.value}
-                      {valueSuffix}
-                    </text>
-                  </>
-                )}
-              </g>
-            );
-          })}
-          <AxisLeft
-            scale={yScale}
-            hideAxisLine
-            hideTicks
-            tickLabelProps={() => ({
-              ...axisLabelProps,
-              textAnchor: "end",
-              dx: -12,
-              dy: "0.32em",
-            })}
-          />
-        </Group>
-      </svg>
-    );
-  }
 
   const xScale = scaleBand<string>({
     domain: data.map((d) => d.label),
@@ -212,21 +179,15 @@ function BarChartInner({
           const x = xScale(d.label) ?? 0;
           const y = yScale(d.value);
           const h = innerH - y;
-          const fill = colorFor(d, i, accentIndex === i);
+          const fill = colorFor(d, i);
           return (
             <g key={d.label}>
-              <Bar
-                x={x}
-                y={y}
-                width={xScale.bandwidth()}
-                height={h}
-                fill={fill}
-              />
+              <Bar x={x} y={y} width={xScale.bandwidth()} height={h} fill={fill} />
               <text
                 x={x + xScale.bandwidth() / 2}
                 y={y - 8}
                 textAnchor="middle"
-                fontSize={12}
+                fontSize={13}
                 fontFamily="var(--font-inter), sans-serif"
                 fontWeight={700}
                 fill={fill}
@@ -245,7 +206,7 @@ function BarChartInner({
           tickLabelProps={() => ({
             ...tickLabelProps,
             textAnchor: "end",
-            dx: -6,
+            dx: -8,
             dy: "0.32em",
           })}
           tickFormat={(v) => `${v}${valueSuffix}`}

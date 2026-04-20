@@ -1,11 +1,4 @@
-"use client";
-
-import { ParentSize } from "@visx/responsive";
-import { Group } from "@visx/group";
-import { scaleBand, scaleLinear } from "@visx/scale";
-import { AxisLeft } from "@visx/axis";
-import { Bar } from "@visx/shape";
-import { palette, inkOnGradient } from "./palette";
+import { palette } from "./palette";
 
 export type GroupedRow = {
   label: string;
@@ -19,128 +12,100 @@ type Props = {
 };
 
 /**
- * Horizontal grouped bar chart for AI vs non-AI style comparisons,
- * styled for the hero-gradient ChartFrame (dark ink).
+ * Horizontal grouped-bar chart built in HTML/CSS. Each row is a cause /
+ * predictor; each series is drawn as its own bar within the row, stacked
+ * vertically on small screens and side-by-side on larger screens.
  */
-export function GroupedBarChart(props: Props) {
-  return (
-    <ParentSize>
-      {({ width, height }) =>
-        width > 0 && height > 0 ? (
-          <GroupedInner width={width} height={height} {...props} />
-        ) : null
-      }
-    </ParentSize>
-  );
-}
-
-function GroupedInner({
-  width,
-  height,
-  rows,
-  series,
-  valueSuffix = "%",
-}: Props & { width: number; height: number }) {
-  const margin = { top: 36, right: 40, bottom: 12, left: 220 };
-  const innerW = Math.max(0, width - margin.left - margin.right);
-  const innerH = Math.max(0, height - margin.top - margin.bottom);
-
-  const yScale = scaleBand<string>({
-    domain: rows.map((r) => r.label),
-    range: [0, innerH],
-    padding: 0.25,
-  });
+export function GroupedBarChart({ rows, series, valueSuffix = "%" }: Props) {
+  const defaultColors = [palette.carbon1000, palette.matcha700];
 
   const max = Math.max(
     ...rows.flatMap((r) => series.map((s) => Number(r[s.key] ?? 0))),
   );
-  const xScale = scaleLinear<number>({
-    domain: [0, max],
-    range: [0, innerW],
-    nice: true,
-  });
-
-  // Default: black for first series (AI/Confident), deep matcha for second.
-  const defaultColors = [palette.carbon1000, palette.matcha700];
+  // Round up to the next 10 for a cleaner implicit scale.
+  const domainMax = Math.max(10, Math.ceil(max / 10) * 10);
 
   return (
-    <svg width={width} height={height}>
-      <g transform={`translate(${margin.left}, 10)`}>
+    <div className="flex flex-col gap-6">
+      {/* Legend */}
+      <div className="flex flex-wrap gap-x-5 gap-y-2 text-xs text-carbon-700">
         {series.map((s, i) => (
-          <g key={s.key} transform={`translate(${i * 160}, 0)`}>
-            <rect
-              width={12}
-              height={12}
-              fill={s.color ?? defaultColors[i] ?? palette.carbon1000}
+          <div key={s.key} className="flex items-center gap-2">
+            <span
+              className="inline-block h-3 w-3"
+              style={{
+                backgroundColor: s.color ?? defaultColors[i] ?? palette.carbon1000,
+              }}
             />
-            <text
-              x={18}
-              y={10}
-              fontSize={11}
-              fontFamily="var(--font-inter), sans-serif"
-              fill={inkOnGradient.base}
-              fontWeight={500}
-            >
-              {s.label}
-            </text>
-          </g>
+            <span className="font-medium">{s.label}</span>
+          </div>
         ))}
-      </g>
-      <Group left={margin.left} top={margin.top}>
-        {rows.map((row) => {
-          const rowY = yScale(row.label) ?? 0;
-          const bandH = yScale.bandwidth();
-          const barH = bandH / series.length;
-          return (
-            <g key={row.label}>
+      </div>
+
+      {/* Rows */}
+      <ul className="flex flex-col gap-5">
+        {rows.map((row) => (
+          <li key={row.label as string} className="flex flex-col gap-1.5">
+            <div className="text-sm font-semibold text-carbon-1000">
+              {row.label as string}
+            </div>
+            <ul className="flex flex-col gap-1">
               {series.map((s, i) => {
                 const v = Number(row[s.key] ?? 0);
-                const w = xScale(v);
-                const y = rowY + i * barH;
                 const color =
                   s.color ?? defaultColors[i] ?? palette.carbon1000;
+                const pct = (v / domainMax) * 100;
                 return (
-                  <g key={s.key}>
-                    <Bar
-                      x={0}
-                      y={y + 1}
-                      width={w}
-                      height={barH - 2}
-                      fill={color}
-                    />
-                    <text
-                      x={w + 6}
-                      y={y + barH / 2}
-                      dy="0.32em"
-                      fontSize={10}
-                      fontFamily="var(--font-jetbrains-mono), monospace"
-                      fill={inkOnGradient.base}
-                      fontWeight={600}
+                  <li
+                    key={s.key}
+                    className="grid grid-cols-[2.5rem_1fr_3rem] items-center gap-3 text-sm"
+                  >
+                    <span className="text-right font-mono text-[0.7rem] uppercase tracking-wider text-carbon-500">
+                      {seriesShortLabel(s.label)}
+                    </span>
+                    <div className="relative h-5 bg-carbon-100">
+                      <div
+                        className="absolute inset-y-0 left-0 flex items-center justify-end pr-2"
+                        style={{ width: `${pct}%`, backgroundColor: color }}
+                      >
+                        {pct > 18 ? (
+                          <span className="font-mono text-[0.7rem] font-semibold tabular-nums text-white">
+                            {v}
+                            {valueSuffix}
+                          </span>
+                        ) : null}
+                      </div>
+                    </div>
+                    <span
+                      className="text-right font-mono text-sm font-semibold tabular-nums"
+                      style={{ color }}
                     >
-                      {v}
-                      {valueSuffix}
-                    </text>
-                  </g>
+                      {pct > 18 ? "" : `${v}${valueSuffix}`}
+                    </span>
+                  </li>
                 );
               })}
-            </g>
-          );
-        })}
-        <AxisLeft
-          scale={yScale}
-          hideAxisLine
-          hideTicks
-          tickLabelProps={() => ({
-            fill: inkOnGradient.base,
-            fontSize: 11,
-            fontFamily: "var(--font-inter), sans-serif",
-            textAnchor: "end",
-            dx: -10,
-            dy: "0.32em",
-            fontWeight: 500,
-          })}
-        />
-      </Group>
-    </svg>
+            </ul>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
+}
+
+/**
+ * Collapse a full series label like "AI teams (n=88)" into a compact row
+ * token ("AI", "noAI") that fits the small tag column.
+ */
+function seriesShortLabel(full: string): string {
+  const trimmed = full.replace(/\s*\(.*\)\s*$/, "").trim();
+  if (/^no[-\s]?ai/i.test(trimmed)) return "noAI";
+  if (/^ai\b/i.test(trimmed)) return "AI";
+  if (/confident/i.test(trimmed) && /unconfident|not/i.test(trimmed)) {
+    return "Unc";
+  }
+  if (/confident/i.test(trimmed) && !/not|unconfident/i.test(trimmed)) {
+    return "Conf";
+  }
+  return trimmed.slice(0, 4);
 }

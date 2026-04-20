@@ -58,7 +58,6 @@ can't fully explain what happened at all.
   label="Figure 8"
   caption="Time to understand what went wrong"
   source="Q5: When a workflow fails in production, how long does it typically take to understand what went wrong? All respondents n=130."
-  aspect="aspect-[16/8]"
 >
   <BarChart data={diagnosticSpeed} valueSuffix="%" horizontal showTrack />
 </ChartFrame>
@@ -76,7 +75,6 @@ Teams using only APM tools without an orchestration dashboard: 29% fast,
   label="Figure 9"
   caption="Time to understand what went wrong — by observability tool"
   source="Q5 × Q4: Respondents may use multiple observability tools. Sorted by % diagnosing in minutes."
-  aspect="aspect-[16/9]"
 >
   <AreaChart
     rows={diagnosticSpeedByTool}
@@ -129,7 +127,6 @@ rarely accumulate 3+.
   label="Figure 10"
   caption="Customer-visible incidents in the past 90 days"
   source="Q7: In the past 90 days, has a workflow or background job failure caused a customer-visible incident? AI vs. non-AI teams."
-  aspect="aspect-[16/7]"
 >
   <AreaChart
     rows={incidentsBy90Days}
@@ -153,7 +150,6 @@ those building with AI.
   label="Figure 11"
   caption="What breaks — AI teams vs non-AI teams"
   source="Q6: What are the most common causes of failures? Pick up to 3. % of each group citing each cause."
-  aspect="aspect-[16/10]"
 >
   <GroupedBarChart
     rows={topFailureCauses.map((d) => ({

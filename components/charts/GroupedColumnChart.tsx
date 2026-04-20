@@ -72,21 +72,21 @@ function Inner({
   tools,
   yMax,
 }: Props & { width: number; height: number }) {
-  const margin = { top: 16, right: 16, bottom: 40, left: 44 };
+  const margin = { top: 12, right: 8, bottom: 36, left: 40 };
   const innerW = Math.max(0, width - margin.left - margin.right);
   const innerH = Math.max(0, height - margin.top - margin.bottom);
 
-  const cohortLabels = cohorts.map((c) => `${c.label} (n=${c.n})`);
+  const cohortLabels = cohorts.map((c) => `${c.label}  n=${c.n}`);
 
   const outerScale = scaleBand<string>({
     domain: cohortLabels,
     range: [0, innerW],
-    padding: 0.2,
+    padding: 0.25,
   });
   const innerScale = scaleBand<string>({
     domain: tools.map((t) => t.key),
     range: [0, outerScale.bandwidth()],
-    padding: 0.08,
+    padding: 0.12,
   });
   const allMax = Math.max(...tools.flatMap((t) => t.values));
   const yScale = scaleLinear<number>({
