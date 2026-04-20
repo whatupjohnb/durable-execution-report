@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { inter, jetbrainsMono, whyte } from "./fonts";
+import { circular, jetbrainsMono, whyte, whyteInktrap, whyteMono } from "./fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -33,7 +33,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`dark ${inter.variable} ${jetbrainsMono.variable} ${whyte.variable}`}
+      className={`dark ${circular.variable} ${jetbrainsMono.variable} ${whyte.variable} ${whyteInktrap.variable} ${whyteMono.variable}`}
       suppressHydrationWarning
     >
       <body className="font-sans">{children}</body>

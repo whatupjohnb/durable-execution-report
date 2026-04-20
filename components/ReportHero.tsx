@@ -40,7 +40,7 @@ export function ReportHero({
         {/* Content */}
         <div className="relative mx-auto flex min-h-[min(88vh,832px)] max-w-3xl flex-col items-center justify-center gap-6 px-6 py-32 text-center sm:py-40">
           <Eyebrow tone="dark">{eyebrow}</Eyebrow>
-          <h1 className="font-heading text-4xl font-bold tracking-tight text-carbon-1000 sm:text-5xl md:text-6xl">
+          <h1 className="font-heading-inktrap text-4xl font-medium tracking-tight text-carbon-1000 sm:text-5xl md:text-6xl">
             {title}
           </h1>
           {subtitle ? (

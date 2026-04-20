@@ -89,15 +89,20 @@ const config: Config = {
         contrast: "rgb(var(--color-border-contrast) / <alpha-value>)",
       },
       fontFamily: {
-        sans: ["var(--font-inter)", "Inter", "system-ui", "sans-serif"],
+        sans: ["var(--font-circular)", "system-ui", "sans-serif"],
         heading: [
           "var(--font-whyte)",
-          "var(--font-inter)",
-          "Inter",
+          "system-ui",
+          "sans-serif",
+        ],
+        "heading-inktrap": [
+          "var(--font-whyte-inktrap)",
+          "var(--font-whyte)",
           "system-ui",
           "sans-serif",
         ],
         mono: [
+          "var(--font-whyte-mono)",
           "var(--font-jetbrains-mono)",
           "ui-monospace",
           "SFMono-Regular",
