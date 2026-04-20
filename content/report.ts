@@ -247,6 +247,7 @@ export const incidentsBy90Days = [
   {
     label: "AI in production",
     n: 88,
+    rightLabel: "19% / 23%",
     segments: {
       "3 or more times":   19,
       "Once or twice":     55,
@@ -257,6 +258,7 @@ export const incidentsBy90Days = [
   {
     label: "No AI in production",
     n: 42,
+    rightLabel: "17% / 31%",
     segments: {
       "3 or more times":   17,
       "Once or twice":     45,
