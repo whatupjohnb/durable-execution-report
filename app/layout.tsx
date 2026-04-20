@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { circular, jetbrainsMono, whyte, whyteInktrap, whyteMono } from "./fonts";
+import { ReadingProgress } from "@/components/ReadingProgress";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -36,7 +37,10 @@ export default function RootLayout({
       className={`dark ${circular.variable} ${jetbrainsMono.variable} ${whyte.variable} ${whyteInktrap.variable} ${whyteMono.variable}`}
       suppressHydrationWarning
     >
-      <body className="font-sans">{children}</body>
+      <body className="font-sans">
+        <ReadingProgress />
+        {children}
+      </body>
     </html>
   );
 }
