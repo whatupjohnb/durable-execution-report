@@ -4,11 +4,19 @@ import { AreaChart } from "@/components/charts/AreaChart";
 import { GroupedBarChart } from "@/components/charts/GroupedBarChart";
 import { PullQuote } from "@/components/PullQuote";
 import { StatCallout } from "@/components/StatCallout";
+import { SectionLead } from "@/components/SectionLead";
 import {
   reliabilityTimeAIvsNonAI,
   reliabilityBurdenDelta,
   reliabilityDrivers,
 } from "@/content/report";
+
+<SectionLead>
+  20% of teams building AI in production spend twice the time on reliability
+  work than those running traditional workflows. Users of Inngest and
+  homegrown solutions report a net reduction in burden to ensure reliability
+  over the last 12 months.
+</SectionLead>
 
 Building AI in production carries different challenges from building
 traditional software — higher throughput, non-deterministic models, opaque
@@ -30,7 +38,8 @@ AI teams are in the 26–50% band — spending up to half their engineering
 capacity just keeping things running. That's twice the rate of non-AI teams
 (10%).
 
-<ChartFrame variant="honey"
+<ChartFrame
+  variant="honey"
   label="Figure 4"
   caption="Share of engineering time spent on reliability, AI vs non-AI teams"
   source="Distribution of reported reliability-work share, normalized to 100% per row."
@@ -61,16 +70,14 @@ also appears to be relatively similar between AI and non-AI use cases.
 
 The more revealing split is by orchestration tool.
 
-<ChartFrame variant="honey"
+<ChartFrame
+  variant="honey"
   label="Figure 6"
   caption="Net change in reliability burden over 12 months, by orchestration tool"
   source="Percentage-point change in share of teams reporting increased reliability work, by primary tool."
 >
   <BarChart
-    data={reliabilityBurdenDelta.map((d) => ({
-      label: d.label,
-      value: d.value,
-    }))}
+    data={reliabilityBurdenDelta.map((d) => ({ label: d.label, value: d.value }))}
     valueSuffix="pp"
     horizontal
     accentIndex={4}
@@ -91,8 +98,7 @@ traffic & scale take a slight lead for AI teams at 62%, and technical debt
 take the lead for non-AI teams at a significantly higher margin of 86%.
 
 Multi-service architectures, faster shipping pressure, and AI workloads with
-new failure modes follow closely. Non-deterministic outputs requiring more
-validation logic is last.
+new failure modes follow closely. Non-determinism is last.
 
 <PullQuote>
   I think the shifting landscape to unproven technologies and repackaging of
@@ -101,10 +107,11 @@ validation logic is last.
   fragmentation and rapid change means we're constantly re-evaluating.
 </PullQuote>
 
-<ChartFrame variant="honey"
+<ChartFrame
+  variant="honey"
   label="Figure 7"
-  caption="Drivers of rising reliability burden, AI vs non-AI teams"
-  source="Share citing each driver. Base: respondents reporting increased burden (31%)."
+  caption="What's driving reliability burden up?"
+  source="Q10: What do you think is driving that increase? Select all that apply. Among respondents who said burden went up. AI n=24, non-AI n=7. Multi-select — totals exceed 100%."
   aspect="aspect-[16/10]"
 >
   <GroupedBarChart
@@ -114,11 +121,15 @@ validation logic is last.
       "Non-AI": d.nonAI,
     }))}
     series={[
-      { key: "AI", label: "AI teams" },
-      { key: "Non-AI", label: "Non-AI teams" },
+      { key: "AI", label: "AI in production (n=24)", color: "#F54A3F" },
+      { key: "Non-AI", label: "No AI in production (n=7)*", color: "#2389F1" },
     ]}
   />
 </ChartFrame>
+
+_* Non-AI n=7 — directional only. AI workloads / new failure modes is the
+only driver that's uniquely AI-specific (54% AI vs 14% non-AI). Technical
+debt skews non-AI (86% vs 54%)._
 
 > **Key insight:** Orchestration tooling should help teams handle rapid or
 > lumpy scale, as well as fit into their existing stack in order to reduce

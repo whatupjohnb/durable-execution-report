@@ -2,12 +2,20 @@ import { ChartFrame } from "@/components/charts/ChartFrame";
 import { BarChart } from "@/components/charts/BarChart";
 import { GroupedColumnChart } from "@/components/charts/GroupedColumnChart";
 import { SoloCohortsChart } from "@/components/charts/SoloCohortsChart";
+import { SectionLead } from "@/components/SectionLead";
 import {
   workflowUseCases,
   toolCountDistribution,
   platformByTeamSize,
   soloToolCohorts,
 } from "@/content/report";
+
+<SectionLead>
+  56% of respondents use more than one tool for durable execution, often
+  pairing a custom-built solution with a third-party platform. While Inngest
+  is favored by growth-stage teams, users also report the widest variety of
+  use cases served.
+</SectionLead>
 
 Durable execution is a fault-tolerant approach to running code that ensures
 functions complete — no matter what. These platforms persist state, handle

@@ -3,6 +3,7 @@ import { BarChart } from "@/components/charts/BarChart";
 import { AreaChart } from "@/components/charts/AreaChart";
 import { PullQuote } from "@/components/PullQuote";
 import { StatCallout } from "@/components/StatCallout";
+import { SectionLead } from "@/components/SectionLead";
 import {
   evalTools,
   confidenceByEvals,
@@ -11,6 +12,12 @@ import {
   confidenceByFramework,
   frameworkGaps,
 } from "@/content/report";
+
+<SectionLead>
+  While evals are closely tied to confidence in scale, we're still early.
+  28% of respondents believe it's hard to write evals that matter, 35%
+  aren't using them at all, and most who are, have built their own pipeline.
+</SectionLead>
 
 AI frameworks and evals exist in the layer of building AI where
 non-determinism becomes harder to manage through better infrastructure alone.
@@ -118,6 +125,14 @@ orchestration state that can't see each other.
 </ChartFrame>
 
 ### Using agent frameworks to guide AI agent production
+
+<SectionLead>
+  69% of respondents building AI in production are not using third-party
+  agent frameworks, instead choosing to call LLM APIs directly, or build
+  their own abstractions. Observability-related fears top the list of
+  perceived gaps, with 26% saying abstractions make failures harder to
+  trace.
+</SectionLead>
 
 Agent frameworks provide the foundational components to simplify the process
 of building, deploying, and managing autonomous AI agents, though the

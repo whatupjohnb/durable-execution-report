@@ -1,11 +1,21 @@
 import { ChartFrame } from "@/components/charts/ChartFrame";
 import { BarChart } from "@/components/charts/BarChart";
 import { GroupedBarChart } from "@/components/charts/GroupedBarChart";
+import { SectionLead } from "@/components/SectionLead";
 import { StatCallout } from "@/components/StatCallout";
 import { confidenceByTeamSize, stackPredictors } from "@/content/report";
 
-We're still early. Confidence in the ability to scale AI systems is
-relatively low, and it drops with team size in a way that feels paradoxical.
+<SectionLead>
+  68% of total respondents are running AI workflows in production, but only
+  19% of these individuals said they were very confident in their stack's
+  ability to handle 2–3× their current scale. 0% of teams with over 500
+  engineers reported any confidence.
+</SectionLead>
+
+We asked survey participants several questions about the tooling in their
+stack that supports how they run asynchronous workflows in production. While
+confidence in the ability to scale AI systems is relatively low, we see
+important correlation based on combinations of solutions in play.
 
 ### What we asked
 
@@ -13,26 +23,17 @@ relatively low, and it drops with team size in a way that feels paradoxical.
 2. How confident are you in your setup's ability to handle AI workloads
    reliably at 2–3× your current scale?
 
-68% of respondents are running AI workflows in production, but only 19% of
-these individuals said they were very confident in their stack's ability to
-handle 2–3× their current scale.
-
-Though, that wasn't the surprising part.
-
 Smaller teams, with limited resource to handle scale, reported being *more*
-confident than larger teams in the ability to handle 2–3× the load. This
-feels paradoxical.
+confident than larger teams in the ability to handle 2–3× the load. This may
+feel paradoxical.
 
-<ChartFrame variant="ruby"
+<ChartFrame
+  variant="ruby"
   label="Figure 22"
   caption="Share 'very confident' in handling 2–3× scale, by team size"
   source="Share of respondents reporting high confidence, by engineering headcount."
 >
-  <BarChart
-    data={confidenceByTeamSize}
-    valueSuffix="%"
-    accentIndex={0}
-  />
+  <BarChart data={confidenceByTeamSize} valueSuffix="%" accentIndex={0} />
 </ChartFrame>
 
 It could be that these teams rate their use cases to be relatively simple —
@@ -44,9 +45,10 @@ In an attempt to add more dimension to this result, we looked at how stack
 choices might correlate with overall reported confidence. We found a few
 statistically significant trends worth noting.
 
-<ChartFrame variant="ruby"
+<ChartFrame
+  variant="ruby"
   label="Figure 23"
-  caption="Stack-choice predictors of confidence in scaling AI"
+  caption="The most statistically significant signals for confidence in scaling AI"
   source="Share of confident and unconfident teams reporting each stack factor."
   aspect="aspect-[16/10]"
 >

@@ -35,8 +35,16 @@ export default function Home() {
           </Section>
 
           <Section
-            id="durable-execution"
+            id="confidence-scaling"
             eyebrow="Section 01"
+            title="Confidence in scaling AI"
+          >
+            <ConfidenceScaling />
+          </Section>
+
+          <Section
+            id="durable-execution"
+            eyebrow="Section 02"
             title="Durable execution: mapping use cases and tools"
           >
             <DurableExecution />
@@ -44,7 +52,7 @@ export default function Home() {
 
           <Section
             id="reliability-tax"
-            eyebrow="Section 02"
+            eyebrow="Section 03"
             title="The reliability tax"
           >
             <ReliabilityTax />
@@ -52,7 +60,7 @@ export default function Home() {
 
           <Section
             id="observability-edge"
-            eyebrow="Section 03"
+            eyebrow="Section 04"
             title="The observability edge"
           >
             <ObservabilityEdge />
@@ -60,18 +68,10 @@ export default function Home() {
 
           <Section
             id="frameworks-evals"
-            eyebrow="Section 04"
+            eyebrow="Section 05"
             title="AI frameworks and evals"
           >
             <FrameworksEvals />
-          </Section>
-
-          <Section
-            id="confidence-scaling"
-            eyebrow="Section 05"
-            title="Confidence in scaling AI"
-          >
-            <ConfidenceScaling />
           </Section>
 
           <Section

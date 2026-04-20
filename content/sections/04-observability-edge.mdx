@@ -4,6 +4,7 @@ import { AreaChart } from "@/components/charts/AreaChart";
 import { GroupedBarChart } from "@/components/charts/GroupedBarChart";
 import { PullQuote } from "@/components/PullQuote";
 import { StatCallout } from "@/components/StatCallout";
+import { SectionLead } from "@/components/SectionLead";
 import {
   diagnosticSpeed,
   diagnosticSpeedByTool,
@@ -11,16 +12,23 @@ import {
   topFailureCauses,
 } from "@/content/report";
 
+<SectionLead>
+  Engineers using observability dashboards built into their orchestration
+  layer report the fastest path to understanding crashes when they occur:
+  40% diagnose in minutes, while 1% note lengthy delays. For teams using
+  only APM tools, 29% diagnose in minutes, with 11% reporting delays.
+</SectionLead>
+
 In this survey we asked one free-text question: *"What is the biggest
 unsolved problem in building reliable workflows, agents, and endpoints?"*
 One theme dominated the responses: observability.
 
 While not exclusively an AI problem, observability was cited more frequently
-by teams building AI in production… which makes sense; most observability
-tools were built on the premise that the same inputs produce the same
-outputs. AI systems break that assumption. When a workflow fails because an
-LLM returned a malformed response at step three of five, the error surfaces
-as a downstream consequence in a system that had no reason to expect it.
+by teams building AI in production. This may be because observability tools
+were built on the premise that the same inputs produce the same outputs. AI
+systems break that assumption. When a workflow fails because an LLM returned
+a malformed response at step three of five, the error surfaces as a
+downstream consequence in a system that had no reason to expect it.
 
 <PullQuote attribution="Engineer, 2–10 engineer team">
   Observability gaps — when something breaks, it's hard to trace why an
@@ -45,13 +53,14 @@ as a downstream consequence in a system that had no reason to expect it.
 there in under an hour but require active investigation. 9% take hours or
 can't fully explain what happened at all.
 
-<ChartFrame variant="breeze"
+<ChartFrame
+  variant="breeze"
   label="Figure 8"
-  caption="How long to understand what went wrong?"
-  source="Time to diagnose a production failure. All respondents."
-  aspect="aspect-[16/7]"
+  caption="Time to understand what went wrong"
+  source="Q5: When a workflow fails in production, how long does it typically take to understand what went wrong? All respondents n=130."
+  aspect="aspect-[16/8]"
 >
-  <BarChart data={diagnosticSpeed} valueSuffix="%" horizontal accentIndex={0} />
+  <BarChart data={diagnosticSpeed} valueSuffix="%" horizontal showTrack />
 </ChartFrame>
 
 The gap between these cohorts is almost entirely explained by observability
@@ -62,17 +71,33 @@ with only 1% in the slow-or-blind band.
 Teams using only APM tools without an orchestration dashboard: 29% fast,
 11% slow or blind. That's an 11× difference in worst-case outcomes.
 
-<ChartFrame variant="breeze"
+<ChartFrame
+  variant="breeze"
   label="Figure 9"
-  caption="Diagnostic speed, by observability approach"
-  source="Distribution of diagnostic speed, normalized per row."
+  caption="Time to understand what went wrong — by observability tool"
+  source="Q5 × Q4: Respondents may use multiple observability tools. Sorted by % diagnosing in minutes."
   aspect="aspect-[16/9]"
 >
   <AreaChart
     rows={diagnosticSpeedByTool}
-    keys={["Minutes", "Under an hour", "Hours / blind"]}
+    keys={["Minutes — good tracing", "Under an hour", "Hours", "Can't explain"]}
+    colors={{
+      "Minutes — good tracing": "#2C9B63",
+      "Under an hour": "#2389F1",
+      "Hours": "#FF7300",
+      "Can't explain": "#F54A3F",
+    }}
+    direction={{ left: "← fast", right: "slow →" }}
   />
 </ChartFrame>
+
+_Orchestration platform dashboards lead on fast diagnosis (40%) and have the
+lowest combined slow/can't-explain rate (5%). Sentry, Datadog, and New Relic
+have the highest "hours" rate (7%) despite being the most widely used tools —
+broad adoption doesn't mean fast resolution. Teams with no structured
+observability (n=7, not shown) split sharply: 43% diagnose in minutes but
+29% can't explain at all — either the failure is immediately obvious or
+you're completely in the dark._
 
 <StatCallout
   value="11×"
@@ -99,15 +124,23 @@ customer-visible incident in the past 90 days — vs 62% of non-AI teams. One
 in five AI teams had three or more, while teams larger than 500 engineers
 rarely accumulate 3+.
 
-<ChartFrame variant="breeze"
+<ChartFrame
+  variant="breeze"
   label="Figure 10"
-  caption="Customer-visible incidents in the past 90 days, AI vs non-AI teams"
-  source="Distribution of incident counts, normalized per row."
-  aspect="aspect-[16/9]"
+  caption="Customer-visible incidents in the past 90 days"
+  source="Q7: In the past 90 days, has a workflow or background job failure caused a customer-visible incident? AI vs. non-AI teams."
+  aspect="aspect-[16/7]"
 >
   <AreaChart
     rows={incidentsBy90Days}
-    keys={["0 incidents", "1–2 incidents", "3+ incidents"]}
+    keys={["3 or more times", "Once or twice", "No incidents", "Unsure"]}
+    colors={{
+      "3 or more times": "#F54A3F",
+      "Once or twice": "#E5A83E",
+      "No incidents": "#2C9B63",
+      "Unsure": "#B0B0B0",
+    }}
+    direction={{ left: "← more incidents", right: "none →" }}
   />
 </ChartFrame>
 
@@ -115,10 +148,11 @@ Infrastructure crashes are a top cause of workflow failure for both AI and
 non-AI use cases, though LLM / external API failures invert the top slot for
 those building with AI.
 
-<ChartFrame variant="breeze"
+<ChartFrame
+  variant="breeze"
   label="Figure 11"
-  caption="Top cited causes of workflow failure, AI vs non-AI teams"
-  source="Share citing each cause as a top-three source of failure."
+  caption="What breaks — AI teams vs non-AI teams"
+  source="Q6: What are the most common causes of failures? Pick up to 3. % of each group citing each cause."
   aspect="aspect-[16/10]"
 >
   <GroupedBarChart
@@ -128,8 +162,8 @@ those building with AI.
       "Non-AI": d.nonAI,
     }))}
     series={[
-      { key: "AI", label: "AI teams" },
-      { key: "Non-AI", label: "Non-AI teams" },
+      { key: "AI", label: "AI (n=88)", color: "#F54A3F" },
+      { key: "Non-AI", label: "No AI (n=42)", color: "#2389F1" },
     ]}
   />
 </ChartFrame>

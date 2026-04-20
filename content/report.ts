@@ -19,11 +19,11 @@ export const reportMeta = {
 
 export const sections = [
   { id: "executive-summary", label: "Executive summary" },
+  { id: "confidence-scaling", label: "Confidence at scale" },
   { id: "durable-execution", label: "Durable execution" },
   { id: "reliability-tax", label: "The reliability tax" },
   { id: "observability-edge", label: "The observability edge" },
   { id: "frameworks-evals", label: "Frameworks & evals" },
-  { id: "confidence-scaling", label: "Confidence at scale" },
   { id: "unsolved", label: "What's still unsolved" },
   { id: "conclusion", label: "Conclusion" },
 ] as const;
@@ -189,103 +189,89 @@ export const reliabilityBurdenDelta = [
   { label: "Inngest", value: -10 },
 ];
 
-// Drivers of reliability increase, AI vs non-AI.
+// Figure 7 — drivers of rising reliability burden, AI vs non-AI.
+// Among respondents who said burden went up. AI n=24, non-AI n=7.
 export const reliabilityDrivers = [
-  {
-    cause: "Higher traffic and scale",
-    ai: 62,
-    nonAI: 50,
-  },
-  {
-    cause: "Technical debt",
-    ai: 58,
-    nonAI: 86,
-  },
-  {
-    cause: "Multi-service architectures",
-    ai: 36,
-    nonAI: 33,
-  },
-  {
-    cause: "Faster shipping pressure",
-    ai: 30,
-    nonAI: 28,
-  },
-  {
-    cause: "AI workloads / new failure modes",
-    ai: 24,
-    nonAI: 4,
-  },
-  {
-    cause: "Non-deterministic outputs",
-    ai: 15,
-    nonAI: 2,
-  },
+  { cause: "Higher traffic & scale",              ai: 62, nonAI: 57 },
+  { cause: "Technical debt",                      ai: 54, nonAI: 86 },
+  { cause: "Multi-service architectures",         ai: 50, nonAI: 57 },
+  { cause: "Faster shipping pressure",            ai: 50, nonAI: 43 },
+  { cause: "AI workloads / new failure modes",    ai: 54, nonAI: 14 },
+  { cause: "Non-determinism",                     ai: 25, nonAI: 29 },
 ];
 
 // ---------------------------------------------------------------------------
 // Observability edge — Section 4
 // ---------------------------------------------------------------------------
 
+// Figure 8 — time to understand what went wrong. All respondents n=130.
+// Each bucket has the raw count (n) and the percentage. Colors match the
+// same semantic scale used in Figure 9 (green = fast → red = blind).
 export const diagnosticSpeed = [
-  { label: "Minutes", value: 38 },
-  { label: "Under an hour (with investigation)", value: 54 },
-  { label: "Hours or can't fully explain", value: 9 },
+  { label: "Minutes — good tracing, pinpoint fast",        value: 38, count: 49, color: "#2C9B63" }, // matcha-500
+  { label: "Under an hour, but it takes digging",          value: 54, count: 70, color: "#2389F1" }, // breeze-500
+  { label: "Hours — requires significant investigation",   value: 5,  count: 6,  color: "#FF7300" }, // citrus-500
+  { label: "We often can't fully explain what happened",   value: 4,  count: 5,  color: "#F54A3F" }, // ruby-500
 ];
 
-// Diagnostic speed split by observability tooling.
+// Figure 9 — diagnostic speed by observability tool. 100% stacked.
+// Sorted by % diagnosing in minutes.
 export const diagnosticSpeedByTool = [
   {
-    label: "Platform-native dashboards",
-    segments: {
-      Minutes: 40,
-      "Under an hour": 59,
-      "Hours / blind": 1,
-    },
+    label: "Orchestration platform dashboards",
+    n: 70,
+    segments: { "Minutes — good tracing": 40, "Under an hour": 55, "Hours": 4, "Can't explain": 1 },
   },
   {
-    label: "APM only (Sentry, DataDog, etc.)",
-    segments: {
-      Minutes: 29,
-      "Under an hour": 60,
-      "Hours / blind": 11,
-    },
+    label: "Logs",
+    n: 70,
+    segments: { "Minutes — good tracing": 30, "Under an hour": 50, "Hours": 15, "Can't explain": 5 },
   },
   {
-    label: "Logs only",
-    segments: {
-      Minutes: 22,
-      "Under an hour": 60,
-      "Hours / blind": 18,
-    },
+    label: "Sentry, Datadog, New Relic",
+    n: 86,
+    segments: { "Minutes — good tracing": 29, "Under an hour": 55, "Hours": 12, "Can't explain": 4 },
+  },
+  {
+    label: "LangSmith / LangFuse",
+    n: 11,
+    segments: { "Minutes — good tracing": 25, "Under an hour": 75, "Hours": 0, "Can't explain": 0 },
   },
 ];
 
+// Figure 10 — customer-visible incidents in past 90 days, AI vs non-AI.
+// 100% stacked with an explicit severity order from "more incidents" → "none".
 export const incidentsBy90Days = [
   {
-    label: "AI teams",
+    label: "AI in production",
+    n: 88,
     segments: {
-      "0 incidents": 26,
-      "1–2 incidents": 54,
-      "3+ incidents": 20,
+      "3 or more times":   19,
+      "Once or twice":     55,
+      "No incidents":      23,
+      "Unsure":            3,
     },
   },
   {
-    label: "Non-AI teams",
+    label: "No AI in production",
+    n: 42,
     segments: {
-      "0 incidents": 38,
-      "1–2 incidents": 47,
-      "3+ incidents": 15,
+      "3 or more times":   17,
+      "Once or twice":     45,
+      "No incidents":      31,
+      "Unsure":            7,
     },
   },
 ];
 
+// Figure 11 — what breaks. Causes, AI vs non-AI.
 export const topFailureCauses = [
-  { cause: "LLM / external API failures", ai: 56, nonAI: 34 },
-  { cause: "Infrastructure crashes", ai: 48, nonAI: 52 },
-  { cause: "Data quality issues", ai: 35, nonAI: 28 },
-  { cause: "Race conditions", ai: 22, nonAI: 30 },
-  { cause: "Deploy regressions", ai: 20, nonAI: 25 },
+  { cause: "LLM / external API failures",       ai: 56, nonAI: 45 },
+  { cause: "Infrastructure crashes",            ai: 48, nonAI: 57 },
+  { cause: "Concurrency spikes",                ai: 41, nonAI: 29 },
+  { cause: "Scaling under load",                ai: 36, nonAI: 29 },
+  { cause: "Lost / corrupted state",            ai: 26, nonAI: 26 },
+  { cause: "Can't tell — no observability",     ai: 8,  nonAI: 7  },
 ];
 
 // ---------------------------------------------------------------------------

@@ -1,44 +1,30 @@
-import { StatCallout } from "@/components/StatCallout";
+We surveyed 130 back-end, full-stack, and AI engineers across companies of
+all sizes about what they're building, and how they keep it reliable.
 
-We surveyed 130 engineers across companies of all sizes — from solopreneurs to
-organizations with 1,000+ engineering staff — about what they're building, and
-how they keep it reliable at scale. We focused entirely on backend, full-stack,
-and AI engineers and directors, in order to really focus on those closest to
-infrastructure decisions.
+We specifically focused on how these teams run asynchronous work in
+production. Some findings were expected: 68% of respondents are building AI
+workflows in production.
 
-Some findings were unsurprising: 68% of respondents are building AI workflows
-in production.
+Other findings were less so: Only 19% of those teams are "very confident"
+their infrastructure can handle 2–3× current scale, and in teams with 500+
+engineers, that number is 0%.
 
-Other findings were unexpected: Only 19% of those teams are "very confident"
-their infrastructure can handle 2–3× their current scale. At organizations
-with 500+ engineers and significantly more resource, that number is 0%.
+That confidence gap is the story of this report.
 
-That confidence gap is the story of this report; what teams are asking to have
-solved vs what tooling choices, outcomes, and confidence levels tell us about
-what needs to be solved.
+Why confidence in AI infra wanes as capacity increases, and how tooling
+choices might be dictating that directionality. Three key findings rise above
+the rest to answer those questions:
 
-This report also specifically focuses on running asynchronous work in
-production (the qualifying question to participate), as well as orchestration,
-observability, evals, and agent framework tooling — four of the more emergent
-layers nested between an AI model and a production system that actually works
-reliably, for every user. Here are the highlights:
-
-- **The reliability burden is growing for teams building AI.** 20% of teams
-  building AI in production spend up to half of their time on reliability
-  work — twice that of non-AI teams — and are more likely to report an
-  increase in that burden over the last year.
-- **LLM failures are the new #1 cause of production workflow failures.** 56%
-  of teams building AI in production cite LLM or external API failures as a
-  top cause, displacing infrastructure crashes for the top slot held by teams
-  not building AI.
-- **Observability is the #1 problem engineers believe still hasn't been
-  solved** — true of those building AI and non-AI applications alike.
-- **The teams 3× more likely to report high confidence in scaling AI
-  workflows** are using three solutions together: structured durable
-  execution, orchestration-native observability, and production evals.
-
-<StatCallout
-  value="19%"
-  label="of AI teams are very confident their infrastructure can handle 2–3× their current scale. At 500+ engineer orgs, it's 0%."
-  source="Inngest 2026 Durable Execution Benchmark (n=130)"
-/>
+1. **The reliability burden is growing for teams expanding into AI use
+   cases.** 20% of teams building AI in production now spend up to half of
+   their time on reliability work, with a clear split in burden expansion or
+   reduction based on durability tool in use.
+2. **Observability is the #1 problem engineers believe still hasn't been
+   solved.** Even respondents using a mix of third-party and homegrown
+   solutions were just as likely to cite a persistent gap in observability
+   across their workflow.
+3. **Confident teams use observable, composable stacks.** The strongest
+   3-factor predictor of confidence is using orchestration tools with
+   built-in observability (like Inngest), running AI evals (like Braintrust),
+   and diagnosing failures fast. These teams are 3× more likely to report
+   confidence in their stack.
