@@ -58,7 +58,7 @@ export function GroupedBarChart({ rows, series, valueSuffix = "%" }: Props) {
                 return (
                   <li
                     key={s.key}
-                    className="grid grid-cols-[2.5rem_minmax(0,1fr)_3rem] items-center gap-3 text-[13px]"
+                    className="grid grid-cols-[2.5rem_minmax(0,1fr)_3rem] items-center gap-2 text-[13px]"
                   >
                     <span className="text-right font-mono text-[0.7rem] uppercase tracking-wider text-carbon-500">
                       {seriesShortLabel(s.label)}

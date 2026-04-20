@@ -65,10 +65,10 @@ function SignalBar({ row, max }: { row: SignalRow; max: number }) {
   const valueColor = significant ? "#FFFFFF" : "#1A161C";
 
   return (
-    <li className="grid items-center gap-x-4 gap-y-0 text-[13px] sm:grid-cols-[auto_minmax(0,1fr)_auto_auto_2rem]">
+    <li className="grid items-center gap-x-4 gap-y-0 text-[13px] sm:grid-cols-[14rem_minmax(0,1fr)_auto_auto_2rem]">
       <span
         className={clsx(
-          "max-w-[18rem] text-left leading-tight",
+          "text-left leading-tight",
           significant ? "font-semibold text-carbon-1000" : "text-carbon-700",
         )}
       >
