@@ -2,6 +2,7 @@ import { ChartFrame } from "@/components/charts/ChartFrame";
 import { BarChart } from "@/components/charts/BarChart";
 import { BubbleMatrix } from "@/components/charts/BubbleMatrix";
 import { PullQuote } from "@/components/PullQuote";
+import { QuoteCarousel } from "@/components/QuoteCarousel";
 import { SectionLead } from "@/components/SectionLead";
 import { unsolvedThemes, unsolvedByTeamSize } from "@/content/report";
 
@@ -38,43 +39,28 @@ responses)._
 highest of any theme, and the only one that appears equally among AI (18%)
 and non-AI (21%) teams.
 
-<PullQuote attribution="Head of ML & Data Science, 11–50 engineer team">
-  Observability is, I would say, still very unsolved. A lot of the
-  workflows that we run, we are able to monitor, but it is not at the same
-  level and requires a lot more instrumentation than we would like. Often
-  the issues that are found are outside of the observability metrics that
-  we have built, so they get missed.
-</PullQuote>
-
-<PullQuote attribution="VP of Engineering, 11–50 engineer team">
-  The end-to-end observability in case of errors — digging takes time and
-  recovering from failed steps requires deep architectural knowledge and
-  failures embrace within an engineering and data department.
-</PullQuote>
-
-<PullQuote attribution="Engineer, 11–50 engineer team">
-  People are forgetting that the hardest part about software engineering is
-  accounting for edge cases. This was always a problem, but how much more
-  software is being built, thanks to AI, has made it orders of magnitude
-  more difficult to solve. The surface area has exploded. People are very
-  interested in building increasingly complex software, they are way less
-  interested in building observability.
-</PullQuote>
-
-It's also the primary concern of folks from companies large and small.
-
-<PullQuote attribution="VP of Engineering, 501–1,000 engineer team">
-  Our biggest challenge is observability. We seem to get more and more logic
-  in our workflows getting pushed to LLMs, which not only makes them
-  non-deterministic but just hard to evaluate for anything other than raw
-  response time.
-</PullQuote>
-
-<PullQuote attribution="Engineer, 2–10 engineer team">
-  Observability gaps — when something breaks, it's hard to trace why an
-  agent made a decision or reproduce it. Debugging feels more like
-  forensics than engineering.
-</PullQuote>
+<QuoteCarousel quotes={[
+  {
+    quote: "Observability is, I would say, still very unsolved. A lot of the workflows that we run, we are able to monitor, but it is not at the same level and requires a lot more instrumentation than we would like. Often the issues that are found are outside of the observability metrics that we have built, so they get missed.",
+    attribution: "Head of ML & Data Science, 11–50 engineer team"
+  },
+  {
+    quote: "The end-to-end observability in case of errors — digging takes time and recovering from failed steps requires deep architectural knowledge and failures embrace within an engineering and data department.",
+    attribution: "VP of Engineering, 11–50 engineer team"
+  },
+  {
+    quote: "People are forgetting that the hardest part about software engineering is accounting for edge cases. This was always a problem, but how much more software is being built, thanks to AI, has made it orders of magnitude more difficult to solve. The surface area has exploded. People are very interested in building increasingly complex software, they are way less interested in building observability.",
+    attribution: "Engineer, 11–50 engineer team"
+  },
+  {
+    quote: "Our biggest challenge is observability. We seem to get more and more logic in our workflows getting pushed to LLMs, which not only makes them non-deterministic but just hard to evaluate for anything other than raw response time.",
+    attribution: "VP of Engineering, 501–1,000 engineer team"
+  },
+  {
+    quote: "Observability gaps — when something breaks, it's hard to trace why an agent made a decision or reproduce it. Debugging feels more like forensics than engineering.",
+    attribution: "Engineer, 2–10 engineer team"
+  },
+]} />
 
 ### Composability: the unnamed gap
 
