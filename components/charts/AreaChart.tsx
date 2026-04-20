@@ -61,7 +61,7 @@ export function AreaChart({ rows, keys, colors, direction, labelWidth = "14rem" 
               style={{ gridTemplateColumns: `${labelWidth} minmax(0,1fr) 5.5rem` }}
             >
               <div className="flex flex-col gap-0.5 text-left">
-                <span className="font-semibold text-carbon-1000">
+                <span className="font-normal text-carbon-1000">
                   {r.label}
                   {r.directional ? (
                     <span className="text-carbon-500"> *</span>
@@ -82,7 +82,7 @@ export function AreaChart({ rows, keys, colors, direction, labelWidth = "14rem" 
                   return (
                     <div
                       key={k}
-                      className="flex items-center justify-center overflow-hidden font-mono text-[11px] font-semibold tabular-nums text-white"
+                      className="flex items-center justify-center overflow-hidden font-mono text-[11px] font-normal tabular-nums text-white"
                       style={{ width: `${pct}%`, backgroundColor: color }}
                     >
                       {pct >= 8 ? `${Math.round(pct)}%` : ""}
@@ -91,7 +91,7 @@ export function AreaChart({ rows, keys, colors, direction, labelWidth = "14rem" 
                 })}
               </div>
               {r.rightLabel ? (
-                <div className="whitespace-nowrap font-mono text-[13px] font-semibold tabular-nums text-carbon-1000">
+                <div className="whitespace-nowrap font-mono text-[13px] font-normal tabular-nums text-carbon-1000">
                   {r.rightLabel}
                 </div>
               ) : (
