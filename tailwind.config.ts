@@ -124,20 +124,21 @@ const config: Config = {
         // Hero — exact Figma stops (matcha + signature lime)
         "hero-gradient":
           "linear-gradient(135deg, #FFFFFF 0%, #9ADAB3 33%, #79D617 49%, #2C9B63 64%, #FFFFFF 82%)",
-        // Section-specific chart backgrounds — dark edge → rich mid → bright
-        // center → rich mid → dark edge. Deep, saturated gem-tone look.
+        // Section-specific chart backgrounds — lighter edges → peak saturation
+        // at center → lighter edges. Uses brand palette -300 at edges, -500
+        // at center, with a -400 intermediate stop each side for smooth bloom.
         "gradient-matcha":
-          "linear-gradient(135deg, #0d3d1e 0%, #2C9B63 30%, #79D617 55%, #2C9B63 75%, #0a2e15 100%)",
+          "linear-gradient(135deg, #9ADAB3 0%, #66BD8B 30%, #2C9B63 50%, #66BD8B 70%, #9ADAB3 100%)",
         "gradient-honey":
-          "linear-gradient(135deg, #4a1e00 0%, #D56B13 30%, #FCC43F 55%, #D56B13 75%, #3a1600 100%)",
+          "linear-gradient(135deg, #FCC43F 0%, #E8871F 30%, #D56B13 50%, #E8871F 70%, #FCC43F 100%)",
         "gradient-breeze":
-          "linear-gradient(135deg, #031740 0%, #1365D6 30%, #52B2FD 55%, #1365D6 75%, #020f2e 100%)",
+          "linear-gradient(135deg, #9CD2FF 0%, #52AAFD 30%, #2389F1 50%, #52AAFD 70%, #9CD2FF 100%)",
         "gradient-purplehaze":
-          "linear-gradient(135deg, #0e0337 0%, #6222DF 30%, #AD9FFC 55%, #6222DF 75%, #09022a 100%)",
+          "linear-gradient(135deg, #CEC6FD 0%, #AD9FFC 30%, #8B74F9 50%, #AD9FFC 70%, #CEC6FD 100%)",
         "gradient-ruby":
-          "linear-gradient(135deg, #330806 0%, #CB2A1D 30%, #FA8D86 55%, #CB2A1D 75%, #260605 100%)",
+          "linear-gradient(135deg, #FA8D86 0%, #F76A61 30%, #F54A3F 50%, #F76A61 70%, #FA8D86 100%)",
         "gradient-blush":
-          "linear-gradient(135deg, #36020e 0%, #CF164B 30%, #FD88A0 55%, #CF164B 75%, #28010b 100%)",
+          "linear-gradient(135deg, #FD88A0 0%, #E6366F 30%, #CF164B 50%, #E6366F 70%, #FD88A0 100%)",
       },
       keyframes: {
         fadeUp: {
