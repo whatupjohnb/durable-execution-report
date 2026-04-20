@@ -18,6 +18,7 @@ export const palette = {
   carbon50: "#F6F6F6",
   carbon200: "#CCCCCC",
   carbon400: "#9B9B9B",
+  carbon500: "#7C7C7C",
   carbon600: "#636363",
   carbon700: "#4B4B4B",
   carbon800: "#353535",

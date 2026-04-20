@@ -1,10 +1,12 @@
 import { ChartFrame } from "@/components/charts/ChartFrame";
 import { BarChart } from "@/components/charts/BarChart";
+import { GroupedColumnChart } from "@/components/charts/GroupedColumnChart";
+import { SoloCohortsChart } from "@/components/charts/SoloCohortsChart";
 import {
   workflowUseCases,
-  orchestrationPlatforms,
-  inngestSoloVsPaired,
-  workflowCoverageByTool,
+  toolCountDistribution,
+  platformByTeamSize,
+  soloToolCohorts,
 } from "@/content/report";
 
 Durable execution is a fault-tolerant approach to running code that ensures
@@ -30,12 +32,14 @@ of every size, regardless of what teams are building. Long-running workflows
 and AI/LLM workflows are tied at 68% — AI is now as common a production use
 case as long-running workflows.
 
-<ChartFrame variant="matcha"
+<ChartFrame
+  variant="matcha"
   label="Figure 1"
-  caption="Workflow types running in production"
-  source="Share of respondents running each workflow type in production (multi-select)."
+  caption="What are teams running in production?"
+  source="Q2: What types of workflows or jobs are you running in production? Q11: Are you currently running AI workflows in production? All respondents n=130. Multi-select — totals exceed 100%."
+  aspect="aspect-[16/9]"
 >
-  <BarChart data={workflowUseCases} valueSuffix="%" horizontal accentIndex={3} />
+  <BarChart data={workflowUseCases} valueSuffix="%" horizontal />
 </ChartFrame>
 
 ### Orchestration platforms by team, and use case
@@ -44,12 +48,14 @@ What teams are building correlates strongly with which orchestration solution
 they use (or build themselves). 56% of respondents use more than one tool,
 often pairing a custom-built solution with a third-party platform.
 
-<ChartFrame variant="matcha"
+<ChartFrame
+  variant="matcha"
   label="Figure 2"
-  caption="Orchestration platforms in use"
-  source="Share of respondents using each platform (multi-select)."
+  caption="How many orchestration tools are teams using?"
+  source="All respondents n=130. 56% use more than one tool."
+  aspect="aspect-[16/7]"
 >
-  <BarChart data={orchestrationPlatforms} valueSuffix="%" horizontal accentIndex={2} />
+  <BarChart data={toolCountDistribution} valueSuffix="%" horizontal showTrack />
 </ChartFrame>
 
 For example, 100% of Temporal users surveyed have another durable execution
@@ -60,13 +66,17 @@ something custom-built.
 This loyalty may be a function of scale: Inngest is popular among growing
 teams who want low-friction adoption that scales with them.
 
-<ChartFrame variant="matcha"
+<ChartFrame
+  variant="matcha"
   label="Figure 2b"
-  caption="Among Inngest users, what else is running alongside?"
-  source="Share of Inngest users pairing Inngest with additional orchestration tooling."
-  aspect="aspect-[16/7]"
+  caption="Orchestration platform by team size"
+  source="Q3: What are you using for workflow or job orchestration? All respondents n=130. Multi-select — totals exceed 100%. % of each size band using each tool."
+  aspect="aspect-[4/3]"
 >
-  <BarChart data={inngestSoloVsPaired} valueSuffix="%" horizontal accentIndex={0} />
+  <GroupedColumnChart
+    cohorts={platformByTeamSize.cohorts}
+    tools={platformByTeamSize.tools}
+  />
 </ChartFrame>
 
 But it's also a reflection of capability breadth. Among statistically
@@ -74,10 +84,15 @@ meaningful solo-tool cohorts, Inngest serves the widest variety of use cases
 at an average of 75% across all five workflow types. Custom-built tools take
 second place but drop sharply on AI coverage (53%).
 
-<ChartFrame variant="matcha"
+<ChartFrame
+  variant="matcha"
   label="Figure 3"
-  caption="Average workflow-type coverage, by solo-tool cohort"
-  source="Mean share of the five workflow types covered by teams using one tool alone."
+  caption="Use case breadth — teams using only one orchestration tool"
+  source="Q2 × Q3 × Q11. Solo users of each tool only. % running each workflow type. Sorted by average across all five use cases."
+  aspect="aspect-auto"
 >
-  <BarChart data={workflowCoverageByTool} valueSuffix="%" horizontal accentIndex={0} />
+  <SoloCohortsChart
+    cohorts={soloToolCohorts}
+    footnote="Temporal solo users (n=3) score the highest average (80%) but are too small to report. Prefect/Airflow solo users (n=2) are also too small — excluded. Among reportable cohorts, Inngest serves the widest variety at 75% average. AWS/Vercel/CF and BullMQ are the most specialized — AWS/Vercel/CF drops sharply on long-running (43%) and AI (29%); BullMQ on data pipelines (17%)."
+  />
 </ChartFrame>

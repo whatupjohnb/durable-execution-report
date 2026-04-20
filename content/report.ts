@@ -32,14 +32,105 @@ export const sections = [
 // Durable execution — Section 2
 // ---------------------------------------------------------------------------
 
+// A stable color key per workflow type, used across Figures 1 and 3 so the
+// same hue always represents the same category. Keys are raw hex strings so
+// chart components can pass them straight to SVG fills.
+export const workflowColors = {
+  "Background jobs": "#E86B5F",       // ruby
+  "Event-driven": "#4F9BE7",           // breeze
+  "Long-running": "#4EB88A",           // matcha
+  "Data pipelines": "#E5A83E",         // honey
+  "AI workflows": "#8B5CC7",           // purplehaze
+} as const;
+
+// Figure 1 — workflow types running in production
 export const workflowUseCases = [
-  { label: "Background jobs", value: 92 },
-  { label: "Event-driven workflows", value: 88 },
-  { label: "Long-running workflows", value: 68 },
-  { label: "AI / LLM workflows", value: 68 },
-  { label: "Scheduled jobs", value: 60 },
+  { label: "Background jobs or scheduled tasks", value: 93, color: workflowColors["Background jobs"] },
+  { label: "Event-driven automation or webhook processing", value: 87, color: workflowColors["Event-driven"] },
+  { label: "Long-running workflows (minutes to days)", value: 68, color: workflowColors["Long-running"] },
+  { label: "AI / LLM workflows", value: 68, color: workflowColors["AI workflows"] },
+  { label: "Data pipelines (ETL, embedding, enrichment)", value: 63, color: workflowColors["Data pipelines"] },
 ];
 
+// Figure 2 — how many orchestration tools are teams using?
+// All respondents n=130. 56% use more than one tool.
+export const toolCountDistribution = [
+  { label: "1 tool (solo)",   value: 44, count: 57 },
+  { label: "2 tools",         value: 35, count: 45 },
+  { label: "3 tools",         value: 15, count: 19 },
+  { label: "4+ tools",        value: 2,  count: 3 },
+  { label: "None / ad-hoc",   value: 5,  count: 6 },
+];
+
+// Figure 2b — orchestration platform by team size.
+// Per-tool colors kept consistent with the source dashboard.
+export const platformByTeamSize = {
+  cohorts: [
+    { label: "Solo / 2–10", n: 47 },
+    { label: "11–50",       n: 40 },
+    { label: "51–500",      n: 27 },
+    { label: "500+",        n: 16 },
+  ],
+  tools: [
+    { key: "inngest",  label: "Inngest",            color: "#E86B5F", values: [72, 35, 7,  0 ] },
+    { key: "custom",   label: "Custom-built",       color: "#9B9B9B", values: [32, 40, 44, 75] },
+    { key: "aws",      label: "AWS / Vercel / CF",  color: "#4F9BE7", values: [15, 28, 33, 62] },
+    { key: "bullmq",   label: "BullMQ / Cel / Sid", color: "#4EB88A", values: [11, 30, 11, 12] },
+    { key: "prefect",  label: "Prefect / Airflow",  color: "#8B5CC7", values: [4,  15, 22, 12] },
+    { key: "temporal", label: "Temporal",           color: "#E5A83E", values: [2,  10, 22, 12] },
+    { key: "none",     label: "None / ad-hoc",      color: "#B0B0B0", values: [11, 18, 22, 31] },
+  ],
+};
+
+// Figure 3 — use-case breadth among teams using only one orchestration tool.
+// Each cohort has its own brand color on the cohort heading; individual bars
+// carry the per-workflow-type color from `workflowColors` so the palette is
+// consistent with Figure 1.
+export const soloToolCohorts = [
+  {
+    tool: "Inngest",      n: 29, avg: 75, accent: "#E86B5F",
+    rows: [
+      { label: "Background jobs", value: 97, color: workflowColors["Background jobs"] },
+      { label: "Event-driven",    value: 83, color: workflowColors["Event-driven"] },
+      { label: "Long-running",    value: 69, color: workflowColors["Long-running"] },
+      { label: "Data pipelines",  value: 52, color: workflowColors["Data pipelines"] },
+      { label: "AI workflows",    value: 72, color: workflowColors["AI workflows"] },
+    ],
+  },
+  {
+    tool: "Custom-built", n: 15, avg: 73, accent: "#4F9BE7",
+    rows: [
+      { label: "Background jobs", value: 93, color: workflowColors["Background jobs"] },
+      { label: "Event-driven",    value: 87, color: workflowColors["Event-driven"] },
+      { label: "Long-running",    value: 67, color: workflowColors["Long-running"] },
+      { label: "Data pipelines",  value: 67, color: workflowColors["Data pipelines"] },
+      { label: "AI workflows",    value: 53, color: workflowColors["AI workflows"] },
+    ],
+  },
+  {
+    tool: "AWS / Vercel / CF", n: 7, avg: 63, accent: "#4EB88A", small: true,
+    rows: [
+      { label: "Background jobs", value: 86, color: workflowColors["Background jobs"] },
+      { label: "Event-driven",    value: 86, color: workflowColors["Event-driven"] },
+      { label: "Long-running",    value: 43, color: workflowColors["Long-running"] },
+      { label: "Data pipelines",  value: 71, color: workflowColors["Data pipelines"] },
+      { label: "AI workflows",    value: 29, color: workflowColors["AI workflows"] },
+    ],
+  },
+  {
+    tool: "BullMQ / Cel / Sid", n: 6, avg: 57, accent: "#E5A83E", small: true,
+    rows: [
+      { label: "Background jobs", value: 83, color: workflowColors["Background jobs"] },
+      { label: "Event-driven",    value: 67, color: workflowColors["Event-driven"] },
+      { label: "Long-running",    value: 50, color: workflowColors["Long-running"] },
+      { label: "Data pipelines",  value: 17, color: workflowColors["Data pipelines"] },
+      { label: "AI workflows",    value: 67, color: workflowColors["AI workflows"] },
+    ],
+  },
+];
+
+// Legacy keys kept so other sections still compile while the rest of the
+// report gets its real data.
 export const orchestrationPlatforms = [
   { label: "Custom-built", value: 40 },
   { label: "AWS / Vercel / CF", value: 32 },
@@ -47,15 +138,11 @@ export const orchestrationPlatforms = [
   { label: "Temporal", value: 24 },
   { label: "BullMQ / Celery / Sidekiq", value: 22 },
 ];
-
-// Of Inngest users, what else are they running?
 export const inngestSoloVsPaired = [
   { label: "Inngest alone", value: 56 },
   { label: "Inngest + custom-built", value: 22 },
   { label: "Inngest + another third-party", value: 22 },
 ];
-
-// Average % of workflow types covered, among solo-tool cohorts.
 export const workflowCoverageByTool = [
   { label: "Inngest", value: 75 },
   { label: "Custom-built", value: 65 },
