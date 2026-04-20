@@ -23,6 +23,12 @@ type Props = {
   accentIndex?: number;
   /** Show an inline track behind each bar for "of 100%" reads. */
   showTrack?: boolean;
+  /**
+   * When true (horizontal only), the % value is rendered white inside the
+   * right end of the bar instead of outside it. Best when bars fill ~half
+   * the chart width or more.
+   */
+  insideLabels?: boolean;
 };
 
 export function BarChart(props: Props) {
@@ -45,9 +51,10 @@ function BarChartInner({
   horizontal = false,
   accentIndex,
   showTrack = false,
+  insideLabels = false,
 }: Props & { width: number; height: number }) {
   const hasAnyCount = data.some((d) => d.count !== undefined);
-  const rightPad = hasAnyCount ? 96 : 48;
+  const rightPad = insideLabels ? 16 : hasAnyCount ? 96 : 48;
   const margin = {
     top: 12,
     right: horizontal ? rightPad : 32,
@@ -114,30 +121,48 @@ function BarChartInner({
                   height={yScale.bandwidth()}
                   fill={fill}
                 />
-                {d.count !== undefined ? (
+                {insideLabels ? (
                   <text
-                    x={w + 10}
+                    x={w - 8}
                     y={y + yScale.bandwidth() / 2}
                     dy="0.32em"
-                    fontSize={11}
-                    fontFamily="var(--font-jetbrains-mono), monospace"
-                    fill={palette.carbon500}
+                    textAnchor="end"
+                    fontSize={14}
+                    fontFamily="var(--font-inter), sans-serif"
+                    fontWeight={700}
+                    fill={palette.carbon50}
                   >
-                    n={d.count}
+                    {d.value}
+                    {valueSuffix}
                   </text>
-                ) : null}
-                <text
-                  x={innerW + (hasAnyCount ? 52 : 10)}
-                  y={y + yScale.bandwidth() / 2}
-                  dy="0.32em"
-                  fontSize={13}
-                  fontFamily="var(--font-inter), sans-serif"
-                  fontWeight={700}
-                  fill={fill}
-                >
-                  {d.value}
-                  {valueSuffix}
-                </text>
+                ) : (
+                  <>
+                    {d.count !== undefined ? (
+                      <text
+                        x={w + 10}
+                        y={y + yScale.bandwidth() / 2}
+                        dy="0.32em"
+                        fontSize={11}
+                        fontFamily="var(--font-jetbrains-mono), monospace"
+                        fill={palette.carbon500}
+                      >
+                        n={d.count}
+                      </text>
+                    ) : null}
+                    <text
+                      x={innerW + (hasAnyCount ? 52 : 10)}
+                      y={y + yScale.bandwidth() / 2}
+                      dy="0.32em"
+                      fontSize={13}
+                      fontFamily="var(--font-inter), sans-serif"
+                      fontWeight={700}
+                      fill={fill}
+                    >
+                      {d.value}
+                      {valueSuffix}
+                    </text>
+                  </>
+                )}
               </g>
             );
           })}

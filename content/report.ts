@@ -278,43 +278,112 @@ export const topFailureCauses = [
 // Frameworks & evals — Section 5
 // ---------------------------------------------------------------------------
 
-export const evalTools = [
-  { label: "Not doing evals", value: 35 },
-  { label: "Homegrown pipeline", value: 30 },
-  { label: "LangSmith", value: 12 },
-  { label: "Braintrust", value: 8 },
-  { label: "Other third-party", value: 15 },
-];
+// Figure 13 — eval approach by team size. AI teams only. Multi-select.
+export const evalApproachByTeamSize = {
+  cohorts: [
+    { label: "Solo/2–10", n: 35 },
+    { label: "11–50",     n: 27 },
+    { label: "51–500",    n: 15 },
+    { label: "500+",      n: 11 },
+  ],
+  tools: [
+    { key: "own",        label: "Built own pipeline", color: "#E86B5F", values: [49, 37, 60, 64] },
+    { key: "none",       label: "Not doing evals",    color: "#242424", values: [34, 44, 27, 27] },
+    { key: "langfuse",   label: "LangFuse",           color: "#7BB7E7", values: [11,  7, 20, 18] },
+    { key: "langsmith",  label: "LangSmith",          color: "#4EB88A", values: [ 6, 11, 13, 18] },
+    { key: "braintrust", label: "Braintrust",         color: "#8B5CC7", values: [ 9, 11,  0, 18] },
+    { key: "arize",      label: "Arize / Phoenix",    color: "#E5A83E", values: [ 6,  7,  7,  0] },
+  ],
+};
 
-// Confidence by eval presence.
+// Figure 14 — scaling confidence by eval approach. AI teams only.
+// Sorted by % very confident (descending).
 export const confidenceByEvals = [
   {
-    label: "Using evals",
-    segments: {
-      "Very confident": 25,
-      "Somewhat confident": 60,
-      "Not confident": 15,
-    },
+    label: "Braintrust",          n: 8, directional: true,
+    rightLabel: "50% / 12%",
+    segments: { "Very confident": 50, "Somewhat confident": 38, "Not very confident": 12 },
   },
   {
-    label: "Not using evals",
-    segments: {
-      "Very confident": 7,
-      "Somewhat confident": 48,
-      "Not confident": 45,
-    },
+    label: "Built own pipeline",  n: 43,
+    rightLabel: "21% / 16%",
+    segments: { "Very confident": 21, "Somewhat confident": 63, "Not very confident": 16 },
+  },
+  {
+    label: "Arize / Phoenix",     n: 5, directional: true,
+    rightLabel: "20% / 0%",
+    segments: { "Very confident": 20, "Somewhat confident": 80, "Not very confident": 0 },
+  },
+  {
+    label: "LangSmith",           n: 9, directional: true,
+    rightLabel: "11% / 11%",
+    segments: { "Very confident": 11, "Somewhat confident": 78, "Not very confident": 11 },
+  },
+  {
+    label: "LangFuse",            n: 11,
+    rightLabel: "9% / 9%",
+    segments: { "Very confident":  9, "Somewhat confident": 82, "Not very confident":  9 },
+  },
+  {
+    label: "Not doing evals",     n: 31,
+    rightLabel: "6% / 29%",
+    segments: { "Very confident":  6, "Somewhat confident": 65, "Not very confident": 29 },
   },
 ];
 
+// Figure 15 — perceived limitations of eval solutions (all respondents n=143).
+// The "not running evals" row is a non-response — tinted gray so it reads
+// distinctly from the other limitations.
 export const evalGaps = [
-  { label: "Evals are hard to write", value: 31 },
-  { label: "LLM-as-judge cost", value: 25 },
-  { label: "Results live in a separate system", value: 20 },
-  { label: "No way to act on a failed eval", value: 13 },
-  { label: "Insufficient coverage to trust output", value: 12 },
-  { label: "Evals offline / disconnected from prod", value: 10 },
+  { label: "Hard to write evals that catch the failures that actually matter", value: 28, count: 40, color: "#1A161C" },
+  { label: "LLM-as-judge is too slow or expensive to run at scale",            value: 22, count: 32, color: "#1A161C" },
+  { label: "Results live in a separate system from where we debug failures",   value: 18, count: 26, color: "#1A161C" },
+  { label: "We're not running evals / don't know enough to comment",           value: 16, count: 23, color: "#9B9B9B" },
+  { label: "No way to act on a failed eval — it's observability only",         value: 12, count: 17, color: "#1A161C" },
+  { label: "We don't have enough coverage to trust our outputs",               value: 11, count: 16, color: "#1A161C" },
+  { label: "Evals are offline only — don't reflect production behavior",       value:  9, count: 13, color: "#1A161C" },
 ];
 
+// Figure 16 — eval gaps by tool in use (matrix). Values are % of each tool's
+// users citing each limitation. Tools with n<3 (W&B, Helicone) excluded.
+export const evalGapsByTool = {
+  columns: [
+    "Hard to write evals that catch the failures that actually matter",
+    "LLM-as-judge is too slow or expensive to run at scale",
+    "Results live in a separate system from where we debug failures",
+    "We don't have enough coverage to trust our outputs",
+    "No way to act on a failed eval — it's observability only",
+    "Evals are offline only — don't reflect production behavior",
+  ],
+  rows: [
+    { label: "Built own pipeline", n: 43, values: [47, 35, 30, 21, 26, 19] },
+    { label: "LangFuse",           n: 11, values: [64, 55, 45, 55, 27, 18] },
+    { label: "LangSmith",          n:  9, values: [78, 44, 56,  0, 11, 56] },
+    { label: "Braintrust",         n:  8, values: [50, 25, 38, 25,  0, 25] },
+    { label: "Arize / Phoenix",    n:  5, values: [80, 20, 60, 40,  0, 20] },
+    { label: "Not doing evals",    n: 31, values: [35, 42, 29,  3, 13,  6] },
+  ],
+};
+
+// Figure 18 — agent framework adoption by team size. AI teams only.
+export const frameworkAdoptionByTeamSize = {
+  cohorts: [
+    { label: "Solo/2–10", n: 35 },
+    { label: "11–50",     n: 27 },
+    { label: "51–500",    n: 15 },
+    { label: "500+",      n: 11 },
+  ],
+  tools: [
+    { key: "direct",    label: "Direct API/DIY",     color: "#E86B5F", values: [77, 59, 67, 73] },
+    { key: "vercel",    label: "Vercel AI SDK",      color: "#4F9BE7", values: [34, 33, 20, 18] },
+    { key: "langchain", label: "LangChain/LGraph",   color: "#4EB88A", values: [ 6, 22, 33, 45] },
+    { key: "llama",     label: "LlamaIndex",         color: "#8B5CC7", values: [ 3, 11, 13,  9] },
+    { key: "mastra",    label: "Mastra",             color: "#E5A83E", values: [ 6,  7,  7,  9] },
+  ],
+};
+
+// Legacy single-bar breakdown, kept for backwards-compat until all charts
+// migrate to the by-team-size grouped view.
 export const frameworkTools = [
   { label: "Direct LLM calls / homegrown", value: 69 },
   { label: "Vercel AI SDK", value: 9 },

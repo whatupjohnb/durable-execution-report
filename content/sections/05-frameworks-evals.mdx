@@ -1,16 +1,17 @@
 import { ChartFrame } from "@/components/charts/ChartFrame";
 import { BarChart } from "@/components/charts/BarChart";
 import { AreaChart } from "@/components/charts/AreaChart";
+import { GroupedColumnChart } from "@/components/charts/GroupedColumnChart";
+import { HeatmapTable } from "@/components/charts/HeatmapTable";
 import { PullQuote } from "@/components/PullQuote";
 import { StatCallout } from "@/components/StatCallout";
 import { SectionLead } from "@/components/SectionLead";
 import {
-  evalTools,
+  evalApproachByTeamSize,
   confidenceByEvals,
   evalGaps,
-  frameworkTools,
-  confidenceByFramework,
-  frameworkGaps,
+  evalGapsByTool,
+  frameworkAdoptionByTeamSize,
 } from "@/content/report";
 
 <SectionLead>
@@ -59,24 +60,29 @@ orchestration solutions, teams begin to default to building their own
 solution when they're small enough that complexity is low, or big enough
 that bespoke solutions seem like the only answer.
 
-<ChartFrame variant="purplehaze"
+<ChartFrame
+  variant="purplehaze"
   label="Figure 13"
-  caption="Eval tooling among teams building AI in production"
-  source="Primary eval approach, respondents running AI workflows in production."
+  caption="Eval approach by team size"
+  source="Q14: AI teams only. % of each size band. Multi-select."
+  aspect="aspect-[4/3]"
 >
-  <BarChart data={evalTools} valueSuffix="%" horizontal accentIndex={0} />
+  <GroupedColumnChart
+    cohorts={evalApproachByTeamSize.cohorts}
+    tools={evalApproachByTeamSize.tools}
+  />
 </ChartFrame>
+
+_"Not doing evals" peaks at 11–50 (44%) — the growth phase where teams are
+moving fast and haven't invested in eval infrastructure. At 500+, 64% have
+built their own pipeline, often because commercial tools don't integrate
+with their bespoke orchestration stack._
 
 <PullQuote>
   The biggest unsolved problem is being able to evaluate complex multi-agent
   workflows quickly and effectively. Evaluating all of these non-deterministic
   intermediary steps is very difficult to do at scale.
 </PullQuote>
-
-Growth-phase teams (11–50 engineers) exhibit the highest rate of "not doing
-evals" at 44%. This may simply be because these teams are moving fast,
-shipping fast, and deferring infrastructure investments until something
-breaks.
 
 ### Confidence in AI stack correlated with eval solutions
 
@@ -86,17 +92,27 @@ with overall confidence in scale. Considering flaky LLMs are the #1 driver
 of workflow failure for those building with AI, this particular correlation
 (confidence and use of evals) may be unsurprising.
 
-<ChartFrame variant="purplehaze"
+<ChartFrame
+  variant="purplehaze"
   label="Figure 14"
-  caption="Confidence in scaling, by eval adoption"
-  source="Distribution of confidence levels, normalized per row."
-  aspect="aspect-[16/7]"
+  caption="Scaling confidence by eval approach"
+  source="AI teams only. Very / somewhat / not very confident. * = n<10, directional. Values on the right: very confident % / not confident %."
+  aspect="aspect-[16/9]"
 >
   <AreaChart
     rows={confidenceByEvals}
-    keys={["Very confident", "Somewhat confident", "Not confident"]}
+    keys={["Very confident", "Somewhat confident", "Not very confident"]}
+    colors={{
+      "Very confident": "#2C9B63",
+      "Somewhat confident": "#9ADAB3",
+      "Not very confident": "#FA8D86",
+    }}
   />
 </ChartFrame>
+
+_Braintrust users: 50% very confident (n=8, directional). Teams not doing
+evals: 6% very confident, 29% not confident. The gap is the largest of any
+single variable in the dataset._
 
 ### Perceived opportunities for improvement in eval solutions
 
@@ -105,23 +121,44 @@ they also answered what gaps they perceived to exist in the category.
 
 While the top two reasons cited pertain exclusively to the ergonomics of
 eval solutions, three are failures of context: results in a separate system
-(20%), no way to act on a failed eval (13%), we don't have enough coverage
-to trust our output (12%), evals offline and disconnected from production
-behavior (10%). Nearly half of all AI teams (47%) cite at least one of these
-three. Each describes the same structural absence: eval state and
-orchestration state that can't see each other.
+(18%), no way to act on a failed eval (12%), we don't have enough coverage
+to trust our output (11%), evals offline and disconnected from production
+behavior (9%). Nearly half of all AI teams cite at least one of these. Each
+describes the same structural absence: eval state and orchestration state
+that can't see each other.
 
 <PullQuote>
   Deeply integrated infrastructure, data sources, evaluations, and data
   migrations based on evaluation results — that's what's still missing.
 </PullQuote>
 
-<ChartFrame variant="purplehaze"
+<ChartFrame
+  variant="purplehaze"
   label="Figure 15"
-  caption="Perceived gaps in AI eval solutions"
-  source="Share citing each gap as a top limitation of modern eval tooling."
+  caption="What's wrong with current eval solutions"
+  source="Q15: What do you believe are the biggest limitations of modern AI eval solutions? % of all respondents citing each limitation (n=143)."
+  aspect="aspect-[16/10]"
 >
-  <BarChart data={evalGaps} valueSuffix="%" horizontal accentIndex={2} />
+  <BarChart data={evalGaps} valueSuffix="%" horizontal showTrack insideLabels />
+</ChartFrame>
+
+To add a little more color, we can compare gaps cited against tools in use,
+only to extrapolate potential opportunities for improvement in each. It's
+important to note that respondents were not asked about gaps in their
+solutions — just in the category overall.
+
+<ChartFrame
+  variant="purplehaze"
+  label="Figure 16"
+  caption="What's wrong with current eval solutions — by tool"
+  source="Q15: % of each tool's users citing each limitation. Red = 50%+, amber = 30–49%."
+  aspect="aspect-auto"
+>
+  <HeatmapTable
+    columns={evalGapsByTool.columns}
+    rows={evalGapsByTool.rows}
+    footnote="Tools with n<3 (W&B, Helicone) excluded. “Not doing evals” row included for context."
+  />
 </ChartFrame>
 
 ### Using agent frameworks to guide AI agent production
@@ -153,47 +190,23 @@ towards larger teams.
   source="Inngest 2026 Durable Execution Benchmark (n=130)"
 />
 
-<ChartFrame variant="purplehaze"
+<ChartFrame
+  variant="purplehaze"
   label="Figure 18"
-  caption="Agent framework usage among teams building AI in production"
-  source="Primary framework approach. Direct LLM calls and custom abstractions grouped."
+  caption="Agent framework adoption by team size"
+  source="Q16: AI teams only. % of each size band. Multi-select."
+  aspect="aspect-[4/3]"
 >
-  <BarChart data={frameworkTools} valueSuffix="%" horizontal accentIndex={0} />
-</ChartFrame>
-
-### Confidence in AI stack correlated with framework solutions
-
-When looking at how overall confidence in AI stack correlates with presence
-of framework solutions, we see growth-stage tools like Mastra correlating
-with higher confidence levels.
-
-<ChartFrame variant="purplehaze"
-  label="Figure 19"
-  caption="Confidence in scaling, by agent framework choice"
-  source="Distribution of confidence levels, normalized per row."
-  aspect="aspect-[16/9]"
->
-  <AreaChart
-    rows={confidenceByFramework}
-    keys={["Very confident", "Somewhat confident", "Not confident"]}
+  <GroupedColumnChart
+    cohorts={frameworkAdoptionByTeamSize.cohorts}
+    tools={frameworkAdoptionByTeamSize.tools}
   />
 </ChartFrame>
 
-### Perceived opportunities for improvement in framework solutions
-
-Regardless of whether teams invested in, built, or deferred framework
-solutions, they answered what gaps they perceived to exist in the category,
-generally. The predominant gaps cited are that agent framework abstractions
-make failures harder to trace (26%), and there's poor support for
-long-running or stateful workflows (19%).
-
-<ChartFrame variant="purplehaze"
-  label="Figure 20"
-  caption="Perceived gaps in agent frameworks"
-  source="Share citing each gap as a top limitation of modern agent frameworks."
->
-  <BarChart data={frameworkGaps} valueSuffix="%" horizontal accentIndex={1} />
-</ChartFrame>
+_LangChain is a small-team rarity (6% at Solo/2–10) that becomes a
+large-team default (45% at 500+). Vercel AI SDK peaks at smaller teams and
+fades with scale. Direct API/DIY is consistently dominant — teams at every
+size are doing some form of it._
 
 However, it should be noted that fear of making failures harder to trace
 while using an agent framework did not shake out in the data. Time to

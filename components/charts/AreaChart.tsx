@@ -12,6 +12,10 @@ export type StackedRow = {
   segments: Record<string, number>;
   /** Optional raw count for the row, rendered next to the label. */
   n?: number;
+  /** When true, appends a superscript * to the label (directional cohort). */
+  directional?: boolean;
+  /** Optional right-edge label (e.g. "50% / 12%"). */
+  rightLabel?: string;
 };
 
 type DirectionHint = { left: string; right: string };
@@ -59,7 +63,13 @@ function Inner({
   keys,
   colors,
 }: Props & { width: number; height: number }) {
-  const margin = { top: 44, right: 16, bottom: 16, left: 220 };
+  const hasRightLabel = rows.some((r) => r.rightLabel);
+  const margin = {
+    top: 44,
+    right: hasRightLabel ? 96 : 16,
+    bottom: 16,
+    left: 220,
+  };
   const innerW = Math.max(0, width - margin.left - margin.right);
   const innerH = Math.max(0, height - margin.top - margin.bottom);
 
@@ -138,6 +148,28 @@ function Inner({
           }
         </BarStackHorizontal>
 
+        {/* Right-edge labels (e.g. "50% / 12%") */}
+        {hasRightLabel
+          ? rows.map((r) => {
+              if (!r.rightLabel) return null;
+              const y = (yScale(r.label) ?? 0) + yScale.bandwidth() / 2;
+              return (
+                <text
+                  key={`rl-${r.label}`}
+                  x={innerW + 12}
+                  y={y}
+                  dy="0.32em"
+                  fontSize={13}
+                  fontFamily="var(--font-inter), sans-serif"
+                  fontWeight={600}
+                  fill={inkOnGradient.base}
+                >
+                  {r.rightLabel}
+                </text>
+              );
+            })
+          : null}
+
         <AxisLeft
           scale={yScale}
           hideAxisLine
@@ -146,6 +178,7 @@ function Inner({
             const idx = data.findIndex((d) => d.label === props.formattedValue);
             const row = rows[idx];
             const n = row?.n;
+            const star = row?.directional ? " *" : "";
             return (
               <g transform={`translate(${props.x}, ${props.y})`}>
                 <text
@@ -158,6 +191,7 @@ function Inner({
                   fill={inkOnGradient.base}
                 >
                   {props.formattedValue}
+                  {star}
                 </text>
                 {n !== undefined ? (
                   <text
