@@ -82,11 +82,11 @@ export function ChartFrame({
       {/* Gradient footer — source + Inngest wordmark */}
       <div className="flex flex-col items-center gap-4 px-3 pt-1 text-center sm:px-5">
         {source ? (
-          <p className="max-w-2xl font-mono text-[0.75rem] leading-relaxed text-carbon-1000/75">
+          <p className="max-w-2xl font-mono text-[0.75rem] leading-relaxed text-white/70">
             {source}
           </p>
         ) : null}
-        <InngestWordmark className="text-carbon-1000/85" />
+        <InngestWordmark className="text-white/90" />
       </div>
     </Reveal>
   );
