@@ -12,11 +12,6 @@ export function PullQuote({ children, attribution }: Props) {
       <div className="font-heading text-xl font-normal leading-snug tracking-tight text-carbon-50 sm:text-2xl">
         {children}
       </div>
-      {attribution ? (
-        <p className="mt-5 font-mono text-xs uppercase tracking-widest text-carbon-500">
-          — {attribution}
-        </p>
-      ) : null}
     </Reveal>
   );
 }

@@ -35,14 +35,6 @@ export function QuoteCarousel({ quotes }: Props) {
         >
           {q.quote}
         </div>
-        {q.attribution ? (
-          <p
-            key={`attr-${index}`}
-            className="mt-5 font-mono text-xs uppercase tracking-widest text-carbon-500 animate-quote-in"
-          >
-            — {q.attribution}
-          </p>
-        ) : null}
       </div>
 
       {/* Controls */}

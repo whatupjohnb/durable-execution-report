@@ -35,11 +35,11 @@ export function ReportHero({
         />
 
         {/* Content — each child enters sequentially */}
-        <div className="relative mx-auto flex min-h-[min(88vh,832px)] max-w-3xl flex-col items-center justify-center gap-6 px-6 py-32 text-center sm:py-40">
+        <div className="relative mx-auto flex min-h-[min(88vh,832px)] max-w-3xl flex-col items-center justify-center gap-3 px-6 py-32 text-center sm:py-40">
           <div className="hero-enter hero-enter-1">
-            <InngestWordmark className="h-[4rem] w-auto text-carbon-1000" />
+            <InngestWordmark className="h-[4rem] w-auto text-white" />
           </div>
-          <h1 className="hero-enter hero-enter-2 font-heading-inktrap text-4xl font-medium tracking-tight text-carbon-1000 sm:text-5xl md:text-6xl">
+          <h1 className="hero-enter hero-enter-2 font-heading-inktrap text-4xl font-medium tracking-tight text-white sm:text-5xl md:text-6xl">
             {title}
           </h1>
           <div className="hero-enter hero-enter-3 mt-4 print-hide">
