@@ -11,8 +11,8 @@ export function ReportHero({
   subtitle,
 }: Props) {
   return (
-    <header className="px-4 pt-8 sm:px-8 sm:pt-12">
-      <div className="relative isolate overflow-hidden rounded-tr-[48px] rounded-bl-[48px]">
+    <header className="px-4 sm:px-8">
+      <div className="relative isolate overflow-hidden rounded-bl-[48px]">
         {/* Layer 1 — base gradient (exact Figma stops) */}
         <div
           className="absolute inset-0 bg-hero-gradient"
