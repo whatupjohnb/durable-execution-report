@@ -25,7 +25,7 @@ export default function Home() {
       <div className="mx-auto mt-12 flex max-w-6xl gap-16 px-4 sm:mt-20 sm:px-8">
         <TableOfContents items={[...sections]} />
 
-        <main className="min-w-0 flex-1">
+        <main className="min-w-0 flex-1 divide-y divide-carbon-800/50">
           <Section
             id="executive-summary"
             eyebrow="AI in Production"
