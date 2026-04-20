@@ -29,26 +29,27 @@ export function ReportHero({
           aria-hidden="true"
         />
 
-        {/* Layer 3 — Shape.png at 5% opacity, scaled up to bleed past the
-            frame. Drop file at /public/textures/shape.png. */}
+        {/* Layer 3 — Shape.png, pulsing subtly */}
         <div
-          className="pointer-events-none absolute -inset-[15%] opacity-[0.05] bg-contain bg-center bg-no-repeat"
+          className="hero-shape-pulse pointer-events-none absolute -inset-[15%] bg-contain bg-center bg-no-repeat"
           style={{ backgroundImage: "url('/textures/shape.png')" }}
           aria-hidden="true"
         />
 
-        {/* Content */}
+        {/* Content — each child enters sequentially */}
         <div className="relative mx-auto flex min-h-[min(88vh,832px)] max-w-3xl flex-col items-center justify-center gap-6 px-6 py-32 text-center sm:py-40">
-          <Eyebrow tone="dark">{eyebrow}</Eyebrow>
-          <h1 className="font-heading-inktrap text-4xl font-medium tracking-tight text-carbon-1000 sm:text-5xl md:text-6xl">
+          <div className="hero-enter hero-enter-1">
+            <Eyebrow tone="dark">{eyebrow}</Eyebrow>
+          </div>
+          <h1 className="hero-enter hero-enter-2 font-heading-inktrap text-4xl font-medium tracking-tight text-carbon-1000 sm:text-5xl md:text-6xl">
             {title}
           </h1>
           {subtitle ? (
-            <p className="max-w-xl text-base leading-relaxed text-carbon-1000/80 sm:text-lg">
+            <p className="hero-enter hero-enter-3 max-w-xl text-base leading-relaxed text-carbon-1000/80 sm:text-lg">
               {subtitle}
             </p>
           ) : null}
-          <div className="mt-4 print-hide">
+          <div className="hero-enter hero-enter-4 mt-4 print-hide">
             <DownloadButton>Download PDF</DownloadButton>
           </div>
         </div>

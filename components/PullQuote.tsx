@@ -1,3 +1,5 @@
+import { Reveal } from "./Reveal";
+
 type Props = {
   children: React.ReactNode;
   attribution?: string;
@@ -5,7 +7,7 @@ type Props = {
 
 export function PullQuote({ children, attribution }: Props) {
   return (
-    <figure className="my-10 border-y border-matcha-400/30 py-6">
+    <Reveal as="figure" className="my-10 border-y border-matcha-400/30 py-6">
       <blockquote className="font-heading text-2xl font-medium leading-snug tracking-tight text-carbon-50 sm:text-3xl">
         &ldquo;{children}&rdquo;
       </blockquote>
@@ -14,6 +16,6 @@ export function PullQuote({ children, attribution }: Props) {
           — {attribution}
         </figcaption>
       ) : null}
-    </figure>
+    </Reveal>
   );
 }

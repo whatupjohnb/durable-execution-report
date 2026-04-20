@@ -1,4 +1,5 @@
 import { Eyebrow } from "./Eyebrow";
+import { Reveal } from "./Reveal";
 import { clsx } from "@/lib/clsx";
 
 type Props = {
@@ -16,6 +17,7 @@ export function Section({ id, eyebrow, title, children, className }: Props) {
       className={clsx("scroll-mt-20 py-28 sm:py-36", className)}
     >
       <div className="mx-auto max-w-3xl px-6">
+        <Reveal>
         {eyebrow ? (
           <div className="mb-6">
             <Eyebrow>{eyebrow}</Eyebrow>
@@ -24,6 +26,7 @@ export function Section({ id, eyebrow, title, children, className }: Props) {
         <h2 className="mb-12 font-heading text-4xl font-medium tracking-tight text-carbon-50 sm:text-5xl">
           {title}
         </h2>
+        </Reveal>
         <div className="report-prose">{children}</div>
       </div>
     </section>

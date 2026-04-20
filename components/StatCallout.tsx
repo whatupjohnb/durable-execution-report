@@ -1,3 +1,5 @@
+import { Reveal } from "./Reveal";
+
 type Props = {
   value: string;
   label: string;
@@ -6,7 +8,7 @@ type Props = {
 
 export function StatCallout({ value, label, source }: Props) {
   return (
-    <figure className="my-8 border-l-2 border-matcha-400 pl-6">
+    <Reveal as="figure" className="my-8 border-l-2 border-matcha-400 pl-6">
       <div className="font-heading text-5xl font-semibold tracking-tight text-carbon-50 sm:text-6xl">
         {value}
       </div>
@@ -18,6 +20,6 @@ export function StatCallout({ value, label, source }: Props) {
           </span>
         ) : null}
       </figcaption>
-    </figure>
+    </Reveal>
   );
 }

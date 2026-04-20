@@ -1,6 +1,7 @@
 import { clsx } from "@/lib/clsx";
 import { ChartShare } from "./ChartShare";
 import { InngestWordmark } from "../InngestWordmark";
+import { Reveal } from "../Reveal";
 
 export type ChartVariant =
   | "matcha"
@@ -51,7 +52,7 @@ export function ChartFrame({
   const shareTitle = caption ?? label ?? "Chart";
 
   return (
-    <figure
+    <Reveal as="figure"
       id={anchorId}
       className={clsx(
         "my-10 flex flex-col gap-5 rounded-tr-[24px] rounded-bl-[24px] p-4 pb-6 scroll-mt-24 sm:p-5 sm:pb-7",
@@ -87,6 +88,6 @@ export function ChartFrame({
         ) : null}
         <InngestWordmark className="text-carbon-1000/85" />
       </div>
-    </figure>
+    </Reveal>
   );
 }
