@@ -2,7 +2,6 @@ import { ChartFrame } from "@/components/charts/ChartFrame";
 import { AreaChart } from "@/components/charts/AreaChart";
 import { SignificanceSignalsChart } from "@/components/charts/SignificanceSignalsChart";
 import { SectionLead } from "@/components/SectionLead";
-import { StatCallout } from "@/components/StatCallout";
 import { confidenceByTeamSize, significanceSignals } from "@/content/report";
 
 <SectionLead>
@@ -46,11 +45,6 @@ feel paradoxical.
   />
 </ChartFrame>
 
-_Very confident drops at every step of growth — from 26% at Solo/2–10 to
-0% at 500+. The 500+ band is entirely "somewhat" or "not very" confident,
-with 27% not very confident. More resources, more complexity, less
-certainty._
-
 It could be that these teams rate their use cases to be relatively simple —
 already designed for 2–3× scale by nature of the stage they're at.
 
@@ -81,12 +75,6 @@ unconfident team has both.
 The combination of using a durable execution solution as well as structured
 evals is the most actionable three-factor predictor (`p=0.011`), with 49% of
 confident teams having all three versus 13% of unconfident teams.
-
-<StatCallout
-  value="+36pp"
-  label="Teams running durable execution, production evals, and able to diagnose failures in minutes are 36 percentage points more concentrated in the confident group than the unconfident one."
-  source="Inngest 2026 Durable Execution Benchmark (n=130)"
-/>
 
 On the negative side, the absence of evals is the clearest anti-pattern in
 the dataset (`p=0.038`). Teams missing both evals and orchestration-native

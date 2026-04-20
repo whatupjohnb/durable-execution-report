@@ -3,7 +3,6 @@ import { BarChart } from "@/components/charts/BarChart";
 import { AreaChart } from "@/components/charts/AreaChart";
 import { GroupedBarChart } from "@/components/charts/GroupedBarChart";
 import { PullQuote } from "@/components/PullQuote";
-import { StatCallout } from "@/components/StatCallout";
 import { SectionLead } from "@/components/SectionLead";
 import {
   diagnosticSpeed,
@@ -30,7 +29,7 @@ systems break that assumption. When a workflow fails because an LLM returned
 a malformed response at step three of five, the error surfaces as a
 downstream consequence in a system that had no reason to expect it.
 
-<PullQuote attribution="Engineer, 2–10 engineer team">
+<PullQuote>
   Observability gaps — when something breaks, it's hard to trace why an
   agent made a decision or reproduce it. Debugging feels more like
   forensics than engineering. LLMs don't crash cleanly; they degrade,
@@ -89,21 +88,7 @@ Teams using only APM tools without an orchestration dashboard: 29% fast,
   />
 </ChartFrame>
 
-_Orchestration platform dashboards lead on fast diagnosis (40%) and have the
-lowest combined slow/can't-explain rate (5%). Sentry, Datadog, and New Relic
-have the highest "hours" rate (7%) despite being the most widely used tools —
-broad adoption doesn't mean fast resolution. Teams with no structured
-observability (n=7, not shown) split sharply: 43% diagnose in minutes but
-29% can't explain at all — either the failure is immediately obvious or
-you're completely in the dark._
-
-<StatCallout
-  value="11×"
-  label="Teams using only APM tools are 11× more likely to spend hours understanding a failure vs teams using orchestration-native insights."
-  source="Inngest 2026 Durable Execution Benchmark (n=130)"
-/>
-
-<PullQuote attribution="VP of Engineering, 501–1,000 engineer team">
+<PullQuote>
   Apart from unconstrained cost management in our workflows, our biggest
   challenge is observability. We seem to get more and more logic in our
   workflows getting pushed to LLMs, which not only makes them
@@ -111,7 +96,7 @@ you're completely in the dark._
   response time.
 </PullQuote>
 
-> **Key takeaway:** Orchestration tools that provide granular observability
+> **Key Takeaway:** Orchestration tools that provide granular observability
 > are the best shot teams have to find what went wrong, quickly, when
 > workflows fail.
 

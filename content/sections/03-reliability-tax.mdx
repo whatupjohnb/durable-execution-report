@@ -3,7 +3,6 @@ import { BarChart } from "@/components/charts/BarChart";
 import { AreaChart } from "@/components/charts/AreaChart";
 import { GroupedBarChart } from "@/components/charts/GroupedBarChart";
 import { PullQuote } from "@/components/PullQuote";
-import { StatCallout } from "@/components/StatCallout";
 import { SectionLead } from "@/components/SectionLead";
 import {
   reliabilityTimeAIvsNonAI,
@@ -60,12 +59,6 @@ Nearly half of AI teams (48%) are in the 10–25% band. That's a significant
 but not catastrophic spend — the kind of number that likely prevents the team
 from shipping as fast as it wants to.
 
-<StatCallout
-  value="20%"
-  label="of AI teams spend up to half of their engineering capacity on reliability work — twice the rate of non-AI teams."
-  source="Inngest 2026 Durable Execution Benchmark (n=130)"
-/>
-
 ### How has time spent on reliability changed over time?
 
 While the survey showed that larger teams generally spend more of their time
@@ -103,7 +96,8 @@ traffic & scale take a slight lead for AI teams at 62%, and technical debt
 take the lead for non-AI teams at a significantly higher margin of 86%.
 
 Multi-service architectures, faster shipping pressure, and AI workloads with
-new failure modes follow closely. Non-determinism is last.
+new failure modes follow closely. Non-deterministic outputs requiring more
+validation logic is last.
 
 <PullQuote>
   I think the shifting landscape to unproven technologies and repackaging of
@@ -131,10 +125,6 @@ new failure modes follow closely. Non-determinism is last.
   />
 </ChartFrame>
 
-_* Non-AI n=7 — directional only. AI workloads / new failure modes is the
-only driver that's uniquely AI-specific (54% AI vs 14% non-AI). Technical
-debt skews non-AI (86% vs 54%)._
-
-> **Key insight:** Orchestration tooling should help teams handle rapid or
+> **Key Insight:** Orchestration tooling should help teams handle rapid or
 > lumpy scale, as well as fit into their existing stack in order to reduce
-> the friction cited here.
+> friction cited here.
