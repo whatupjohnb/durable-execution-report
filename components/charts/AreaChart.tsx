@@ -54,27 +54,29 @@ export function AreaChart({ rows, keys, colors, direction }: Props) {
       </div>
 
       {/* Rows */}
-      <ul className="flex flex-col gap-2">
+      <ul className="flex flex-col gap-3">
         {rows.map((r) => {
           const total =
             keys.reduce((acc, k) => acc + (r.segments[k] ?? 0), 0) || 1;
           return (
             <li
               key={r.label}
-              className="grid items-center gap-x-4 text-sm sm:grid-cols-[auto_auto_minmax(0,1fr)_auto]"
+              className="grid items-center gap-x-4 text-[13px] sm:grid-cols-[14rem_minmax(0,1fr)_auto]"
             >
-              <div className="flex items-baseline gap-1 sm:justify-end">
-                <span className="whitespace-nowrap font-semibold text-carbon-1000">
+              <div className="flex flex-col gap-0.5 text-left">
+                <span className="font-semibold text-carbon-1000">
                   {r.label}
+                  {r.directional ? (
+                    <span className="text-carbon-500"> *</span>
+                  ) : null}
                 </span>
-                {r.directional ? (
-                  <span className="text-carbon-500">*</span>
+                {r.n !== undefined ? (
+                  <span className="font-mono text-[11px] tabular-nums text-carbon-500">
+                    n={r.n}
+                  </span>
                 ) : null}
               </div>
-              <div className="whitespace-nowrap font-mono text-xs tabular-nums text-carbon-500 sm:text-left">
-                {r.n !== undefined ? `n=${r.n}` : ""}
-              </div>
-              <div className="flex h-9 min-w-0 overflow-hidden">
+              <div className="flex h-7 min-w-0 overflow-hidden">
                 {keys.map((k, i) => {
                   const v = r.segments[k] ?? 0;
                   const pct = (v / total) * 100;
@@ -83,7 +85,7 @@ export function AreaChart({ rows, keys, colors, direction }: Props) {
                   return (
                     <div
                       key={k}
-                      className="flex items-center justify-center overflow-hidden text-xs font-semibold tabular-nums text-white"
+                      className="flex items-center justify-center overflow-hidden font-mono text-[11px] font-semibold tabular-nums text-white"
                       style={{ width: `${pct}%`, backgroundColor: color }}
                     >
                       {pct >= 8 ? `${Math.round(pct)}%` : ""}
@@ -92,7 +94,7 @@ export function AreaChart({ rows, keys, colors, direction }: Props) {
                 })}
               </div>
               {r.rightLabel ? (
-                <div className="whitespace-nowrap font-mono text-sm font-semibold tabular-nums text-carbon-1000">
+                <div className="whitespace-nowrap font-mono text-[13px] font-semibold tabular-nums text-carbon-1000">
                   {r.rightLabel}
                 </div>
               ) : (

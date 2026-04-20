@@ -95,14 +95,12 @@ function CohortBlock({
           return (
             <li
               key={r.label}
-              className="grid grid-cols-[8rem_minmax(0,1fr)_3rem] items-center gap-3 sm:grid-cols-[10rem_minmax(0,1fr)_3rem]"
+              className="grid grid-cols-[9rem_minmax(0,1fr)_2.75rem] items-center gap-3 text-[13px] sm:grid-cols-[11rem_minmax(0,1fr)_3rem]"
             >
-              <span className="truncate text-sm text-carbon-800">
-                {r.label}
-              </span>
-              <div className="relative h-5 overflow-hidden bg-carbon-100">
+              <span className="text-left text-carbon-800">{r.label}</span>
+              <div className="relative h-5 min-w-0 overflow-hidden bg-carbon-100">
                 <div
-                  className="h-full transition-all"
+                  className="h-full"
                   style={{
                     width: `${(pct / max) * 100}%`,
                     backgroundColor: color,
@@ -110,7 +108,7 @@ function CohortBlock({
                 />
               </div>
               <span
-                className="text-right text-sm font-semibold tabular-nums"
+                className="text-right font-mono font-semibold tabular-nums"
                 style={{ color }}
               >
                 {r.value}%

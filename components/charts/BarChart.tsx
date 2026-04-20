@@ -51,11 +51,15 @@ function HorizontalBars({
   data,
   valueSuffix = "",
   accentIndex,
-  showTrack = false,
+  showTrack,
   insideLabels = false,
 }: Props) {
-  const hasAnyCount = data.some((d) => d.count !== undefined);
-  const domainMax = showTrack
+  // Percent charts default to showing the 0–100 track so bars across charts
+  // share a visual scale. Non-percent charts (e.g. "pp" delta) opt out.
+  const isPercent = valueSuffix === "%";
+  const effectiveShowTrack = showTrack ?? isPercent;
+
+  const domainMax = effectiveShowTrack
     ? 100
     : Math.max(...data.map((d) => d.value));
 
@@ -66,20 +70,27 @@ function HorizontalBars({
   };
 
   return (
-    <ul className="flex flex-col gap-2.5">
+    <ul className="flex flex-col gap-3">
       {data.map((d, i) => {
         const pct = Math.max(0, (d.value / domainMax) * 100);
         const color = colorFor(d, i);
         return (
           <li
             key={d.label}
-            className="grid items-center gap-x-4 gap-y-1 text-sm sm:grid-cols-[minmax(0,auto)_minmax(0,1fr)_auto] sm:gap-x-5"
+            className="grid items-center gap-x-4 gap-y-1 text-[13px] sm:grid-cols-[14rem_minmax(0,1fr)_auto] sm:gap-x-5"
           >
-            <div className="max-w-[18rem] font-medium leading-snug text-carbon-900 sm:text-right">
-              {d.label}
+            <div className="flex flex-col gap-0.5 text-left">
+              <span className="font-medium leading-snug text-carbon-900">
+                {d.label}
+              </span>
+              {d.count !== undefined ? (
+                <span className="font-mono text-[11px] tabular-nums text-carbon-500">
+                  n={d.count}
+                </span>
+              ) : null}
             </div>
-            <div className="relative h-8 min-w-0">
-              {showTrack ? (
+            <div className="relative h-7 min-w-0">
+              {effectiveShowTrack ? (
                 <div className="absolute inset-0 bg-carbon-100" />
               ) : null}
               <div
@@ -87,29 +98,24 @@ function HorizontalBars({
                 style={{ width: `${pct}%`, backgroundColor: color }}
               >
                 {insideLabels && pct > 12 ? (
-                  <span className="font-mono text-xs font-semibold tabular-nums text-white">
+                  <span className="font-mono text-[11px] font-semibold tabular-nums text-white">
                     {d.value}
                     {valueSuffix}
                   </span>
                 ) : null}
               </div>
             </div>
-            <div className="flex items-center gap-3 whitespace-nowrap sm:justify-end">
-              {d.count !== undefined ? (
-                <span className="font-mono text-xs tabular-nums text-carbon-500">
-                  n={d.count}
-                </span>
-              ) : null}
-              {!insideLabels ? (
-                <span
-                  className="min-w-[3rem] text-right font-mono text-sm font-bold tabular-nums"
-                  style={{ color }}
-                >
-                  {d.value}
-                  {valueSuffix}
-                </span>
-              ) : null}
-            </div>
+            {!insideLabels ? (
+              <span
+                className="min-w-[2.5rem] text-right font-mono text-[13px] font-bold tabular-nums"
+                style={{ color }}
+              >
+                {d.value}
+                {valueSuffix}
+              </span>
+            ) : (
+              <span />
+            )}
           </li>
         );
       })}
