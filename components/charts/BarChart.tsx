@@ -105,7 +105,6 @@ function BarChartInner({
                     height={yScale.bandwidth()}
                     fill={fill}
                     fillOpacity={0.15}
-                    rx={4}
                   />
                 ) : null}
                 <Bar
@@ -114,7 +113,6 @@ function BarChartInner({
                   width={w}
                   height={yScale.bandwidth()}
                   fill={fill}
-                  rx={4}
                 />
                 {d.count !== undefined ? (
                   <text
@@ -198,7 +196,6 @@ function BarChartInner({
                 width={xScale.bandwidth()}
                 height={h}
                 fill={fill}
-                rx={3}
               />
               <text
                 x={x + xScale.bandwidth() / 2}

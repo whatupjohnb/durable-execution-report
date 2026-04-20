@@ -127,7 +127,6 @@ function Inner({
                     width={innerScale.bandwidth()}
                     height={h}
                     fill={t.color}
-                    rx={1.5}
                   />
                 );
               })}

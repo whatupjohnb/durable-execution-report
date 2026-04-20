@@ -100,9 +100,9 @@ function CohortBlock({
               <span className="truncate text-sm text-carbon-800">
                 {r.label}
               </span>
-              <div className="relative h-5 overflow-hidden rounded-md bg-carbon-100">
+              <div className="relative h-5 overflow-hidden bg-carbon-100">
                 <div
-                  className="h-full rounded-md transition-all"
+                  className="h-full transition-all"
                   style={{
                     width: `${(pct / max) * 100}%`,
                     backgroundColor: color,

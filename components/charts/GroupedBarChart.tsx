@@ -107,7 +107,6 @@ function GroupedInner({
                       width={w}
                       height={barH - 2}
                       fill={color}
-                      rx={1.5}
                     />
                     <text
                       x={w + 6}

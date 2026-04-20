@@ -33,22 +33,23 @@ export const sections = [
 // ---------------------------------------------------------------------------
 
 // A stable color key per workflow type, used across Figures 1 and 3 so the
-// same hue always represents the same category. Keys are raw hex strings so
-// chart components can pass them straight to SVG fills.
+// same hue always represents the same category. Colors pulled from the
+// official Inngest palette: Citrus Glow (orange), Breeze (blue), Matcha
+// (green), Honey (gold), Quantum (purple).
 export const workflowColors = {
-  "Background jobs": "#E86B5F",       // ruby
-  "Event-driven": "#4F9BE7",           // breeze
-  "Long-running": "#4EB88A",           // matcha
-  "Data pipelines": "#E5A83E",         // honey
-  "AI workflows": "#8B5CC7",           // purplehaze
+  "Background jobs": "#FF7300",     // citrus-500 / Citrus Glow
+  "Event-driven":    "#2389F1",     // breeze-500
+  "Long-running":    "#2C9B63",     // matcha-500
+  "Data pipelines":  "#FCC43F",     // honey-300
+  "AI workflows":    "#8F75B7",     // quantum-500
 } as const;
 
 // Figure 1 — workflow types running in production
 export const workflowUseCases = [
-  { label: "Background jobs or scheduled tasks", value: 93, color: workflowColors["Background jobs"] },
+  { label: "Background jobs or scheduled tasks",          value: 93, color: workflowColors["Background jobs"] },
   { label: "Event-driven automation or webhook processing", value: 87, color: workflowColors["Event-driven"] },
-  { label: "Long-running workflows (minutes to days)", value: 68, color: workflowColors["Long-running"] },
-  { label: "AI / LLM workflows", value: 68, color: workflowColors["AI workflows"] },
+  { label: "Long-running workflows (minutes to days)",    value: 68, color: workflowColors["Long-running"] },
+  { label: "AI / LLM workflows",                          value: 68, color: workflowColors["AI workflows"] },
   { label: "Data pipelines (ETL, embedding, enrichment)", value: 63, color: workflowColors["Data pipelines"] },
 ];
 
@@ -63,7 +64,9 @@ export const toolCountDistribution = [
 ];
 
 // Figure 2b — orchestration platform by team size.
-// Per-tool colors kept consistent with the source dashboard.
+// Tool colors chosen from the Inngest brand palette for maximum distinction
+// at 7 series. Inngest keeps matcha (their own brand green); competitor
+// tools fan out across breeze/honey/quantum/ruby/citrus.
 export const platformByTeamSize = {
   cohorts: [
     { label: "Solo / 2–10", n: 47 },
@@ -72,13 +75,13 @@ export const platformByTeamSize = {
     { label: "500+",        n: 16 },
   ],
   tools: [
-    { key: "inngest",  label: "Inngest",            color: "#E86B5F", values: [72, 35, 7,  0 ] },
-    { key: "custom",   label: "Custom-built",       color: "#9B9B9B", values: [32, 40, 44, 75] },
-    { key: "aws",      label: "AWS / Vercel / CF",  color: "#4F9BE7", values: [15, 28, 33, 62] },
-    { key: "bullmq",   label: "BullMQ / Cel / Sid", color: "#4EB88A", values: [11, 30, 11, 12] },
-    { key: "prefect",  label: "Prefect / Airflow",  color: "#8B5CC7", values: [4,  15, 22, 12] },
-    { key: "temporal", label: "Temporal",           color: "#E5A83E", values: [2,  10, 22, 12] },
-    { key: "none",     label: "None / ad-hoc",      color: "#B0B0B0", values: [11, 18, 22, 31] },
+    { key: "inngest",  label: "Inngest",            color: "#2C9B63", values: [72, 35, 7,  0 ] }, // matcha-500
+    { key: "custom",   label: "Custom-built",       color: "#7C7C7C", values: [32, 40, 44, 75] }, // carbon-500
+    { key: "aws",      label: "AWS / Vercel / CF",  color: "#2389F1", values: [15, 28, 33, 62] }, // breeze-500
+    { key: "bullmq",   label: "BullMQ / Cel / Sid", color: "#D56B13", values: [11, 30, 11, 12] }, // honey-500
+    { key: "prefect",  label: "Prefect / Airflow",  color: "#8F75B7", values: [4,  15, 22, 12] }, // quantum-500
+    { key: "temporal", label: "Temporal",           color: "#F54A3F", values: [2,  10, 22, 12] }, // ruby-500
+    { key: "none",     label: "None / ad-hoc",      color: "#B0B0B0", values: [11, 18, 22, 31] }, // carbon-300
   ],
 };
 
@@ -88,7 +91,7 @@ export const platformByTeamSize = {
 // consistent with Figure 1.
 export const soloToolCohorts = [
   {
-    tool: "Inngest",      n: 29, avg: 75, accent: "#E86B5F",
+    tool: "Inngest",      n: 29, avg: 75, accent: "#2C9B63", // matcha-500
     rows: [
       { label: "Background jobs", value: 97, color: workflowColors["Background jobs"] },
       { label: "Event-driven",    value: 83, color: workflowColors["Event-driven"] },
@@ -98,7 +101,7 @@ export const soloToolCohorts = [
     ],
   },
   {
-    tool: "Custom-built", n: 15, avg: 73, accent: "#4F9BE7",
+    tool: "Custom-built", n: 15, avg: 73, accent: "#7C7C7C", // carbon-500
     rows: [
       { label: "Background jobs", value: 93, color: workflowColors["Background jobs"] },
       { label: "Event-driven",    value: 87, color: workflowColors["Event-driven"] },
@@ -108,7 +111,7 @@ export const soloToolCohorts = [
     ],
   },
   {
-    tool: "AWS / Vercel / CF", n: 7, avg: 63, accent: "#4EB88A", small: true,
+    tool: "AWS / Vercel / CF", n: 7, avg: 63, accent: "#2389F1", small: true, // breeze-500
     rows: [
       { label: "Background jobs", value: 86, color: workflowColors["Background jobs"] },
       { label: "Event-driven",    value: 86, color: workflowColors["Event-driven"] },
@@ -118,7 +121,7 @@ export const soloToolCohorts = [
     ],
   },
   {
-    tool: "BullMQ / Cel / Sid", n: 6, avg: 57, accent: "#E5A83E", small: true,
+    tool: "BullMQ / Cel / Sid", n: 6, avg: 57, accent: "#D56B13", small: true, // honey-500
     rows: [
       { label: "Background jobs", value: 83, color: workflowColors["Background jobs"] },
       { label: "Event-driven",    value: 67, color: workflowColors["Event-driven"] },
