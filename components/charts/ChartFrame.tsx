@@ -60,7 +60,7 @@ export function ChartFrame({
       )}
     >
       {/* White card — title + share buttons + chart body */}
-      <div className="rounded-2xl bg-white p-5 shadow-[0_16px_48px_-18px_rgba(0,0,0,0.35)] sm:p-7">
+      <div className="rounded-tl-none rounded-tr-[24px] rounded-br-none rounded-bl-[24px] bg-white p-5 shadow-[0_16px_48px_-18px_rgba(0,0,0,0.35)] sm:p-7">
         {(caption || anchorId) ? (
           <div className="mb-5 flex items-start justify-between gap-4">
             {caption ? (
