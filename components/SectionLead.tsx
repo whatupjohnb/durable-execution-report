@@ -18,9 +18,6 @@ export function SectionLead({ children, className }: Props) {
         className,
       )}
     >
-      <span aria-hidden="true" className="mt-1 select-none text-xl leading-none">
-        👉
-      </span>
       <div className="font-heading text-xl font-medium leading-snug tracking-tight sm:text-2xl">
         {children}
       </div>
