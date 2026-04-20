@@ -29,7 +29,7 @@ export function QuoteCarousel({ quotes }: Props) {
   return (
     <div className="my-10 select-none">
       {/* Card */}
-      <div className="relative overflow-hidden rounded-tr-[24px] rounded-bl-[24px] bg-carbon-950 px-8 py-10 sm:px-12 sm:py-12">
+      <div className="relative overflow-hidden rounded-tr-[24px] rounded-bl-[24px] bg-[#353535] px-8 py-10 sm:px-12 sm:py-12">
         {/* Opening mark */}
         <span className="mb-4 block font-heading text-3xl leading-none text-matcha-600 select-none">
           &ldquo;
