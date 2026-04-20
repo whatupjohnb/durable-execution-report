@@ -9,7 +9,6 @@ export type ChartVariant =
   | "ruby"
   | "blush";
 
-// Static class mapping so Tailwind's JIT picks up every variant at build time.
 const VARIANT_BG: Record<ChartVariant, string> = {
   matcha: "bg-gradient-matcha",
   honey: "bg-gradient-honey",
@@ -52,34 +51,36 @@ export function ChartFrame({
     <figure
       id={anchorId}
       className={clsx(
-        "my-10 overflow-hidden rounded-tr-[48px] rounded-bl-[48px] p-6 text-carbon-1000 ring-1 ring-inset ring-carbon-1000/10 sm:p-8 scroll-mt-24",
+        "my-10 rounded-tr-[24px] rounded-bl-[24px] p-6 scroll-mt-24 sm:p-10",
         VARIANT_BG[variant],
         className,
       )}
     >
-      <div className="mb-3 flex items-start justify-between gap-4">
-        {label ? (
-          <div className="font-mono text-[0.6875rem] uppercase tracking-widest text-carbon-1000/70">
-            {label}
+      <div className="rounded-2xl bg-white p-6 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.45)] sm:p-8">
+        <div className="mb-5 flex items-start justify-between gap-4">
+          <div className="min-w-0">
+            {label ? (
+              <div className="font-mono text-[0.6875rem] uppercase tracking-widest text-carbon-500">
+                {label}
+              </div>
+            ) : null}
+            {caption ? (
+              <div className="mt-1.5 font-heading text-lg font-semibold leading-snug text-carbon-1000 sm:text-xl">
+                {caption}
+              </div>
+            ) : null}
           </div>
-        ) : (
-          <span />
-        )}
-        {anchorId ? (
-          <ChartShare anchorId={anchorId} title={shareTitle} />
+          {anchorId ? (
+            <ChartShare anchorId={anchorId} title={shareTitle} />
+          ) : null}
+        </div>
+        <div className={clsx("w-full", aspect)}>{children}</div>
+        {source ? (
+          <div className="mt-4 font-mono text-[0.6875rem] text-carbon-500">
+            {source}
+          </div>
         ) : null}
       </div>
-      {caption ? (
-        <figcaption className="mb-5 max-w-2xl font-heading text-lg font-semibold leading-snug text-carbon-1000 sm:text-xl">
-          {caption}
-        </figcaption>
-      ) : null}
-      <div className={clsx("w-full", aspect)}>{children}</div>
-      {source ? (
-        <div className="mt-4 font-mono text-[0.6875rem] text-carbon-1000/60">
-          {source}
-        </div>
-      ) : null}
     </figure>
   );
 }
