@@ -605,3 +605,23 @@ export const unsolvedThemes = [
   { label: "Debugging", value: 9 },
   { label: "Evals / quality", value: 8 },
 ];
+
+// Figure 24 — themes in open-text responses, by team size band.
+// Bubble area = number of respondents mentioning each theme.
+export const unsolvedByTeamSize = {
+  themes: [
+    "Observability & debugging",
+    "Scalability & cost",
+    "Non-determinism",
+    "State & durability",
+    "Evals at scale",
+    "Tooling frag.",
+    "Context / memory",
+  ],
+  cohorts: [
+    { label: "Solo / 2–10", n: 47, color: "#F54A3F", values: [8, 13, 3, 5, 6, 1, 3] },
+    { label: "11–50",       n: 40, color: "#2389F1", values: [8,  4, 2, 3, 3, 5, 4] },
+    { label: "51–500",      n: 27, color: "#2C9B63", values: [7,  3, 3, 4, 1, 2, 0] },
+    { label: "500+",        n: 16, color: "#8F75B7", values: [2,  4, 6, 0, 2, 0, 0] },
+  ],
+};

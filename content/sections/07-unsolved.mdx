@@ -1,8 +1,9 @@
 import { ChartFrame } from "@/components/charts/ChartFrame";
 import { BarChart } from "@/components/charts/BarChart";
+import { BubbleMatrix } from "@/components/charts/BubbleMatrix";
 import { PullQuote } from "@/components/PullQuote";
 import { SectionLead } from "@/components/SectionLead";
-import { unsolvedThemes } from "@/content/report";
+import { unsolvedThemes, unsolvedByTeamSize } from "@/content/report";
 
 <SectionLead>
   19% of responses name observability as the core unsolved problem — the
@@ -17,11 +18,20 @@ problems of scale.
 
 <ChartFrame variant="blush"
   label="Figure 24"
-  caption="Top themes in open-ended responses about unsolved problems"
-  source="Share of free-text responses mentioning each theme. Multiple codes per response."
+  caption="What's unsolved — by team size"
+  source="Q18: Themes in open-text responses by team size band. Bubble area = number of respondents mentioning each theme."
+  aspect="aspect-auto"
 >
-  <BarChart data={unsolvedThemes} valueSuffix="%" horizontal accentIndex={0} />
+  <BubbleMatrix
+    themes={unsolvedByTeamSize.themes}
+    cohorts={unsolvedByTeamSize.cohorts}
+  />
 </ChartFrame>
+
+_500+ n=16 — directional only. The 500+ spike on non-determinism (6 of 16
+respondents, 38%) is the sharpest size-specific signal in the dataset.
+Small teams concentrate on scalability and cost (28% of Solo/2–10
+responses)._
 
 ### Observability: the named gap
 
