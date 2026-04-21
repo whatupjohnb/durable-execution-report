@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 654 540" width="654" height="540" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" text-rendering="optimizeLegibility">
+  <rect width="654" height="540" fill="#ffffff"/>
+
+  <g id="title">
+    <text x="28" y="48" font-size="22" font-weight="600" fill="#020202" letter-spacing="-0.3">Orchestration platform by team size</text>
+  </g>
+
+  <g id="legend" transform="translate(28,76)">
+    <!-- row 1 -->
+    <g transform="translate(0,0)"><rect width="10" height="10" fill="#2C9B63"/><text x="16" y="9" font-size="11" fill="#242424">Inngest</text></g>
+    <g transform="translate(78,0)"><rect width="10" height="10" fill="#7C7C7C"/><text x="16" y="9" font-size="11" fill="#242424">Custom-built</text></g>
+    <g transform="translate(180,0)"><rect width="10" height="10" fill="#2389F1"/><text x="16" y="9" font-size="11" fill="#242424">AWS / Vercel / CF</text></g>
+    <g transform="translate(306,0)"><rect width="10" height="10" fill="#D56B13"/><text x="16" y="9" font-size="11" fill="#242424">BullMQ / Cel / Sid</text></g>
+    <g transform="translate(430,0)"><rect width="10" height="10" fill="#8F75B7"/><text x="16" y="9" font-size="11" fill="#242424">Prefect / Airflow</text></g>
+    <g transform="translate(550,0)"><rect width="10" height="10" fill="#F54A3F"/><text x="16" y="9" font-size="11" fill="#242424">Temporal</text></g>
+    <g transform="translate(0,22)"><rect width="10" height="10" fill="#B0B0B0"/><text x="16" y="9" font-size="11" fill="#242424">None / ad-hoc</text></g>
+  </g>
+
+  <!--
+    axis:  y goes 0..80% over 280px
+      scale: px = value * 280 / 80 = value * 3.5
+    4 cohort columns. Each cohort has 7 tool bars side by side.
+    Cohort column block width = 140px.  Bar width = 16px, gap 2px = 126px, left inset 7px.
+    Chart origin: x=40 (y-axis), y=140 (top of plot). plot height = 280.
+  -->
+  <g id="plot" transform="translate(40,140)">
+    <!-- gridlines at 0,20,40,60,80 -->
+    <g stroke="#E2E2E2" stroke-dasharray="2 4">
+      <line x1="0" y1="280" x2="580" y2="280"/>
+      <line x1="0" y1="210" x2="580" y2="210"/>
+      <line x1="0" y1="140" x2="580" y2="140"/>
+      <line x1="0" y1="70"  x2="580" y2="70"/>
+      <line x1="0" y1="0"   x2="580" y2="0"/>
+    </g>
+    <g font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" fill="#7C7C7C" text-anchor="end">
+      <text x="-8" y="284">0%</text>
+      <text x="-8" y="214">20%</text>
+      <text x="-8" y="144">40%</text>
+      <text x="-8" y="74">60%</text>
+      <text x="-8" y="4">80%</text>
+    </g>
+
+    <!-- cohort: Solo / 2–10 (x=0..140) values: inngest 72, custom 32, aws 15, bullmq 11, prefect 4, temporal 2, none 11 -->
+    <g transform="translate(0,0)">
+      <rect x="7"   y="28"  width="16" height="252" fill="#2C9B63"/>
+      <rect x="25"  y="168" width="16" height="112" fill="#7C7C7C"/>
+      <rect x="43"  y="227" width="16" height="53"  fill="#2389F1"/>
+      <rect x="61"  y="241" width="16" height="39"  fill="#D56B13"/>
+      <rect x="79"  y="266" width="16" height="14"  fill="#8F75B7"/>
+      <rect x="97"  y="273" width="16" height="7"   fill="#F54A3F"/>
+      <rect x="115" y="241" width="16" height="39"  fill="#B0B0B0"/>
+    </g>
+    <!-- cohort: 11–50 (x=140..280) values: 35, 40, 28, 30, 15, 10, 18 -->
+    <g transform="translate(145,0)">
+      <rect x="7"   y="158" width="16" height="122" fill="#2C9B63"/>
+      <rect x="25"  y="140" width="16" height="140" fill="#7C7C7C"/>
+      <rect x="43"  y="182" width="16" height="98"  fill="#2389F1"/>
+      <rect x="61"  y="175" width="16" height="105" fill="#D56B13"/>
+      <rect x="79"  y="227" width="16" height="53"  fill="#8F75B7"/>
+      <rect x="97"  y="245" width="16" height="35"  fill="#F54A3F"/>
+      <rect x="115" y="217" width="16" height="63"  fill="#B0B0B0"/>
+    </g>
+    <!-- cohort: 51–500 (x=280..420) values: 7, 44, 33, 11, 22, 22, 22 -->
+    <g transform="translate(290,0)">
+      <rect x="7"   y="255" width="16" height="25"  fill="#2C9B63"/>
+      <rect x="25"  y="126" width="16" height="154" fill="#7C7C7C"/>
+      <rect x="43"  y="165" width="16" height="115" fill="#2389F1"/>
+      <rect x="61"  y="241" width="16" height="39"  fill="#D56B13"/>
+      <rect x="79"  y="203" width="16" height="77"  fill="#8F75B7"/>
+      <rect x="97"  y="203" width="16" height="77"  fill="#F54A3F"/>
+      <rect x="115" y="203" width="16" height="77"  fill="#B0B0B0"/>
+    </g>
+    <!-- cohort: 500+ (x=420..560) values: 0, 75, 62, 12, 12, 12, 31 -->
+    <g transform="translate(435,0)">
+      <rect x="7"   y="280" width="16" height="0"   fill="#2C9B63"/>
+      <rect x="25"  y="17.5" width="16" height="262.5" fill="#7C7C7C"/>
+      <rect x="43"  y="63"  width="16" height="217" fill="#2389F1"/>
+      <rect x="61"  y="238" width="16" height="42"  fill="#D56B13"/>
+      <rect x="79"  y="238" width="16" height="42"  fill="#8F75B7"/>
+      <rect x="97"  y="238" width="16" height="42"  fill="#F54A3F"/>
+      <rect x="115" y="171.5" width="16" height="108.5" fill="#B0B0B0"/>
+    </g>
+
+    <!-- cohort axis labels -->
+    <g font-size="12" fill="#242424" text-anchor="middle">
+      <text x="70"  y="308">Solo / 2–10</text>
+      <text x="215" y="308">11–50</text>
+      <text x="360" y="308">51–500</text>
+      <text x="505" y="308">500+</text>
+    </g>
+    <g font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#7C7C7C" text-anchor="middle">
+      <text x="70"  y="322">n=47</text>
+      <text x="215" y="322">n=40</text>
+      <text x="360" y="322">n=27</text>
+      <text x="505" y="322">n=16</text>
+    </g>
+  </g>
+
+  <g id="source" transform="translate(28,500)">
+    <text font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#636363">
+      <tspan x="0" dy="0">Q3: What are you using for workflow or job orchestration? All respondents n=130. Multi-select</tspan>
+      <tspan x="0" dy="14">— totals exceed 100%. % of each size band using each tool.</tspan>
+    </text>
+  </g>
+</svg>

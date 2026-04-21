@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 654 460" width="654" height="460" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" text-rendering="optimizeLegibility">
+  <rect width="654" height="460" fill="#ffffff"/>
+
+  <g id="title">
+    <text x="28" y="48" font-size="22" font-weight="600" fill="#020202" letter-spacing="-0.3">What's broken about agent frameworks — by tool</text>
+  </g>
+
+  <!-- 5 rows × 5 columns. row label 150 | 5 cells × 84 = 420. Total 570, +28 pad = 598 -->
+
+  <g id="column-headers" transform="translate(180,110)">
+    <g font-size="11" fill="#242424">
+      <g transform="translate(42,-6) rotate(-30)"><text x="0" y="0">Harder to trace</text></g>
+      <g transform="translate(126,-6) rotate(-30)"><text x="0" y="0">Poor stateful</text></g>
+      <g transform="translate(210,-6) rotate(-30)"><text x="0" y="0">App layer only</text></g>
+      <g transform="translate(294,-6) rotate(-30)"><text x="0" y="0">Too rigid</text></g>
+      <g transform="translate(378,-6) rotate(-30)"><text x="0" y="0">Lock-in</text></g>
+    </g>
+  </g>
+
+  <g id="rows" transform="translate(28,140)">
+    <!-- Direct/DIY n=61  [38, 26, 21, 25, 18] -->
+    <g transform="translate(0,0)">
+      <text x="0" y="22" font-size="12" fill="#242424">Direct / DIY</text>
+      <text x="0" y="36" font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#7C7C7C">n=61</text>
+      <g transform="translate(150,0)">
+        <rect x="0"   y="4" width="80" height="44" fill="#F9CCA5"/>
+        <rect x="84"  y="4" width="80" height="44" fill="#F1F1F1"/>
+        <rect x="168" y="4" width="80" height="44" fill="#F1F1F1"/>
+        <rect x="252" y="4" width="80" height="44" fill="#F1F1F1"/>
+        <rect x="336" y="4" width="80" height="44" fill="#F1F1F1"/>
+        <g font-size="12" font-family="'JetBrains Mono', ui-monospace, monospace" font-variant-numeric="tabular-nums" text-anchor="middle" fill="#020202">
+          <text x="40"  y="30">38%</text>
+          <text x="124" y="30">26%</text>
+          <text x="208" y="30">21%</text>
+          <text x="292" y="30">25%</text>
+          <text x="376" y="30">18%</text>
+        </g>
+      </g>
+    </g>
+    <!-- Vercel AI SDK n=26  [54, 35, 38, 23, 35] -->
+    <g transform="translate(0,56)">
+      <text x="0" y="22" font-size="12" fill="#242424">Vercel AI SDK</text>
+      <text x="0" y="36" font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#7C7C7C">n=26</text>
+      <g transform="translate(150,0)">
+        <rect x="0"   y="4" width="80" height="44" fill="#EC5E54"/>
+        <rect x="84"  y="4" width="80" height="44" fill="#F9CCA5"/>
+        <rect x="168" y="4" width="80" height="44" fill="#F9CCA5"/>
+        <rect x="252" y="4" width="80" height="44" fill="#F1F1F1"/>
+        <rect x="336" y="4" width="80" height="44" fill="#F9CCA5"/>
+        <g font-size="12" font-family="'JetBrains Mono', ui-monospace, monospace" font-variant-numeric="tabular-nums" text-anchor="middle">
+          <text x="40"  y="30" fill="#ffffff">54%</text>
+          <text x="124" y="30" fill="#020202">35%</text>
+          <text x="208" y="30" fill="#020202">38%</text>
+          <text x="292" y="30" fill="#020202">23%</text>
+          <text x="376" y="30" fill="#020202">35%</text>
+        </g>
+      </g>
+    </g>
+    <!-- LangChain n=18 [50, 50, 28, 39, 28] -->
+    <g transform="translate(0,112)">
+      <text x="0" y="22" font-size="12" fill="#242424">LangChain</text>
+      <text x="0" y="36" font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#7C7C7C">n=18</text>
+      <g transform="translate(150,0)">
+        <rect x="0"   y="4" width="80" height="44" fill="#EC5E54"/>
+        <rect x="84"  y="4" width="80" height="44" fill="#EC5E54"/>
+        <rect x="168" y="4" width="80" height="44" fill="#F1F1F1"/>
+        <rect x="252" y="4" width="80" height="44" fill="#F9CCA5"/>
+        <rect x="336" y="4" width="80" height="44" fill="#F1F1F1"/>
+        <g font-size="12" font-family="'JetBrains Mono', ui-monospace, monospace" font-variant-numeric="tabular-nums" text-anchor="middle">
+          <text x="40"  y="30" fill="#ffffff">50%</text>
+          <text x="124" y="30" fill="#ffffff">50%</text>
+          <text x="208" y="30" fill="#020202">28%</text>
+          <text x="292" y="30" fill="#020202">39%</text>
+          <text x="376" y="30" fill="#020202">28%</text>
+        </g>
+      </g>
+    </g>
+    <!-- LlamaIndex n=7 [43, 14, 29, 71, 14] -->
+    <g transform="translate(0,168)">
+      <text x="0" y="22" font-size="12" fill="#242424">LlamaIndex</text>
+      <text x="0" y="36" font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#7C7C7C">n=7</text>
+      <g transform="translate(150,0)">
+        <rect x="0"   y="4" width="80" height="44" fill="#F9CCA5"/>
+        <rect x="84"  y="4" width="80" height="44" fill="#F1F1F1"/>
+        <rect x="168" y="4" width="80" height="44" fill="#F1F1F1"/>
+        <rect x="252" y="4" width="80" height="44" fill="#EC5E54"/>
+        <rect x="336" y="4" width="80" height="44" fill="#F1F1F1"/>
+        <g font-size="12" font-family="'JetBrains Mono', ui-monospace, monospace" font-variant-numeric="tabular-nums" text-anchor="middle">
+          <text x="40"  y="30" fill="#020202">43%</text>
+          <text x="124" y="30" fill="#020202">14%</text>
+          <text x="208" y="30" fill="#020202">29%</text>
+          <text x="292" y="30" fill="#ffffff">71%</text>
+          <text x="376" y="30" fill="#020202">14%</text>
+        </g>
+      </g>
+    </g>
+    <!-- Mastra n=6 [67, 17, 33, 17, 0] -->
+    <g transform="translate(0,224)">
+      <text x="0" y="22" font-size="12" fill="#242424">Mastra</text>
+      <text x="0" y="36" font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#7C7C7C">n=6</text>
+      <g transform="translate(150,0)">
+        <rect x="0"   y="4" width="80" height="44" fill="#EC5E54"/>
+        <rect x="84"  y="4" width="80" height="44" fill="#F1F1F1"/>
+        <rect x="168" y="4" width="80" height="44" fill="#F9CCA5"/>
+        <rect x="252" y="4" width="80" height="44" fill="#F1F1F1"/>
+        <rect x="336" y="4" width="80" height="44" fill="#F1F1F1"/>
+        <g font-size="12" font-family="'JetBrains Mono', ui-monospace, monospace" font-variant-numeric="tabular-nums" text-anchor="middle">
+          <text x="40"  y="30" fill="#ffffff">67%</text>
+          <text x="124" y="30" fill="#020202">17%</text>
+          <text x="208" y="30" fill="#020202">33%</text>
+          <text x="292" y="30" fill="#020202">17%</text>
+          <text x="376" y="30" fill="#020202">0%</text>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <g id="legend" transform="translate(28,400)">
+    <g transform="translate(0,0)"><rect width="12" height="12" fill="#EC5E54"/><text x="18" y="10" font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#242424">50%+</text></g>
+    <g transform="translate(80,0)"><rect width="12" height="12" fill="#F9CCA5"/><text x="18" y="10" font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#242424">30–49%</text></g>
+    <g transform="translate(170,0)"><rect width="12" height="12" fill="#F1F1F1"/><text x="18" y="10" font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#242424">&lt;30%</text></g>
+  </g>
+
+  <g id="source" transform="translate(28,432)">
+    <text font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#636363">
+      <tspan x="0" dy="0">Q17: % of framework users citing each limitation. Tools with n&lt;3 excluded.</tspan>
+    </text>
+  </g>
+</svg>

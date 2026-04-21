@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 654 420" width="654" height="420" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" text-rendering="optimizeLegibility">
+  <rect width="654" height="420" fill="#ffffff"/>
+
+  <g id="title">
+    <text x="28" y="48" font-size="22" font-weight="600" fill="#020202" letter-spacing="-0.3">Time to understand what went wrong — by observability tool</text>
+  </g>
+
+  <g id="legend" transform="translate(28,78)">
+    <g transform="translate(0,0)"><rect width="10" height="10" fill="#2C9B63"/><text x="16" y="9" font-size="11" fill="#242424">Minutes — good tracing</text></g>
+    <g transform="translate(168,0)"><rect width="10" height="10" fill="#2389F1"/><text x="16" y="9" font-size="11" fill="#242424">Under an hour</text></g>
+    <g transform="translate(282,0)"><rect width="10" height="10" fill="#FF7300"/><text x="16" y="9" font-size="11" fill="#242424">Hours</text></g>
+    <g transform="translate(346,0)"><rect width="10" height="10" fill="#F54A3F"/><text x="16" y="9" font-size="11" fill="#242424">Can't explain</text></g>
+  </g>
+
+  <!-- rows: label 180 | bar 420 | n 20 hidden in label. bar 100% = 420px -->
+  <g id="rows" transform="translate(28,120)">
+
+    <g id="row-orch" transform="translate(0,0)">
+      <text x="0" y="18" font-size="12" fill="#242424">Orchestration platform</text>
+      <text x="0" y="32" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#7C7C7C">n=70</text>
+      <g transform="translate(180,0)">
+        <rect x="0"   y="4" width="168" height="30" fill="#2C9B63"/>
+        <rect x="168" y="4" width="231" height="30" fill="#2389F1"/>
+        <rect x="399" y="4" width="16.8" height="30" fill="#FF7300"/>
+        <rect x="415.8" y="4" width="4.2" height="30" fill="#F54A3F"/>
+        <g font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#ffffff" text-anchor="middle">
+          <text x="84"  y="24">40%</text>
+          <text x="283" y="24">55%</text>
+        </g>
+        <text x="424" y="24" font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#F54A3F" font-variant-numeric="tabular-nums">5%</text>
+      </g>
+    </g>
+
+    <g id="row-logs" transform="translate(0,60)">
+      <text x="0" y="18" font-size="12" fill="#242424">Logs</text>
+      <text x="0" y="32" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#7C7C7C">n=70</text>
+      <g transform="translate(180,0)">
+        <rect x="0"   y="4" width="126" height="30" fill="#2C9B63"/>
+        <rect x="126" y="4" width="210" height="30" fill="#2389F1"/>
+        <rect x="336" y="4" width="63"  height="30" fill="#FF7300"/>
+        <rect x="399" y="4" width="21"  height="30" fill="#F54A3F"/>
+        <g font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#ffffff" text-anchor="middle">
+          <text x="63"  y="24">30%</text>
+          <text x="231" y="24">50%</text>
+          <text x="367" y="24">15%</text>
+        </g>
+        <text x="424" y="24" font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#F54A3F" font-variant-numeric="tabular-nums">5%</text>
+      </g>
+    </g>
+
+    <g id="row-sentry" transform="translate(0,120)">
+      <text x="0" y="18" font-size="12" fill="#242424">Sentry, Datadog, New Relic</text>
+      <text x="0" y="32" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#7C7C7C">n=86</text>
+      <g transform="translate(180,0)">
+        <rect x="0"    y="4" width="121.8" height="30" fill="#2C9B63"/>
+        <rect x="121.8" y="4" width="231"  height="30" fill="#2389F1"/>
+        <rect x="352.8" y="4" width="50.4" height="30" fill="#FF7300"/>
+        <rect x="403.2" y="4" width="16.8" height="30" fill="#F54A3F"/>
+        <g font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#ffffff" text-anchor="middle">
+          <text x="61"  y="24">29%</text>
+          <text x="237" y="24">55%</text>
+          <text x="378" y="24">12%</text>
+        </g>
+        <text x="424" y="24" font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#F54A3F" font-variant-numeric="tabular-nums">4%</text>
+      </g>
+    </g>
+
+    <g id="row-lang" transform="translate(0,180)">
+      <text x="0" y="18" font-size="12" fill="#242424">LangSmith / LangFuse</text>
+      <text x="0" y="32" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#7C7C7C">n=11</text>
+      <g transform="translate(180,0)">
+        <rect x="0"   y="4" width="105" height="30" fill="#2C9B63"/>
+        <rect x="105" y="4" width="315" height="30" fill="#2389F1"/>
+        <g font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#ffffff" text-anchor="middle">
+          <text x="52"  y="24">25%</text>
+          <text x="262" y="24">75%</text>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <g id="direction" transform="translate(212,340)">
+    <text x="0" y="0" font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#7C7C7C">← fast</text>
+    <text x="420" y="0" font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#7C7C7C" text-anchor="end">slow →</text>
+  </g>
+
+  <g id="source" transform="translate(28,380)">
+    <text font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#636363">
+      <tspan x="0" dy="0">Q5 × Q4: Respondents may use multiple observability tools. Sorted by % diagnosing in minutes.</tspan>
+    </text>
+  </g>
+</svg>

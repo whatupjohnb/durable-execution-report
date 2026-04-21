@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 654 420" width="654" height="420" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" text-rendering="optimizeLegibility">
+  <rect width="654" height="420" fill="#ffffff"/>
+
+  <g id="title">
+    <text x="28" y="48" font-size="22" font-weight="600" fill="#020202" letter-spacing="-0.3">What's driving reliability burden up?</text>
+  </g>
+
+  <g id="legend" transform="translate(28,78)">
+    <g transform="translate(0,0)"><rect width="10" height="10" fill="#F54A3F"/><text x="16" y="9" font-size="11" fill="#242424">AI in production (n=24)</text></g>
+    <g transform="translate(190,0)"><rect width="10" height="10" fill="#2389F1"/><text x="16" y="9" font-size="11" fill="#242424">No AI in production (n=7)*</text></g>
+  </g>
+
+  <!--
+    horizontal grouped bars. Scale: 0..100 mapped to 380px. label 180px, bar 380, value 40.
+    Each group: 40px tall (2 bars of 14 + 6 gap + labels).
+  -->
+  <g id="chart" transform="translate(28,110)">
+
+    <g id="row-traffic" transform="translate(0,0)">
+      <text x="0" y="14" font-size="12" fill="#242424">Higher traffic &amp; scale</text>
+      <g transform="translate(182,0)">
+        <rect x="0" y="2"  width="235.6" height="12" fill="#F54A3F"/>
+        <rect x="0" y="16" width="216.6" height="12" fill="#2389F1"/>
+        <text x="380" y="12" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" text-anchor="end" fill="#F54A3F" font-variant-numeric="tabular-nums">62%</text>
+        <text x="380" y="26" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" text-anchor="end" fill="#2389F1" font-variant-numeric="tabular-nums">57%</text>
+      </g>
+    </g>
+
+    <g id="row-techdebt" transform="translate(0,46)">
+      <text x="0" y="14" font-size="12" fill="#242424">Technical debt</text>
+      <g transform="translate(182,0)">
+        <rect x="0" y="2"  width="205.2" height="12" fill="#F54A3F"/>
+        <rect x="0" y="16" width="326.8" height="12" fill="#2389F1"/>
+        <text x="380" y="12" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" text-anchor="end" fill="#F54A3F" font-variant-numeric="tabular-nums">54%</text>
+        <text x="380" y="26" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" text-anchor="end" fill="#2389F1" font-variant-numeric="tabular-nums">86%</text>
+      </g>
+    </g>
+
+    <g id="row-multi" transform="translate(0,92)">
+      <text x="0" y="14" font-size="12" fill="#242424">Multi-service architectures</text>
+      <g transform="translate(182,0)">
+        <rect x="0" y="2"  width="190" height="12" fill="#F54A3F"/>
+        <rect x="0" y="16" width="216.6" height="12" fill="#2389F1"/>
+        <text x="380" y="12" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" text-anchor="end" fill="#F54A3F" font-variant-numeric="tabular-nums">50%</text>
+        <text x="380" y="26" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" text-anchor="end" fill="#2389F1" font-variant-numeric="tabular-nums">57%</text>
+      </g>
+    </g>
+
+    <g id="row-shipping" transform="translate(0,138)">
+      <text x="0" y="14" font-size="12" fill="#242424">Faster shipping pressure</text>
+      <g transform="translate(182,0)">
+        <rect x="0" y="2"  width="190" height="12" fill="#F54A3F"/>
+        <rect x="0" y="16" width="163.4" height="12" fill="#2389F1"/>
+        <text x="380" y="12" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" text-anchor="end" fill="#F54A3F" font-variant-numeric="tabular-nums">50%</text>
+        <text x="380" y="26" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" text-anchor="end" fill="#2389F1" font-variant-numeric="tabular-nums">43%</text>
+      </g>
+    </g>
+
+    <g id="row-ai" transform="translate(0,184)">
+      <text x="0" y="14" font-size="12" fill="#242424">AI workloads / new failure modes</text>
+      <g transform="translate(182,0)">
+        <rect x="0" y="2"  width="205.2" height="12" fill="#F54A3F"/>
+        <rect x="0" y="16" width="53.2"  height="12" fill="#2389F1"/>
+        <text x="380" y="12" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" text-anchor="end" fill="#F54A3F" font-variant-numeric="tabular-nums">54%</text>
+        <text x="380" y="26" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" text-anchor="end" fill="#2389F1" font-variant-numeric="tabular-nums">14%</text>
+      </g>
+    </g>
+
+    <g id="row-nondeterm" transform="translate(0,230)">
+      <text x="0" y="14" font-size="12" fill="#242424">Non-determinism</text>
+      <g transform="translate(182,0)">
+        <rect x="0" y="2"  width="95"   height="12" fill="#F54A3F"/>
+        <rect x="0" y="16" width="110.2" height="12" fill="#2389F1"/>
+        <text x="380" y="12" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" text-anchor="end" fill="#F54A3F" font-variant-numeric="tabular-nums">25%</text>
+        <text x="380" y="26" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" text-anchor="end" fill="#2389F1" font-variant-numeric="tabular-nums">29%</text>
+      </g>
+    </g>
+  </g>
+
+  <g id="source" transform="translate(28,380)">
+    <text font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#636363">
+      <tspan x="0" dy="0">Q10: What do you think is driving that increase? Select all that apply. Among respondents</tspan>
+      <tspan x="0" dy="14">who said burden went up. AI n=24, non-AI n=7. Multi-select — totals exceed 100%.</tspan>
+    </text>
+  </g>
+</svg>

@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 654 420" width="654" height="420" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" text-rendering="optimizeLegibility">
+  <rect width="654" height="420" fill="#ffffff"/>
+
+  <g id="title">
+    <text x="28" y="48" font-size="22" font-weight="600" fill="#020202" letter-spacing="-0.3">What breaks — AI teams vs non-AI teams</text>
+  </g>
+
+  <g id="legend" transform="translate(28,78)">
+    <g transform="translate(0,0)"><rect width="10" height="10" fill="#F54A3F"/><text x="16" y="9" font-size="11" fill="#242424">AI (n=88)</text></g>
+    <g transform="translate(110,0)"><rect width="10" height="10" fill="#2389F1"/><text x="16" y="9" font-size="11" fill="#242424">No AI (n=42)</text></g>
+  </g>
+
+  <!-- grouped bars. label 200 | bar 360 | value 40. Scale 0..100 = 360 -->
+  <g id="chart" transform="translate(28,110)">
+
+    <g id="row-llm" transform="translate(0,0)">
+      <text x="0" y="14" font-size="12" fill="#242424">LLM / external API failures</text>
+      <g transform="translate(200,0)">
+        <rect x="0" y="2"  width="201.6" height="12" fill="#F54A3F"/>
+        <rect x="0" y="16" width="162"   height="12" fill="#2389F1"/>
+        <text x="360" y="12" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" text-anchor="end" fill="#F54A3F" font-variant-numeric="tabular-nums">56%</text>
+        <text x="360" y="26" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" text-anchor="end" fill="#2389F1" font-variant-numeric="tabular-nums">45%</text>
+      </g>
+    </g>
+
+    <g id="row-infra" transform="translate(0,46)">
+      <text x="0" y="14" font-size="12" fill="#242424">Infrastructure crashes</text>
+      <g transform="translate(200,0)">
+        <rect x="0" y="2"  width="172.8" height="12" fill="#F54A3F"/>
+        <rect x="0" y="16" width="205.2" height="12" fill="#2389F1"/>
+        <text x="360" y="12" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" text-anchor="end" fill="#F54A3F" font-variant-numeric="tabular-nums">48%</text>
+        <text x="360" y="26" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" text-anchor="end" fill="#2389F1" font-variant-numeric="tabular-nums">57%</text>
+      </g>
+    </g>
+
+    <g id="row-conc" transform="translate(0,92)">
+      <text x="0" y="14" font-size="12" fill="#242424">Concurrency spikes</text>
+      <g transform="translate(200,0)">
+        <rect x="0" y="2"  width="147.6" height="12" fill="#F54A3F"/>
+        <rect x="0" y="16" width="104.4" height="12" fill="#2389F1"/>
+        <text x="360" y="12" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" text-anchor="end" fill="#F54A3F" font-variant-numeric="tabular-nums">41%</text>
+        <text x="360" y="26" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" text-anchor="end" fill="#2389F1" font-variant-numeric="tabular-nums">29%</text>
+      </g>
+    </g>
+
+    <g id="row-scale" transform="translate(0,138)">
+      <text x="0" y="14" font-size="12" fill="#242424">Scaling under load</text>
+      <g transform="translate(200,0)">
+        <rect x="0" y="2"  width="129.6" height="12" fill="#F54A3F"/>
+        <rect x="0" y="16" width="104.4" height="12" fill="#2389F1"/>
+        <text x="360" y="12" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" text-anchor="end" fill="#F54A3F" font-variant-numeric="tabular-nums">36%</text>
+        <text x="360" y="26" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" text-anchor="end" fill="#2389F1" font-variant-numeric="tabular-nums">29%</text>
+      </g>
+    </g>
+
+    <g id="row-state" transform="translate(0,184)">
+      <text x="0" y="14" font-size="12" fill="#242424">Lost / corrupted state</text>
+      <g transform="translate(200,0)">
+        <rect x="0" y="2"  width="93.6" height="12" fill="#F54A3F"/>
+        <rect x="0" y="16" width="93.6" height="12" fill="#2389F1"/>
+        <text x="360" y="12" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" text-anchor="end" fill="#F54A3F" font-variant-numeric="tabular-nums">26%</text>
+        <text x="360" y="26" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" text-anchor="end" fill="#2389F1" font-variant-numeric="tabular-nums">26%</text>
+      </g>
+    </g>
+
+    <g id="row-cant" transform="translate(0,230)">
+      <text x="0" y="14" font-size="12" fill="#242424">Can't tell — no observability</text>
+      <g transform="translate(200,0)">
+        <rect x="0" y="2"  width="28.8" height="12" fill="#F54A3F"/>
+        <rect x="0" y="16" width="25.2" height="12" fill="#2389F1"/>
+        <text x="360" y="12" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" text-anchor="end" fill="#F54A3F" font-variant-numeric="tabular-nums">8%</text>
+        <text x="360" y="26" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" text-anchor="end" fill="#2389F1" font-variant-numeric="tabular-nums">7%</text>
+      </g>
+    </g>
+  </g>
+
+  <g id="source" transform="translate(28,380)">
+    <text font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#636363">
+      <tspan x="0" dy="0">Q6: What are the most common causes of failures? Pick up to 3. % of each group citing</tspan>
+      <tspan x="0" dy="14">each cause.</tspan>
+    </text>
+  </g>
+</svg>

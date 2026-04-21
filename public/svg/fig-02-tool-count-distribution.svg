@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 654 360" width="654" height="360" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" text-rendering="optimizeLegibility">
+  <rect width="654" height="360" fill="#ffffff"/>
+
+  <g id="title">
+    <text x="28" y="48" font-size="22" font-weight="600" fill="#020202" letter-spacing="-0.3">How many orchestration tools are teams using?</text>
+  </g>
+
+  <g id="chart" transform="translate(28,80)">
+    <g id="row-1" transform="translate(0,0)">
+      <text x="0" y="14" font-size="13" fill="#242424">1 tool (solo)</text>
+      <text x="0" y="30" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#7C7C7C">n=57</text>
+      <rect x="222" y="2" width="340" height="26" fill="#E2E2E2"/>
+      <rect x="222" y="2" width="149.6" height="26" fill="#FF7300"/>
+      <text x="598" y="20" font-size="13" font-family="'JetBrains Mono', ui-monospace, monospace" text-anchor="end" fill="#FF7300" font-variant-numeric="tabular-nums">44%</text>
+    </g>
+
+    <g id="row-2" transform="translate(0,48)">
+      <text x="0" y="14" font-size="13" fill="#242424">2 tools</text>
+      <text x="0" y="30" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#7C7C7C">n=45</text>
+      <rect x="222" y="2" width="340" height="26" fill="#E2E2E2"/>
+      <rect x="222" y="2" width="119.0" height="26" fill="#2389F1"/>
+      <text x="598" y="20" font-size="13" font-family="'JetBrains Mono', ui-monospace, monospace" text-anchor="end" fill="#2389F1" font-variant-numeric="tabular-nums">35%</text>
+    </g>
+
+    <g id="row-3" transform="translate(0,96)">
+      <text x="0" y="14" font-size="13" fill="#242424">3 tools</text>
+      <text x="0" y="30" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#7C7C7C">n=19</text>
+      <rect x="222" y="2" width="340" height="26" fill="#E2E2E2"/>
+      <rect x="222" y="2" width="51.0" height="26" fill="#2C9B63"/>
+      <text x="598" y="20" font-size="13" font-family="'JetBrains Mono', ui-monospace, monospace" text-anchor="end" fill="#2C9B63" font-variant-numeric="tabular-nums">15%</text>
+    </g>
+
+    <g id="row-4" transform="translate(0,144)">
+      <text x="0" y="14" font-size="13" fill="#242424">4+ tools</text>
+      <text x="0" y="30" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#7C7C7C">n=3</text>
+      <rect x="222" y="2" width="340" height="26" fill="#E2E2E2"/>
+      <rect x="222" y="2" width="6.8" height="26" fill="#8F75B7"/>
+      <text x="598" y="20" font-size="13" font-family="'JetBrains Mono', ui-monospace, monospace" text-anchor="end" fill="#8F75B7" font-variant-numeric="tabular-nums">2%</text>
+    </g>
+
+    <g id="row-5" transform="translate(0,192)">
+      <text x="0" y="14" font-size="13" fill="#242424">None / ad-hoc</text>
+      <text x="0" y="30" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#7C7C7C">n=6</text>
+      <rect x="222" y="2" width="340" height="26" fill="#E2E2E2"/>
+      <rect x="222" y="2" width="17.0" height="26" fill="#FCC43F"/>
+      <text x="598" y="20" font-size="13" font-family="'JetBrains Mono', ui-monospace, monospace" text-anchor="end" fill="#B58700" font-variant-numeric="tabular-nums">5%</text>
+    </g>
+  </g>
+
+  <g id="source" transform="translate(28,320)">
+    <text font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#636363">
+      <tspan x="0" dy="0">All respondents n=130. 56% use more than one tool.</tspan>
+    </text>
+  </g>
+</svg>

@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 654 340" width="654" height="340" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" text-rendering="optimizeLegibility">
+  <rect width="654" height="340" fill="#ffffff"/>
+
+  <g id="title">
+    <text x="28" y="48" font-size="22" font-weight="600" fill="#020202" letter-spacing="-0.3">Customer-visible incidents in the past 90 days</text>
+  </g>
+
+  <g id="legend" transform="translate(28,78)">
+    <g transform="translate(0,0)"><rect width="10" height="10" fill="#F54A3F"/><text x="16" y="9" font-size="11" fill="#242424">3 or more times</text></g>
+    <g transform="translate(130,0)"><rect width="10" height="10" fill="#E5A83E"/><text x="16" y="9" font-size="11" fill="#242424">Once or twice</text></g>
+    <g transform="translate(250,0)"><rect width="10" height="10" fill="#2C9B63"/><text x="16" y="9" font-size="11" fill="#242424">No incidents</text></g>
+    <g transform="translate(362,0)"><rect width="10" height="10" fill="#B0B0B0"/><text x="16" y="9" font-size="11" fill="#242424">Unsure</text></g>
+  </g>
+
+  <!-- rows: label 160 | bar 400 | right 40 -->
+  <g id="rows" transform="translate(28,120)">
+
+    <!-- AI in production: 19 / 55 / 23 / 3 -->
+    <g id="row-ai" transform="translate(0,0)">
+      <text x="0" y="18" font-size="13" fill="#242424">AI in production</text>
+      <text x="0" y="34" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#7C7C7C">n=88</text>
+      <g transform="translate(160,0)">
+        <rect x="0"   y="4" width="76"  height="30" fill="#F54A3F"/>
+        <rect x="76"  y="4" width="220" height="30" fill="#E5A83E"/>
+        <rect x="296" y="4" width="92"  height="30" fill="#2C9B63"/>
+        <rect x="388" y="4" width="12"  height="30" fill="#B0B0B0"/>
+        <g font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#ffffff" text-anchor="middle">
+          <text x="38"  y="24">19%</text>
+          <text x="186" y="24">55%</text>
+          <text x="342" y="24">23%</text>
+        </g>
+        <text x="420" y="24" font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#636363" font-variant-numeric="tabular-nums">19% / 23%</text>
+      </g>
+    </g>
+
+    <!-- No AI: 17 / 45 / 31 / 7 -->
+    <g id="row-noai" transform="translate(0,64)">
+      <text x="0" y="18" font-size="13" fill="#242424">No AI in production</text>
+      <text x="0" y="34" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#7C7C7C">n=42</text>
+      <g transform="translate(160,0)">
+        <rect x="0"   y="4" width="68"  height="30" fill="#F54A3F"/>
+        <rect x="68"  y="4" width="180" height="30" fill="#E5A83E"/>
+        <rect x="248" y="4" width="124" height="30" fill="#2C9B63"/>
+        <rect x="372" y="4" width="28"  height="30" fill="#B0B0B0"/>
+        <g font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#ffffff" text-anchor="middle">
+          <text x="34"  y="24">17%</text>
+          <text x="158" y="24">45%</text>
+          <text x="310" y="24">31%</text>
+          <text x="386" y="24" fill="#020202">7%</text>
+        </g>
+        <text x="420" y="24" font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#636363" font-variant-numeric="tabular-nums">17% / 31%</text>
+      </g>
+    </g>
+  </g>
+
+  <g id="direction" transform="translate(188,228)">
+    <text x="0"   y="0" font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#7C7C7C">← more incidents</text>
+    <text x="400" y="0" font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#7C7C7C" text-anchor="end">none →</text>
+  </g>
+
+  <g id="source" transform="translate(28,290)">
+    <text font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#636363">
+      <tspan x="0" dy="0">Q7: In the past 90 days, has a workflow or background job failure caused a customer-visible</tspan>
+      <tspan x="0" dy="14">incident? AI vs. non-AI teams.</tspan>
+    </text>
+  </g>
+</svg>
