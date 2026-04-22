@@ -1,136 +1,194 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 654 500" width="654" height="500" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" text-rendering="optimizeLegibility">
-  <rect width="654" height="500" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1117 627" width="1117" height="627" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" text-rendering="optimizeLegibility">
+  <rect width="1117" height="627" fill="#212121"/>
 
-  <g id="title">
-    <text x="28" y="48" font-size="22" font-weight="600" fill="#020202" letter-spacing="-0.3">What's unsolved — by team size</text>
-  </g>
+  <!-- Title -->
+  <text x="48" y="56" font-size="30" font-weight="700" fill="#FFFFFF" letter-spacing="-0.5">What's unsolved — by team size</text>
 
-  <g id="legend" transform="translate(28,78)">
-    <g transform="translate(0,0)"><circle r="5" cx="5" cy="5" fill="#F54A3F"/><text x="14" y="9" font-size="11" fill="#242424">Solo / 2–10 (n=47)</text></g>
-    <g transform="translate(148,0)"><circle r="5" cx="5" cy="5" fill="#2389F1"/><text x="14" y="9" font-size="11" fill="#242424">11–50 (n=40)</text></g>
-    <g transform="translate(276,0)"><circle r="5" cx="5" cy="5" fill="#2C9B63"/><text x="14" y="9" font-size="11" fill="#242424">51–500 (n=27)</text></g>
-    <g transform="translate(404,0)"><circle r="5" cx="5" cy="5" fill="#8F75B7"/><text x="14" y="9" font-size="11" fill="#242424">500+ (n=16)</text></g>
+  <!-- Subtitle -->
+  <text x="48" y="84" font-size="12" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#9B9B9B">
+    Q18: Themes in open-text responses by team size band. Bubble area = respondents mentioning each theme.
+  </text>
+
+  <!-- Legend -->
+  <g id="legend" transform="translate(48,106)">
+    <g transform="translate(0,0)">
+      <circle cx="7" cy="7" r="7" fill="#FC9680"/>
+      <text x="22" y="11" font-size="12" fill="#FFFFFF">Solo / 2–10</text>
+      <text x="22" y="24" font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#9B9B9B">n=47</text>
+    </g>
+    <g transform="translate(132,0)">
+      <circle cx="7" cy="7" r="7" fill="#FB5536"/>
+      <text x="22" y="11" font-size="12" fill="#FFFFFF">11–50</text>
+      <text x="22" y="24" font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#9B9B9B">n=40</text>
+    </g>
+    <g transform="translate(238,0)">
+      <circle cx="7" cy="7" r="7" fill="#C2401F"/>
+      <text x="22" y="11" font-size="12" fill="#FFFFFF">51–500</text>
+      <text x="22" y="24" font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#9B9B9B">n=27</text>
+    </g>
+    <g transform="translate(348,0)">
+      <circle cx="7" cy="7" r="7" fill="#7A2818"/>
+      <text x="22" y="11" font-size="12" fill="#FFFFFF">500+</text>
+      <text x="22" y="24" font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#9B9B9B">n=16</text>
+    </g>
   </g>
 
   <!--
-    Bubble matrix. 7 themes × 4 cohort columns.
-    Column x positions: 212, 296, 380, 464  (step 84)
-    Row y positions: 12 themes rows, step 44.
-    Bubble radius: sqrt(value) * 3
+    Layout:
+    - Cohort label col: x=48..173 (125 wide, incl. padding)
+    - 7 theme columns × 128 = 896, starts at x=173, ends at x=1069
+    - Theme col centers: 237, 365, 493, 621, 749, 877, 1005
+    - Row centers (cohort): 270, 355, 440, 525
+    - Bubble radius = sqrt(value) × 10
   -->
-  <g id="headers" transform="translate(0,118)">
-    <g font-size="11" fill="#242424" text-anchor="middle">
-      <text x="212" y="18">Solo / 2–10</text>
-      <text x="296" y="18">11–50</text>
-      <text x="380" y="18">51–500</text>
-      <text x="464" y="18">500+</text>
-    </g>
-  </g>
 
-  <g id="rows" transform="translate(28,148)">
-
-    <!-- Observability & debugging: 8, 8, 7, 2 -->
-    <g transform="translate(0,0)">
-      <text x="0" y="22" font-size="12" fill="#242424">Observability &amp; debugging</text>
-      <circle cx="184" cy="22" r="8.49" fill="#F54A3F" opacity="0.9"/>
-      <circle cx="268" cy="22" r="8.49" fill="#2389F1" opacity="0.9"/>
-      <circle cx="352" cy="22" r="7.94" fill="#2C9B63" opacity="0.9"/>
-      <circle cx="436" cy="22" r="4.24" fill="#8F75B7" opacity="0.9"/>
-      <g font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" font-variant-numeric="tabular-nums" fill="#ffffff" text-anchor="middle">
-        <text x="184" y="25">8</text>
-        <text x="268" y="25">8</text>
-        <text x="352" y="25">7</text>
-        <text x="436" y="25" fill="#8F75B7">2</text>
+  <!-- Theme column headers (2-line wrap) -->
+  <g id="theme-headers" transform="translate(0,162)">
+    <g font-size="13" font-weight="500" fill="#FFFFFF" text-anchor="middle">
+      <g transform="translate(237,0)">
+        <text y="14">Observability</text>
+        <text y="32">&amp; debugging</text>
       </g>
-    </g>
-
-    <!-- Scalability & cost: 13, 4, 3, 4 -->
-    <g transform="translate(0,44)">
-      <text x="0" y="22" font-size="12" fill="#242424">Scalability &amp; cost</text>
-      <circle cx="184" cy="22" r="10.82" fill="#F54A3F" opacity="0.9"/>
-      <circle cx="268" cy="22" r="6" fill="#2389F1" opacity="0.9"/>
-      <circle cx="352" cy="22" r="5.2" fill="#2C9B63" opacity="0.9"/>
-      <circle cx="436" cy="22" r="6" fill="#8F75B7" opacity="0.9"/>
-      <g font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" font-variant-numeric="tabular-nums" fill="#ffffff" text-anchor="middle">
-        <text x="184" y="25">13</text>
-        <text x="268" y="25">4</text>
-        <text x="352" y="25">3</text>
-        <text x="436" y="25">4</text>
+      <g transform="translate(365,0)">
+        <text y="14">Scalability</text>
+        <text y="32">&amp; cost</text>
       </g>
-    </g>
-
-    <!-- Non-determinism: 3, 2, 3, 6 -->
-    <g transform="translate(0,88)">
-      <text x="0" y="22" font-size="12" fill="#242424">Non-determinism</text>
-      <circle cx="184" cy="22" r="5.2" fill="#F54A3F" opacity="0.9"/>
-      <circle cx="268" cy="22" r="4.24" fill="#2389F1" opacity="0.9"/>
-      <circle cx="352" cy="22" r="5.2" fill="#2C9B63" opacity="0.9"/>
-      <circle cx="436" cy="22" r="7.35" fill="#8F75B7" opacity="0.9"/>
-      <g font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" font-variant-numeric="tabular-nums" fill="#ffffff" text-anchor="middle">
-        <text x="184" y="25">3</text>
-        <text x="268" y="25">2</text>
-        <text x="352" y="25">3</text>
-        <text x="436" y="25">6</text>
+      <g transform="translate(493,0)">
+        <text y="14">Non-</text>
+        <text y="32">determinism</text>
       </g>
-    </g>
-
-    <!-- State & durability: 5, 3, 4, 0 -->
-    <g transform="translate(0,132)">
-      <text x="0" y="22" font-size="12" fill="#242424">State &amp; durability</text>
-      <circle cx="184" cy="22" r="6.71" fill="#F54A3F" opacity="0.9"/>
-      <circle cx="268" cy="22" r="5.2" fill="#2389F1" opacity="0.9"/>
-      <circle cx="352" cy="22" r="6" fill="#2C9B63" opacity="0.9"/>
-      <g font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" font-variant-numeric="tabular-nums" fill="#ffffff" text-anchor="middle">
-        <text x="184" y="25">5</text>
-        <text x="268" y="25">3</text>
-        <text x="352" y="25">4</text>
+      <g transform="translate(621,0)">
+        <text y="14">State &amp;</text>
+        <text y="32">durability</text>
       </g>
-    </g>
-
-    <!-- Evals at scale: 6, 3, 1, 2 -->
-    <g transform="translate(0,176)">
-      <text x="0" y="22" font-size="12" fill="#242424">Evals at scale</text>
-      <circle cx="184" cy="22" r="7.35" fill="#F54A3F" opacity="0.9"/>
-      <circle cx="268" cy="22" r="5.2" fill="#2389F1" opacity="0.9"/>
-      <circle cx="352" cy="22" r="3" fill="#2C9B63" opacity="0.9"/>
-      <circle cx="436" cy="22" r="4.24" fill="#8F75B7" opacity="0.9"/>
-      <g font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" font-variant-numeric="tabular-nums" fill="#ffffff" text-anchor="middle">
-        <text x="184" y="25">6</text>
-        <text x="268" y="25">3</text>
-        <text x="352" y="25" fill="#2C9B63">1</text>
-        <text x="436" y="25">2</text>
+      <g transform="translate(749,0)">
+        <text y="14">Evals</text>
+        <text y="32">at scale</text>
       </g>
-    </g>
-
-    <!-- Tooling frag.: 1, 5, 2, 0 -->
-    <g transform="translate(0,220)">
-      <text x="0" y="22" font-size="12" fill="#242424">Tooling frag.</text>
-      <circle cx="184" cy="22" r="3" fill="#F54A3F" opacity="0.9"/>
-      <circle cx="268" cy="22" r="6.71" fill="#2389F1" opacity="0.9"/>
-      <circle cx="352" cy="22" r="4.24" fill="#2C9B63" opacity="0.9"/>
-      <g font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" font-variant-numeric="tabular-nums" fill="#ffffff" text-anchor="middle">
-        <text x="184" y="25" fill="#F54A3F">1</text>
-        <text x="268" y="25">5</text>
-        <text x="352" y="25">2</text>
+      <g transform="translate(877,0)">
+        <text y="14">Tooling</text>
+        <text y="32">frag.</text>
       </g>
-    </g>
-
-    <!-- Context / memory: 3, 4, 0, 0 -->
-    <g transform="translate(0,264)">
-      <text x="0" y="22" font-size="12" fill="#242424">Context / memory</text>
-      <circle cx="184" cy="22" r="5.2" fill="#F54A3F" opacity="0.9"/>
-      <circle cx="268" cy="22" r="6" fill="#2389F1" opacity="0.9"/>
-      <g font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" font-variant-numeric="tabular-nums" fill="#ffffff" text-anchor="middle">
-        <text x="184" y="25">3</text>
-        <text x="268" y="25">4</text>
+      <g transform="translate(1005,0)">
+        <text y="14">Context /</text>
+        <text y="32">memory</text>
       </g>
     </g>
   </g>
 
-  <g id="source" transform="translate(28,460)">
-    <text font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#636363">
-      <tspan x="0" dy="0">Q18: Themes in open-text responses by team size band. Bubble area = number of</tspan>
-      <tspan x="0" dy="14">respondents mentioning each theme.</tspan>
+  <!-- Divider under headers -->
+  <line x1="48" y1="210" x2="1069" y2="210" stroke="#3A3A3A" stroke-width="1"/>
+
+  <!-- Grid column dividers (subtle) -->
+  <g stroke="#2A2A2A" stroke-width="1">
+    <line x1="173" y1="220" x2="173" y2="560"/>
+    <line x1="301" y1="220" x2="301" y2="560"/>
+    <line x1="429" y1="220" x2="429" y2="560"/>
+    <line x1="557" y1="220" x2="557" y2="560"/>
+    <line x1="685" y1="220" x2="685" y2="560"/>
+    <line x1="813" y1="220" x2="813" y2="560"/>
+    <line x1="941" y1="220" x2="941" y2="560"/>
+    <line x1="1069" y1="220" x2="1069" y2="560"/>
+  </g>
+
+  <!-- ROW 1: Solo / 2–10   values [8, 13, 3, 5, 6, 1, 3] -->
+  <g id="row-solo" transform="translate(0,270)">
+    <text x="48" y="0" font-size="16" font-weight="600" fill="#FFFFFF">Solo / 2–10</text>
+    <text x="48" y="18" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#9B9B9B">n=47</text>
+    <g fill="#FC9680">
+      <circle cx="237"  cy="0" r="28.28"/>
+      <circle cx="365"  cy="0" r="36.06"/>
+      <circle cx="493"  cy="0" r="17.32"/>
+      <circle cx="621"  cy="0" r="22.36"/>
+      <circle cx="749"  cy="0" r="24.49"/>
+      <circle cx="877"  cy="0" r="10.00"/>
+      <circle cx="1005" cy="0" r="17.32"/>
+    </g>
+    <g font-size="13" font-family="'JetBrains Mono', ui-monospace, monospace" font-variant-numeric="tabular-nums" text-anchor="middle" fill="#212121" font-weight="600">
+      <text x="237"  y="4">8</text>
+      <text x="365"  y="4">13</text>
+      <text x="493"  y="4">3</text>
+      <text x="621"  y="4">5</text>
+      <text x="749"  y="4">6</text>
+      <text x="877"  y="4">1</text>
+      <text x="1005" y="4">3</text>
+    </g>
+  </g>
+
+  <!-- ROW 2: 11–50   values [8, 4, 2, 3, 3, 5, 4] -->
+  <g id="row-11-50" transform="translate(0,355)">
+    <text x="48" y="0" font-size="16" font-weight="600" fill="#FFFFFF">11–50</text>
+    <text x="48" y="18" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#9B9B9B">n=40</text>
+    <g fill="#FB5536">
+      <circle cx="237"  cy="0" r="28.28"/>
+      <circle cx="365"  cy="0" r="20.00"/>
+      <circle cx="493"  cy="0" r="14.14"/>
+      <circle cx="621"  cy="0" r="17.32"/>
+      <circle cx="749"  cy="0" r="17.32"/>
+      <circle cx="877"  cy="0" r="22.36"/>
+      <circle cx="1005" cy="0" r="20.00"/>
+    </g>
+    <g font-size="13" font-family="'JetBrains Mono', ui-monospace, monospace" font-variant-numeric="tabular-nums" text-anchor="middle" fill="#FFFFFF" font-weight="600">
+      <text x="237"  y="4">8</text>
+      <text x="365"  y="4">4</text>
+      <text x="493"  y="4">2</text>
+      <text x="621"  y="4">3</text>
+      <text x="749"  y="4">3</text>
+      <text x="877"  y="4">5</text>
+      <text x="1005" y="4">4</text>
+    </g>
+  </g>
+
+  <!-- ROW 3: 51–500   values [7, 3, 3, 4, 1, 2, 0] -->
+  <g id="row-51-500" transform="translate(0,440)">
+    <text x="48" y="0" font-size="16" font-weight="600" fill="#FFFFFF">51–500</text>
+    <text x="48" y="18" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#9B9B9B">n=27</text>
+    <g fill="#C2401F">
+      <circle cx="237"  cy="0" r="26.46"/>
+      <circle cx="365"  cy="0" r="17.32"/>
+      <circle cx="493"  cy="0" r="17.32"/>
+      <circle cx="621"  cy="0" r="20.00"/>
+      <circle cx="749"  cy="0" r="10.00"/>
+      <circle cx="877"  cy="0" r="14.14"/>
+    </g>
+    <g font-size="13" font-family="'JetBrains Mono', ui-monospace, monospace" font-variant-numeric="tabular-nums" text-anchor="middle" fill="#FFFFFF" font-weight="600">
+      <text x="237"  y="4">7</text>
+      <text x="365"  y="4">3</text>
+      <text x="493"  y="4">3</text>
+      <text x="621"  y="4">4</text>
+      <text x="749"  y="4">1</text>
+      <text x="877"  y="4">2</text>
+    </g>
+    <text x="1005" y="4" font-size="12" font-family="'JetBrains Mono', ui-monospace, monospace" text-anchor="middle" fill="#4A4A4A">—</text>
+  </g>
+
+  <!-- ROW 4: 500+   values [2, 4, 6, 0, 2, 0, 0] -->
+  <g id="row-500plus" transform="translate(0,525)">
+    <text x="48" y="0" font-size="16" font-weight="600" fill="#FFFFFF">500+</text>
+    <text x="48" y="18" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#9B9B9B">n=16</text>
+    <g fill="#7A2818">
+      <circle cx="237"  cy="0" r="14.14"/>
+      <circle cx="365"  cy="0" r="20.00"/>
+      <circle cx="493"  cy="0" r="24.49"/>
+      <circle cx="749"  cy="0" r="14.14"/>
+    </g>
+    <g font-size="13" font-family="'JetBrains Mono', ui-monospace, monospace" font-variant-numeric="tabular-nums" text-anchor="middle" fill="#FFFFFF" font-weight="600">
+      <text x="237"  y="4">2</text>
+      <text x="365"  y="4">4</text>
+      <text x="493"  y="4">6</text>
+      <text x="749"  y="4">2</text>
+    </g>
+    <g font-size="12" font-family="'JetBrains Mono', ui-monospace, monospace" text-anchor="middle" fill="#4A4A4A">
+      <text x="621"  y="4">—</text>
+      <text x="877"  y="4">—</text>
+      <text x="1005" y="4">—</text>
+    </g>
+  </g>
+
+  <!-- Source -->
+  <g id="source" transform="translate(48,594)">
+    <text font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#808080">
+      19% of responses name observability as the core unsolved problem — the highest of any theme, equal across AI (18%) and non-AI (21%) teams.
     </text>
   </g>
 </svg>
