@@ -1,74 +1,93 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 654 440" width="654" height="440" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" text-rendering="optimizeLegibility">
-  <rect width="654" height="440" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 618 620" width="618" height="620" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" text-rendering="optimizeLegibility">
+  <rect width="618" height="620" fill="#212121"/>
 
+  <!-- Title -->
   <g id="title">
-    <text x="28" y="48" font-size="22" font-weight="600" fill="#020202" letter-spacing="-0.3">What's wrong with current eval solutions</text>
+    <text x="28" y="50" font-size="26" font-weight="700" fill="#FFFFFF" letter-spacing="-0.4">What's wrong with current eval solutions</text>
   </g>
 
-  <!-- horizontal bars, full-width with inside labels. Track 560px, 0..100% -->
-  <g id="chart" transform="translate(28,86)">
+  <!--
+    Layout (padding 28 each side → inner 562px):
+    Label col: 250px | Gap: 12 | Bar area: 300px
+    Bar starts at x=290. Bar scale: 3px per percentage point.
+    Row height: 64px. Rows start at y=92.
+  -->
 
-    <g id="row-1" transform="translate(0,0)">
-      <text x="0" y="14" font-size="12" fill="#242424">Hard to write evals that catch the failures that actually matter</text>
-      <text x="0" y="30" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#7C7C7C">n=40</text>
-      <rect x="0" y="38" width="598" height="24" fill="#E2E2E2"/>
-      <rect x="0" y="38" width="167.44" height="24" fill="#FF7300"/>
-      <text x="160" y="55" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#ffffff" text-anchor="end" font-variant-numeric="tabular-nums">28%</text>
-    </g>
-
-    <g id="row-2" transform="translate(0,82)">
-      <text x="0" y="14" font-size="12" fill="#242424">LLM-as-judge is too slow or expensive to run at scale</text>
-      <text x="0" y="30" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#7C7C7C">n=32</text>
-      <rect x="0" y="38" width="598" height="24" fill="#E2E2E2"/>
-      <rect x="0" y="38" width="131.56" height="24" fill="#2389F1"/>
-      <text x="124" y="55" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#ffffff" text-anchor="end" font-variant-numeric="tabular-nums">22%</text>
-    </g>
-
-    <g id="row-3" transform="translate(0,164)">
-      <text x="0" y="14" font-size="12" fill="#242424">Results live in a separate system from where we debug failures</text>
-      <text x="0" y="30" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#7C7C7C">n=26</text>
-      <rect x="0" y="38" width="598" height="24" fill="#E2E2E2"/>
-      <rect x="0" y="38" width="107.64" height="24" fill="#8F75B7"/>
-      <text x="100" y="55" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#ffffff" text-anchor="end" font-variant-numeric="tabular-nums">18%</text>
-    </g>
-
-    <g id="row-4" transform="translate(0,246)">
-      <text x="0" y="14" font-size="12" fill="#242424" opacity="0.7">We're not running evals / don't know enough to comment</text>
-      <text x="0" y="30" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#7C7C7C">n=23</text>
-      <rect x="0" y="38" width="598" height="24" fill="#E2E2E2"/>
-      <rect x="0" y="38" width="95.68" height="24" fill="#9B9B9B"/>
-      <text x="88" y="55" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#ffffff" text-anchor="end" font-variant-numeric="tabular-nums">16%</text>
-    </g>
+  <!-- Row 1: Hard to write evals — 28%, n=40 -->
+  <g id="row-1" transform="translate(28,92)">
+    <text x="0" y="14" font-size="14" fill="#FFFFFF" font-weight="500">Hard to write evals that catch the</text>
+    <text x="0" y="32" font-size="14" fill="#FFFFFF" font-weight="500">failures that actually matter</text>
+    <text x="0" y="52" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#9B9B9B">n=40</text>
+    <rect x="262" y="18" width="300" height="26" fill="#2E2E2E"/>
+    <rect x="262" y="18" width="84"  height="26" fill="#FCC43F"/>
+    <text x="340" y="36" font-size="12" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#212121" text-anchor="end" font-variant-numeric="tabular-nums" font-weight="600">28%</text>
   </g>
 
-  <!-- Additional condensed rows -->
-  <g id="chart-extra" transform="translate(28,310)">
-    <g id="row-5" transform="translate(0,0)">
-      <text x="0" y="10" font-size="11" fill="#242424">No way to act on a failed eval — it's observability only <tspan fill="#7C7C7C" font-family="'JetBrains Mono', ui-monospace, monospace"> n=17</tspan></text>
-      <rect x="0" y="16" width="598" height="18" fill="#E2E2E2"/>
-      <rect x="0" y="16" width="71.76" height="18" fill="#2C9B63"/>
-      <text x="64" y="29" font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#ffffff" text-anchor="end" font-variant-numeric="tabular-nums">12%</text>
-    </g>
-
-    <g id="row-6" transform="translate(0,44)">
-      <text x="0" y="10" font-size="11" fill="#242424">We don't have enough coverage to trust our outputs <tspan fill="#7C7C7C" font-family="'JetBrains Mono', ui-monospace, monospace"> n=16</tspan></text>
-      <rect x="0" y="16" width="598" height="18" fill="#E2E2E2"/>
-      <rect x="0" y="16" width="65.78" height="18" fill="#FCC43F"/>
-      <text x="58" y="29" font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#ffffff" text-anchor="end" font-variant-numeric="tabular-nums">11%</text>
-    </g>
-
-    <g id="row-7" transform="translate(0,88)">
-      <text x="0" y="10" font-size="11" fill="#242424">Evals are offline only — don't reflect production behavior <tspan fill="#7C7C7C" font-family="'JetBrains Mono', ui-monospace, monospace"> n=13</tspan></text>
-      <rect x="0" y="16" width="598" height="18" fill="#E2E2E2"/>
-      <rect x="0" y="16" width="53.82" height="18" fill="#F54A3F"/>
-      <text x="46" y="29" font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#ffffff" text-anchor="end" font-variant-numeric="tabular-nums">9%</text>
-    </g>
+  <!-- Row 2: LLM-as-judge — 22%, n=32 -->
+  <g id="row-2" transform="translate(28,156)">
+    <text x="0" y="14" font-size="14" fill="#FFFFFF" font-weight="500">LLM-as-judge is too slow or</text>
+    <text x="0" y="32" font-size="14" fill="#FFFFFF" font-weight="500">expensive to run at scale</text>
+    <text x="0" y="52" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#9B9B9B">n=32</text>
+    <rect x="262" y="18" width="300" height="26" fill="#2E2E2E"/>
+    <rect x="262" y="18" width="66"  height="26" fill="#FCC43F"/>
+    <text x="322" y="36" font-size="12" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#212121" text-anchor="end" font-variant-numeric="tabular-nums" font-weight="600">22%</text>
   </g>
 
-  <g id="source" transform="translate(28,410)">
-    <text font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#636363">
+  <!-- Row 3: Results in separate system — 18%, n=26 -->
+  <g id="row-3" transform="translate(28,220)">
+    <text x="0" y="14" font-size="14" fill="#FFFFFF" font-weight="500">Results live in a separate system</text>
+    <text x="0" y="32" font-size="14" fill="#FFFFFF" font-weight="500">from where we debug failures</text>
+    <text x="0" y="52" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#9B9B9B">n=26</text>
+    <rect x="262" y="18" width="300" height="26" fill="#2E2E2E"/>
+    <rect x="262" y="18" width="54"  height="26" fill="#FCC43F"/>
+    <text x="310" y="36" font-size="12" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#212121" text-anchor="end" font-variant-numeric="tabular-nums" font-weight="600">18%</text>
+  </g>
+
+  <!-- Row 4: Not running evals — 16%, n=23 (non-response, muted grey) -->
+  <g id="row-4" transform="translate(28,284)" opacity="0.7">
+    <text x="0" y="14" font-size="14" fill="#FFFFFF" font-weight="500">We're not running evals /</text>
+    <text x="0" y="32" font-size="14" fill="#FFFFFF" font-weight="500">don't know enough to comment</text>
+    <text x="0" y="52" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#9B9B9B">n=23</text>
+    <rect x="262" y="18" width="300" height="26" fill="#2E2E2E"/>
+    <rect x="262" y="18" width="48"  height="26" fill="#5A5A5A"/>
+    <text x="304" y="36" font-size="12" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#FFFFFF" text-anchor="end" font-variant-numeric="tabular-nums" font-weight="600">16%</text>
+  </g>
+
+  <!-- Row 5: No way to act — 12%, n=17 -->
+  <g id="row-5" transform="translate(28,348)">
+    <text x="0" y="14" font-size="14" fill="#FFFFFF" font-weight="500">No way to act on a failed eval —</text>
+    <text x="0" y="32" font-size="14" fill="#FFFFFF" font-weight="500">it's observability only</text>
+    <text x="0" y="52" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#9B9B9B">n=17</text>
+    <rect x="262" y="18" width="300" height="26" fill="#2E2E2E"/>
+    <rect x="262" y="18" width="36"  height="26" fill="#FCC43F"/>
+    <text x="292" y="36" font-size="12" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#212121" text-anchor="end" font-variant-numeric="tabular-nums" font-weight="600">12%</text>
+  </g>
+
+  <!-- Row 6: Not enough coverage — 11%, n=16 -->
+  <g id="row-6" transform="translate(28,412)">
+    <text x="0" y="14" font-size="14" fill="#FFFFFF" font-weight="500">We don't have enough coverage</text>
+    <text x="0" y="32" font-size="14" fill="#FFFFFF" font-weight="500">to trust our outputs</text>
+    <text x="0" y="52" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#9B9B9B">n=16</text>
+    <rect x="262" y="18" width="300" height="26" fill="#2E2E2E"/>
+    <rect x="262" y="18" width="33"  height="26" fill="#FCC43F"/>
+    <text x="289" y="36" font-size="12" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#212121" text-anchor="end" font-variant-numeric="tabular-nums" font-weight="600">11%</text>
+  </g>
+
+  <!-- Row 7: Offline only — 9%, n=13 -->
+  <g id="row-7" transform="translate(28,476)">
+    <text x="0" y="14" font-size="14" fill="#FFFFFF" font-weight="500">Evals are offline only — don't</text>
+    <text x="0" y="32" font-size="14" fill="#FFFFFF" font-weight="500">reflect production behavior</text>
+    <text x="0" y="52" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#9B9B9B">n=13</text>
+    <rect x="262" y="18" width="300" height="26" fill="#2E2E2E"/>
+    <rect x="262" y="18" width="27"  height="26" fill="#FCC43F"/>
+    <text x="283" y="36" font-size="12" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#212121" text-anchor="end" font-variant-numeric="tabular-nums" font-weight="600">9%</text>
+  </g>
+
+  <!-- Source -->
+  <g id="source" transform="translate(28,564)">
+    <text font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#808080">
       <tspan x="0" dy="0">Q15: What do you believe are the biggest limitations of modern AI eval solutions?</tspan>
-      <tspan x="0" dy="14">% of all respondents citing each limitation (n=143).</tspan>
+      <tspan x="0" dy="16">% of all respondents citing each limitation (n=143).</tspan>
     </text>
   </g>
 </svg>
