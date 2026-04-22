@@ -1,178 +1,207 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 654 500" width="654" height="500" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" text-rendering="optimizeLegibility">
-  <rect width="654" height="500" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1117 1440" width="1117" height="1440" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" text-rendering="optimizeLegibility">
+  <rect width="1117" height="1440" fill="#212121"/>
 
-  <g id="title">
-    <text x="28" y="48" font-size="22" font-weight="600" fill="#020202" letter-spacing="-0.3">What's wrong with current eval solutions — by tool</text>
-  </g>
+  <!-- Title -->
+  <text x="48" y="104" font-size="46" font-weight="700" fill="#FFFFFF" letter-spacing="-0.8">What's wrong with current eval solutions</text>
+  <text x="48" y="162" font-size="46" font-weight="700" fill="#FFFFFF" letter-spacing="-0.8">— by tool</text>
 
   <!--
-    Heatmap table. 7 columns = row label + 6 gap categories.
-    Row label: 150px | 6 cells of 72px each = 432 | + 2 trailing = total 582. Start x=28.
-    Cell height 56. Header height 96 (rotated).
-    Colors: red (>=50%), amber (30-49%), neutral (<30%)
+    Layout:
+    Padding-left: 48. Label col: 240.  Data area starts x=288. Col width: 130 (126 + 4 gap).
+    Header area: y=224 to 400 (176 tall for wrapped 2-line headers).
+    First data row: y=412. Row height: 150. 6 rows → ends y=1312.
+    Legend: y=1352. Source: y=1400.
   -->
 
-  <g id="column-headers" transform="translate(180,110)">
-    <!-- column labels rotated -45deg -->
-    <g font-size="10.5" fill="#242424">
-      <g transform="translate(36,-8) rotate(-38)">
-        <text x="0" y="0" text-anchor="start">Hard-to-write evals</text>
+  <!-- Column headers -->
+  <g id="headers" transform="translate(288,224)">
+    <g font-size="20" font-weight="500" fill="#FFFFFF" text-anchor="middle">
+      <g transform="translate(63,0)">
+        <text y="30">Hard-to-write</text>
+        <text y="58">evals</text>
       </g>
-      <g transform="translate(108,-8) rotate(-38)">
-        <text x="0" y="0" text-anchor="start">LLM-as-judge cost</text>
+      <g transform="translate(193,0)">
+        <text y="30">LLM-as-judge</text>
+        <text y="58">cost</text>
       </g>
-      <g transform="translate(180,-8) rotate(-38)">
-        <text x="0" y="0" text-anchor="start">Results in separate system</text>
+      <g transform="translate(323,0)">
+        <text y="30">Results in</text>
+        <text y="58">separate system</text>
       </g>
-      <g transform="translate(252,-8) rotate(-38)">
-        <text x="0" y="0" text-anchor="start">Not enough coverage</text>
+      <g transform="translate(453,0)">
+        <text y="30">Not enough</text>
+        <text y="58">coverage</text>
       </g>
-      <g transform="translate(324,-8) rotate(-38)">
-        <text x="0" y="0" text-anchor="start">No way to act on failure</text>
+      <g transform="translate(583,0)">
+        <text y="30">No way to act</text>
+        <text y="58">on failure</text>
       </g>
-      <g transform="translate(396,-8) rotate(-38)">
-        <text x="0" y="0" text-anchor="start">Offline only</text>
+      <g transform="translate(713,0)">
+        <text y="30">Offline</text>
+        <text y="58">only</text>
       </g>
     </g>
   </g>
 
-  <g id="rows" transform="translate(28,140)">
-    <!-- Row: Built own pipeline  [47, 35, 30, 21, 26, 19] -->
+  <!-- Horizontal rule under headers -->
+  <line x1="288" y1="400" x2="1062" y2="400" stroke="#3A3A3A" stroke-width="1"/>
+
+  <!-- ============================================================
+       Rows.  Row label (x=48).  Data cells (start x=288).
+       Cell width 126, gap 4. Cell height 142, gap 8.
+       ============================================================ -->
+
+  <!-- Row 1: Built own pipeline  [47, 35, 30, 21, 26, 19]  (n=43) -->
+  <g id="row-own" transform="translate(0,412)">
+    <text x="48" y="84" font-size="28" font-weight="600" fill="#FFFFFF">Built own pipeline</text>
+    <text x="48" y="116" font-size="16" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#9B9B9B">n=43</text>
+    <g transform="translate(288,0)">
+      <rect x="0"   y="0" width="126" height="142" fill="#B5731E"/>
+      <rect x="130" y="0" width="126" height="142" fill="#B5731E"/>
+      <rect x="260" y="0" width="126" height="142" fill="#B5731E"/>
+      <rect x="390" y="0" width="126" height="142" fill="#3A3A3A"/>
+      <rect x="520" y="0" width="126" height="142" fill="#3A3A3A"/>
+      <rect x="650" y="0" width="126" height="142" fill="#3A3A3A"/>
+      <g font-size="34" font-family="'JetBrains Mono', ui-monospace, monospace" font-variant-numeric="tabular-nums" text-anchor="middle" fill="#FFFFFF">
+        <text x="63"  y="84">47%</text>
+        <text x="193" y="84">35%</text>
+        <text x="323" y="84">30%</text>
+        <text x="453" y="84">21%</text>
+        <text x="583" y="84">26%</text>
+        <text x="713" y="84">19%</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Row 2: LangFuse  [64, 55, 45, 55, 27, 18]  (n=11) -->
+  <g id="row-langfuse" transform="translate(0,562)">
+    <text x="48" y="84" font-size="28" font-weight="600" fill="#FFFFFF">LangFuse</text>
+    <text x="48" y="116" font-size="16" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#9B9B9B">n=11</text>
+    <g transform="translate(288,0)">
+      <rect x="0"   y="0" width="126" height="142" fill="#FCC43F"/>
+      <rect x="130" y="0" width="126" height="142" fill="#FCC43F"/>
+      <rect x="260" y="0" width="126" height="142" fill="#B5731E"/>
+      <rect x="390" y="0" width="126" height="142" fill="#FCC43F"/>
+      <rect x="520" y="0" width="126" height="142" fill="#3A3A3A"/>
+      <rect x="650" y="0" width="126" height="142" fill="#3A3A3A"/>
+      <g font-size="34" font-family="'JetBrains Mono', ui-monospace, monospace" font-variant-numeric="tabular-nums" text-anchor="middle">
+        <text x="63"  y="84" fill="#212121">64%</text>
+        <text x="193" y="84" fill="#212121">55%</text>
+        <text x="323" y="84" fill="#FFFFFF">45%</text>
+        <text x="453" y="84" fill="#212121">55%</text>
+        <text x="583" y="84" fill="#FFFFFF">27%</text>
+        <text x="713" y="84" fill="#FFFFFF">18%</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Row 3: LangSmith  [78, 44, 56, 0, 11, 56]  (n=9) -->
+  <g id="row-langsmith" transform="translate(0,712)">
+    <text x="48" y="84" font-size="28" font-weight="600" fill="#FFFFFF">LangSmith</text>
+    <text x="48" y="116" font-size="16" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#9B9B9B">n=9</text>
+    <g transform="translate(288,0)">
+      <rect x="0"   y="0" width="126" height="142" fill="#FCC43F"/>
+      <rect x="130" y="0" width="126" height="142" fill="#B5731E"/>
+      <rect x="260" y="0" width="126" height="142" fill="#FCC43F"/>
+      <rect x="390" y="0" width="126" height="142" fill="#2A2A2A"/>
+      <rect x="520" y="0" width="126" height="142" fill="#3A3A3A"/>
+      <rect x="650" y="0" width="126" height="142" fill="#FCC43F"/>
+      <g font-size="34" font-family="'JetBrains Mono', ui-monospace, monospace" font-variant-numeric="tabular-nums" text-anchor="middle">
+        <text x="63"  y="84" fill="#212121">78%</text>
+        <text x="193" y="84" fill="#FFFFFF">44%</text>
+        <text x="323" y="84" fill="#212121">56%</text>
+        <text x="453" y="84" fill="#666666">0%</text>
+        <text x="583" y="84" fill="#FFFFFF">11%</text>
+        <text x="713" y="84" fill="#212121">56%</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Row 4: Braintrust  [50, 25, 38, 25, 0, 25]  (n=8) -->
+  <g id="row-braintrust" transform="translate(0,862)">
+    <text x="48" y="84" font-size="28" font-weight="600" fill="#FFFFFF">Braintrust</text>
+    <text x="48" y="116" font-size="16" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#9B9B9B">n=8</text>
+    <g transform="translate(288,0)">
+      <rect x="0"   y="0" width="126" height="142" fill="#FCC43F"/>
+      <rect x="130" y="0" width="126" height="142" fill="#3A3A3A"/>
+      <rect x="260" y="0" width="126" height="142" fill="#B5731E"/>
+      <rect x="390" y="0" width="126" height="142" fill="#3A3A3A"/>
+      <rect x="520" y="0" width="126" height="142" fill="#2A2A2A"/>
+      <rect x="650" y="0" width="126" height="142" fill="#3A3A3A"/>
+      <g font-size="34" font-family="'JetBrains Mono', ui-monospace, monospace" font-variant-numeric="tabular-nums" text-anchor="middle">
+        <text x="63"  y="84" fill="#212121">50%</text>
+        <text x="193" y="84" fill="#FFFFFF">25%</text>
+        <text x="323" y="84" fill="#FFFFFF">38%</text>
+        <text x="453" y="84" fill="#FFFFFF">25%</text>
+        <text x="583" y="84" fill="#666666">0%</text>
+        <text x="713" y="84" fill="#FFFFFF">25%</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Row 5: Arize / Phoenix  [80, 20, 60, 40, 0, 20]  (n=5) -->
+  <g id="row-arize" transform="translate(0,1012)">
+    <text x="48" y="84" font-size="28" font-weight="600" fill="#FFFFFF">Arize / Phoenix</text>
+    <text x="48" y="116" font-size="16" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#9B9B9B">n=5</text>
+    <g transform="translate(288,0)">
+      <rect x="0"   y="0" width="126" height="142" fill="#FCC43F"/>
+      <rect x="130" y="0" width="126" height="142" fill="#3A3A3A"/>
+      <rect x="260" y="0" width="126" height="142" fill="#FCC43F"/>
+      <rect x="390" y="0" width="126" height="142" fill="#B5731E"/>
+      <rect x="520" y="0" width="126" height="142" fill="#2A2A2A"/>
+      <rect x="650" y="0" width="126" height="142" fill="#3A3A3A"/>
+      <g font-size="34" font-family="'JetBrains Mono', ui-monospace, monospace" font-variant-numeric="tabular-nums" text-anchor="middle">
+        <text x="63"  y="84" fill="#212121">80%</text>
+        <text x="193" y="84" fill="#FFFFFF">20%</text>
+        <text x="323" y="84" fill="#212121">60%</text>
+        <text x="453" y="84" fill="#FFFFFF">40%</text>
+        <text x="583" y="84" fill="#666666">0%</text>
+        <text x="713" y="84" fill="#FFFFFF">20%</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Row 6: Not doing evals  [35, 42, 29, 3, 13, 6]  (n=31) — muted -->
+  <g id="row-none" transform="translate(0,1162)" opacity="0.55">
+    <text x="48" y="84" font-size="28" font-weight="600" fill="#FFFFFF">Not doing evals</text>
+    <text x="48" y="116" font-size="16" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#9B9B9B">n=31</text>
+    <g transform="translate(288,0)">
+      <rect x="0"   y="0" width="126" height="142" fill="#B5731E"/>
+      <rect x="130" y="0" width="126" height="142" fill="#B5731E"/>
+      <rect x="260" y="0" width="126" height="142" fill="#3A3A3A"/>
+      <rect x="390" y="0" width="126" height="142" fill="#2A2A2A"/>
+      <rect x="520" y="0" width="126" height="142" fill="#3A3A3A"/>
+      <rect x="650" y="0" width="126" height="142" fill="#2A2A2A"/>
+      <g font-size="34" font-family="'JetBrains Mono', ui-monospace, monospace" font-variant-numeric="tabular-nums" text-anchor="middle">
+        <text x="63"  y="84" fill="#FFFFFF">35%</text>
+        <text x="193" y="84" fill="#FFFFFF">42%</text>
+        <text x="323" y="84" fill="#FFFFFF">29%</text>
+        <text x="453" y="84" fill="#666666">3%</text>
+        <text x="583" y="84" fill="#FFFFFF">13%</text>
+        <text x="713" y="84" fill="#666666">6%</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Legend -->
+  <g id="legend" transform="translate(48,1348)">
     <g transform="translate(0,0)">
-      <text x="0" y="22" font-size="12" fill="#242424">Built own pipeline</text>
-      <text x="0" y="36" font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#7C7C7C">n=43</text>
-      <g transform="translate(150,0)">
-        <rect x="0"   y="4" width="68" height="40" fill="#F39C93"/>
-        <rect x="72"  y="4" width="68" height="40" fill="#F9CCA5"/>
-        <rect x="144" y="4" width="68" height="40" fill="#F9CCA5"/>
-        <rect x="216" y="4" width="68" height="40" fill="#F1F1F1"/>
-        <rect x="288" y="4" width="68" height="40" fill="#F1F1F1"/>
-        <rect x="360" y="4" width="68" height="40" fill="#F1F1F1"/>
-        <g font-size="12" font-family="'JetBrains Mono', ui-monospace, monospace" font-variant-numeric="tabular-nums" text-anchor="middle" fill="#020202">
-          <text x="34"  y="28">47%</text>
-          <text x="106" y="28">35%</text>
-          <text x="178" y="28">30%</text>
-          <text x="250" y="28">21%</text>
-          <text x="322" y="28">26%</text>
-          <text x="394" y="28">19%</text>
-        </g>
-      </g>
+      <rect width="22" height="22" fill="#FCC43F"/>
+      <text x="32" y="18" font-size="18" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#FFFFFF">50%+</text>
     </g>
-    <!-- LangFuse n=11  [64, 55, 45, 55, 27, 18] -->
-    <g transform="translate(0,52)">
-      <text x="0" y="22" font-size="12" fill="#242424">LangFuse</text>
-      <text x="0" y="36" font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#7C7C7C">n=11</text>
-      <g transform="translate(150,0)">
-        <rect x="0"   y="4" width="68" height="40" fill="#EC5E54"/>
-        <rect x="72"  y="4" width="68" height="40" fill="#EC5E54"/>
-        <rect x="144" y="4" width="68" height="40" fill="#F39C93"/>
-        <rect x="216" y="4" width="68" height="40" fill="#EC5E54"/>
-        <rect x="288" y="4" width="68" height="40" fill="#F1F1F1"/>
-        <rect x="360" y="4" width="68" height="40" fill="#F1F1F1"/>
-        <g font-size="12" font-family="'JetBrains Mono', ui-monospace, monospace" font-variant-numeric="tabular-nums" text-anchor="middle" fill="#ffffff">
-          <text x="34"  y="28">64%</text>
-          <text x="106" y="28">55%</text>
-          <text x="178" y="28" fill="#020202">45%</text>
-          <text x="250" y="28">55%</text>
-          <text x="322" y="28" fill="#020202">27%</text>
-          <text x="394" y="28" fill="#020202">18%</text>
-        </g>
-      </g>
+    <g transform="translate(140,0)">
+      <rect width="22" height="22" fill="#B5731E"/>
+      <text x="32" y="18" font-size="18" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#FFFFFF">30–49%</text>
     </g>
-    <!-- LangSmith n=9  [78, 44, 56, 0, 11, 56] -->
-    <g transform="translate(0,104)">
-      <text x="0" y="22" font-size="12" fill="#242424">LangSmith</text>
-      <text x="0" y="36" font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#7C7C7C">n=9</text>
-      <g transform="translate(150,0)">
-        <rect x="0"   y="4" width="68" height="40" fill="#EC5E54"/>
-        <rect x="72"  y="4" width="68" height="40" fill="#F39C93"/>
-        <rect x="144" y="4" width="68" height="40" fill="#EC5E54"/>
-        <rect x="216" y="4" width="68" height="40" fill="#F1F1F1"/>
-        <rect x="288" y="4" width="68" height="40" fill="#F1F1F1"/>
-        <rect x="360" y="4" width="68" height="40" fill="#EC5E54"/>
-        <g font-size="12" font-family="'JetBrains Mono', ui-monospace, monospace" font-variant-numeric="tabular-nums" text-anchor="middle" fill="#ffffff">
-          <text x="34"  y="28">78%</text>
-          <text x="106" y="28" fill="#020202">44%</text>
-          <text x="178" y="28">56%</text>
-          <text x="250" y="28" fill="#020202">0%</text>
-          <text x="322" y="28" fill="#020202">11%</text>
-          <text x="394" y="28">56%</text>
-        </g>
-      </g>
-    </g>
-    <!-- Braintrust n=8 [50, 25, 38, 25, 0, 25] -->
-    <g transform="translate(0,156)">
-      <text x="0" y="22" font-size="12" fill="#242424">Braintrust</text>
-      <text x="0" y="36" font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#7C7C7C">n=8</text>
-      <g transform="translate(150,0)">
-        <rect x="0"   y="4" width="68" height="40" fill="#EC5E54"/>
-        <rect x="72"  y="4" width="68" height="40" fill="#F1F1F1"/>
-        <rect x="144" y="4" width="68" height="40" fill="#F9CCA5"/>
-        <rect x="216" y="4" width="68" height="40" fill="#F1F1F1"/>
-        <rect x="288" y="4" width="68" height="40" fill="#F1F1F1"/>
-        <rect x="360" y="4" width="68" height="40" fill="#F1F1F1"/>
-        <g font-size="12" font-family="'JetBrains Mono', ui-monospace, monospace" font-variant-numeric="tabular-nums" text-anchor="middle" fill="#ffffff">
-          <text x="34"  y="28">50%</text>
-          <text x="106" y="28" fill="#020202">25%</text>
-          <text x="178" y="28" fill="#020202">38%</text>
-          <text x="250" y="28" fill="#020202">25%</text>
-          <text x="322" y="28" fill="#020202">0%</text>
-          <text x="394" y="28" fill="#020202">25%</text>
-        </g>
-      </g>
-    </g>
-    <!-- Arize/Phoenix n=5 [80, 20, 60, 40, 0, 20] -->
-    <g transform="translate(0,208)">
-      <text x="0" y="22" font-size="12" fill="#242424">Arize / Phoenix</text>
-      <text x="0" y="36" font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#7C7C7C">n=5</text>
-      <g transform="translate(150,0)">
-        <rect x="0"   y="4" width="68" height="40" fill="#EC5E54"/>
-        <rect x="72"  y="4" width="68" height="40" fill="#F1F1F1"/>
-        <rect x="144" y="4" width="68" height="40" fill="#EC5E54"/>
-        <rect x="216" y="4" width="68" height="40" fill="#F9CCA5"/>
-        <rect x="288" y="4" width="68" height="40" fill="#F1F1F1"/>
-        <rect x="360" y="4" width="68" height="40" fill="#F1F1F1"/>
-        <g font-size="12" font-family="'JetBrains Mono', ui-monospace, monospace" font-variant-numeric="tabular-nums" text-anchor="middle" fill="#ffffff">
-          <text x="34"  y="28">80%</text>
-          <text x="106" y="28" fill="#020202">20%</text>
-          <text x="178" y="28">60%</text>
-          <text x="250" y="28" fill="#020202">40%</text>
-          <text x="322" y="28" fill="#020202">0%</text>
-          <text x="394" y="28" fill="#020202">20%</text>
-        </g>
-      </g>
-    </g>
-    <!-- Not doing evals n=31  [35, 42, 29, 3, 13, 6] -->
-    <g transform="translate(0,260)">
-      <text x="0" y="22" font-size="12" fill="#242424" opacity="0.7">Not doing evals</text>
-      <text x="0" y="36" font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#7C7C7C">n=31</text>
-      <g transform="translate(150,0)" opacity="0.7">
-        <rect x="0"   y="4" width="68" height="40" fill="#F9CCA5"/>
-        <rect x="72"  y="4" width="68" height="40" fill="#F9CCA5"/>
-        <rect x="144" y="4" width="68" height="40" fill="#F1F1F1"/>
-        <rect x="216" y="4" width="68" height="40" fill="#F1F1F1"/>
-        <rect x="288" y="4" width="68" height="40" fill="#F1F1F1"/>
-        <rect x="360" y="4" width="68" height="40" fill="#F1F1F1"/>
-        <g font-size="12" font-family="'JetBrains Mono', ui-monospace, monospace" font-variant-numeric="tabular-nums" text-anchor="middle" fill="#020202">
-          <text x="34"  y="28">35%</text>
-          <text x="106" y="28">42%</text>
-          <text x="178" y="28">29%</text>
-          <text x="250" y="28">3%</text>
-          <text x="322" y="28">13%</text>
-          <text x="394" y="28">6%</text>
-        </g>
-      </g>
+    <g transform="translate(300,0)">
+      <rect width="22" height="22" fill="#3A3A3A"/>
+      <text x="32" y="18" font-size="18" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#FFFFFF">&lt;30%</text>
     </g>
   </g>
 
-  <g id="legend" transform="translate(28,440)">
-    <g transform="translate(0,0)"><rect width="12" height="12" fill="#EC5E54"/><text x="18" y="10" font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#242424">50%+</text></g>
-    <g transform="translate(80,0)"><rect width="12" height="12" fill="#F9CCA5"/><text x="18" y="10" font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#242424">30–49%</text></g>
-    <g transform="translate(170,0)"><rect width="12" height="12" fill="#F1F1F1"/><text x="18" y="10" font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#242424">&lt;30%</text></g>
-  </g>
-
-  <g id="source" transform="translate(28,470)">
-    <text font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#636363">
+  <!-- Source -->
+  <g id="source" transform="translate(48,1408)">
+    <text font-size="16" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#808080">
       <tspan x="0" dy="0">Q15: % of each tool's users citing each limitation. Tools with n&lt;3 (W&amp;B, Helicone) excluded.</tspan>
     </text>
   </g>

@@ -1,92 +1,94 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 654 460" width="654" height="460" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" text-rendering="optimizeLegibility">
-  <rect width="654" height="460" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 618 500" width="618" height="500" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" text-rendering="optimizeLegibility">
+  <rect width="618" height="500" fill="#212121"/>
 
-  <g id="title">
-    <text x="28" y="48" font-size="22" font-weight="600" fill="#020202" letter-spacing="-0.3">Scaling confidence by agent framework</text>
-  </g>
+  <!-- Title -->
+  <text x="28" y="50" font-size="26" font-weight="700" fill="#FFFFFF" letter-spacing="-0.4">Scaling confidence by agent framework</text>
 
-  <g id="legend" transform="translate(28,78)">
-    <g transform="translate(0,0)"><rect width="10" height="10" fill="#2C9B63"/><text x="16" y="9" font-size="11" fill="#242424">Very confident</text></g>
-    <g transform="translate(128,0)"><rect width="10" height="10" fill="#9ADAB3"/><text x="16" y="9" font-size="11" fill="#242424">Somewhat confident</text></g>
-    <g transform="translate(270,0)"><rect width="10" height="10" fill="#FA8D86"/><text x="16" y="9" font-size="11" fill="#242424">Not very confident</text></g>
-  </g>
-
-  <!-- label 170 | bar 360 | right 60. -->
-  <g id="rows" transform="translate(28,118)">
-
-    <!-- Mastra* n=6 50/50/0 -->
-    <g id="row-mastra" transform="translate(0,0)">
-      <text x="0" y="18" font-size="13" fill="#242424">Mastra*</text>
-      <text x="0" y="32" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#7C7C7C">n=6</text>
-      <g transform="translate(170,0)">
-        <rect x="0"   y="4" width="180" height="26" fill="#2C9B63"/>
-        <rect x="180" y="4" width="180" height="26" fill="#9ADAB3"/>
-        <g font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#ffffff" text-anchor="middle"><text x="90" y="22">50%</text></g>
-        <g font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#020202" text-anchor="middle"><text x="270" y="22">50%</text></g>
-      </g>
-      <text x="598" y="22" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" text-anchor="end" fill="#636363" font-variant-numeric="tabular-nums">50% / 0%</text>
+  <!-- Legend -->
+  <g id="legend" transform="translate(28,90)">
+    <g transform="translate(0,0)">
+      <rect width="14" height="14" fill="#FCC43F"/>
+      <text x="22" y="12" font-size="13" fill="#FFFFFF">Very confident</text>
     </g>
-
-    <!-- Vercel AI SDK n=26 35/57/8 -->
-    <g id="row-vercel" transform="translate(0,50)">
-      <text x="0" y="18" font-size="13" fill="#242424">Vercel AI SDK</text>
-      <text x="0" y="32" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#7C7C7C">n=26</text>
-      <g transform="translate(170,0)">
-        <rect x="0"   y="4" width="126"   height="26" fill="#2C9B63"/>
-        <rect x="126" y="4" width="205.2" height="26" fill="#9ADAB3"/>
-        <rect x="331.2" y="4" width="28.8" height="26" fill="#FA8D86"/>
-        <g font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#ffffff" text-anchor="middle"><text x="63" y="22">35%</text></g>
-        <g font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#020202" text-anchor="middle"><text x="229" y="22">57%</text></g>
-      </g>
-      <text x="598" y="22" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" text-anchor="end" fill="#636363" font-variant-numeric="tabular-nums">35% / 8%</text>
+    <g transform="translate(148,0)">
+      <rect width="14" height="14" fill="#E5A83E"/>
+      <text x="22" y="12" font-size="13" fill="#FFFFFF">Somewhat confident</text>
     </g>
-
-    <!-- Direct API / DIY n=61 16/64/20 -->
-    <g id="row-direct" transform="translate(0,100)">
-      <text x="0" y="18" font-size="13" fill="#242424">Direct API / DIY</text>
-      <text x="0" y="32" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#7C7C7C">n=61</text>
-      <g transform="translate(170,0)">
-        <rect x="0"   y="4" width="57.6"  height="26" fill="#2C9B63"/>
-        <rect x="57.6" y="4" width="230.4" height="26" fill="#9ADAB3"/>
-        <rect x="288"  y="4" width="72"   height="26" fill="#FA8D86"/>
-        <g font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#ffffff" text-anchor="middle"><text x="29" y="22">16%</text></g>
-        <g font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#020202" text-anchor="middle"><text x="173" y="22">64%</text></g>
-        <g font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#ffffff" text-anchor="middle"><text x="324" y="22">20%</text></g>
-      </g>
-      <text x="598" y="22" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" text-anchor="end" fill="#636363" font-variant-numeric="tabular-nums">16% / 20%</text>
-    </g>
-
-    <!-- LlamaIndex* n=7 14/72/14 -->
-    <g id="row-llama" transform="translate(0,150)">
-      <text x="0" y="18" font-size="13" fill="#242424">LlamaIndex*</text>
-      <text x="0" y="32" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#7C7C7C">n=7</text>
-      <g transform="translate(170,0)">
-        <rect x="0"   y="4" width="50.4"  height="26" fill="#2C9B63"/>
-        <rect x="50.4" y="4" width="259.2" height="26" fill="#9ADAB3"/>
-        <rect x="309.6" y="4" width="50.4" height="26" fill="#FA8D86"/>
-        <g font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#020202" text-anchor="middle"><text x="180" y="22">72%</text></g>
-      </g>
-      <text x="598" y="22" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" text-anchor="end" fill="#636363" font-variant-numeric="tabular-nums">14% / 14%</text>
-    </g>
-
-    <!-- LangChain/LangGraph n=18 0/78/22 -->
-    <g id="row-lang" transform="translate(0,200)">
-      <text x="0" y="18" font-size="13" fill="#242424">LangChain / LangGraph</text>
-      <text x="0" y="32" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#7C7C7C">n=18</text>
-      <g transform="translate(170,0)">
-        <rect x="0"    y="4" width="280.8" height="26" fill="#9ADAB3"/>
-        <rect x="280.8" y="4" width="79.2" height="26" fill="#FA8D86"/>
-        <g font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#020202" text-anchor="middle"><text x="140" y="22">78%</text></g>
-        <g font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#ffffff" text-anchor="middle"><text x="320" y="22">22%</text></g>
-      </g>
-      <text x="598" y="22" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" text-anchor="end" fill="#636363" font-variant-numeric="tabular-nums">0% / 22%</text>
+    <g transform="translate(318,0)">
+      <rect width="14" height="14" fill="#B5731E"/>
+      <text x="22" y="12" font-size="13" fill="#FFFFFF">Not very confident</text>
     </g>
   </g>
 
-  <g id="source" transform="translate(28,420)">
-    <text font-size="10" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#636363">
-      <tspan x="0" dy="0">AI teams only. Very / somewhat / not very confident. * = n&lt;10, directional. Values on the</tspan>
-      <tspan x="0" dy="14">right: very confident % / not confident %.</tspan>
+  <!--
+    Layout: Label 180 | gap 10 | bar 372 = 562 inner (28 each side)
+    Bar scale: 372/100 = 3.72 px per %
+    Row height: 58. 5 rows starting at y=144.
+  -->
+
+  <!-- Row 1: Mastra*  50/50/0 -->
+  <g id="row-mastra" transform="translate(28,144)">
+    <text x="0" y="16" font-size="18" font-weight="600" fill="#FFFFFF">Mastra*</text>
+    <text x="0" y="36" font-size="12" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#9B9B9B">n=6</text>
+    <g transform="translate(190,6)">
+      <rect x="0"   y="0" width="186" height="30" fill="#FCC43F"/>
+      <rect x="186" y="0" width="186" height="30" fill="#E5A83E"/>
+    </g>
+  </g>
+
+  <!-- Row 2: Vercel AI SDK  35/57/8 -->
+  <g id="row-vercel" transform="translate(28,202)">
+    <text x="0" y="16" font-size="18" font-weight="600" fill="#FFFFFF">Vercel AI SDK</text>
+    <text x="0" y="36" font-size="12" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#9B9B9B">n=26</text>
+    <g transform="translate(190,6)">
+      <rect x="0"     y="0" width="130.2" height="30" fill="#FCC43F"/>
+      <rect x="130.2" y="0" width="212.04" height="30" fill="#E5A83E"/>
+      <rect x="342.24" y="0" width="29.76" height="30" fill="#B5731E"/>
+    </g>
+  </g>
+
+  <!-- Row 3: Direct API / DIY  16/64/20 -->
+  <g id="row-direct" transform="translate(28,260)">
+    <text x="0" y="16" font-size="18" font-weight="600" fill="#FFFFFF">Direct API / DIY</text>
+    <text x="0" y="36" font-size="12" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#9B9B9B">n=61</text>
+    <g transform="translate(190,6)">
+      <rect x="0"     y="0" width="59.52" height="30" fill="#FCC43F"/>
+      <rect x="59.52" y="0" width="238.08" height="30" fill="#E5A83E"/>
+      <rect x="297.6" y="0" width="74.4" height="30" fill="#B5731E"/>
+    </g>
+  </g>
+
+  <!-- Row 4: LlamaIndex*  14/72/14 -->
+  <g id="row-llama" transform="translate(28,318)">
+    <text x="0" y="16" font-size="18" font-weight="600" fill="#FFFFFF">LlamaIndex*</text>
+    <text x="0" y="36" font-size="12" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#9B9B9B">n=7</text>
+    <g transform="translate(190,6)">
+      <rect x="0"     y="0" width="52.08" height="30" fill="#FCC43F"/>
+      <rect x="52.08" y="0" width="267.84" height="30" fill="#E5A83E"/>
+      <rect x="319.92" y="0" width="52.08" height="30" fill="#B5731E"/>
+    </g>
+  </g>
+
+  <!-- Row 5: LangChain/LangGraph  0/78/22 -->
+  <g id="row-langchain" transform="translate(28,376)">
+    <text x="0" y="16" font-size="18" font-weight="600" fill="#FFFFFF">LangChain / LangGraph</text>
+    <text x="0" y="36" font-size="12" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#9B9B9B">n=18</text>
+    <g transform="translate(190,6)">
+      <rect x="0"      y="0" width="290.16" height="30" fill="#E5A83E"/>
+      <rect x="290.16" y="0" width="81.84"  height="30" fill="#B5731E"/>
+    </g>
+  </g>
+
+  <!-- Direction labels -->
+  <g transform="translate(186,444)">
+    <text x="0" y="0" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#9B9B9B">← more confident</text>
+    <text x="372" y="0" font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#9B9B9B" text-anchor="end">less confident →</text>
+  </g>
+
+  <!-- Source -->
+  <g id="source" transform="translate(28,478)">
+    <text font-size="11" font-family="'JetBrains Mono', ui-monospace, monospace" fill="#808080">
+      <tspan x="0" dy="0">AI teams only. * = n&lt;10, directional. Ordered by % very confident (desc).</tspan>
     </text>
   </g>
 </svg>
